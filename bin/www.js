@@ -1,6 +1,3 @@
-
-require('babel-core/register');
-require('babel-polyfill');
 require('../global.js');
 
 const app = require('../app');

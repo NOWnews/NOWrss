@@ -1,11 +1,11 @@
 const debug = require('debug')('NOWrss:controllers:qoo');
 
-import express from 'express';
-import co from 'co';
+let express = require('express');
+let co = require('co');
 let router = express.Router();
 
-import models from '../models';
-import caches from '../caches';
+let models = require('../models');
+let caches = require('../caches');
 
 router.route('/')
     .get( (req, res, next) => {

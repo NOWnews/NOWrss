@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
+let mongoose = require('mongoose');
+let autoIncrement = require('mongoose-auto-increment');
 
 const Schema = mongoose.Schema;
 const schema = new Schema({

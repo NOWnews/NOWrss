@@ -1,6 +1,6 @@
-import Promise from 'bluebird';
-import redis from 'redis';
-import co from 'co';
+let Promise = require('bluebird');
+let redis = require('redis');
+let co = require('co');
 
 /*
  * 利用 bluebird 將 redis 轉換成可以使用 promise

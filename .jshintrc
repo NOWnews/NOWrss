@@ -93,9 +93,10 @@
         "expect"
     ],
     "globals": {
-        "models": false,
+        "Promise": true,
+        "co": true,
+        "models": true,
         "Debug": false,
-        "co": false,
         "moment": false,
         "_": false,
         "config": false,

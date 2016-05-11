@@ -1,13 +1,13 @@
-import express from 'express';
-import compression from 'compression';
-import logger from 'morgan';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import multer from 'multer';
-import cookieSession from 'cookie-session';
-import nunjucks from 'nunjucks';
-import methodOverride from 'method-override';
+let express = require('express');
+let compression = require('compression');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+let cors = require('cors');
+let multer = require('multer');
+let cookieSession = require('cookie-session');
+let nunjucks = require('nunjucks');
+let methodOverride = require('method-override');
 
 const upload = multer({
     dest: '/tmp'
