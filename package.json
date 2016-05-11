@@ -4,7 +4,7 @@
     "description": "NOWnews RSS service",
     "main": "index.js",
     "scripts": {
-        "start": "./node_modules/nodemon/bin/nodemon.js ./bin/www.js",
+        "start": "DEBUG=NOWrss* ./node_modules/nodemon/bin/nodemon.js ./bin/www.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
@@ -21,14 +21,15 @@
         "debug": "^2.2.0",
         "express": "~4.13.1",
         "is_js": "^0.8.0",
-        "jade": "~1.11.0",
         "lodash": "^4.3.0",
         "method-override": "^2.3.5",
+        "mongoose-auto-increment": "^5.0.1",
         "mongoose": "^4.4.3",
         "morgan": "~1.6.1",
         "multer": "^1.1.0",
         "nunjucks": "^2.3.0",
-        "serve-favicon": "~2.3.0"
+        "serve-favicon": "~2.3.0",
+        "redis": "^2.4.2"
     },
     "repository": {
         "type": "git",

@@ -27,8 +27,8 @@ module.exports = function(app) {
     // express session setting
     app.set('trust proxy', 1);
     app.use(cookieSession({
-        name: 'adm3000',
-        keys: ['adm3000_nownews', 'nownews_adm3000']
+        name: 'rss',
+        keys: ['NOWrss', 'rss']
     }));
 
     // view engine 設定與 views 擺放位置設定
@@ -50,6 +50,8 @@ module.exports = function(app) {
             return method;
         }
     }));
+
+     app.use(logger('dev'));
 
     return function(req, res, next) {
         return next();
