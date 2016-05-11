@@ -2,8 +2,8 @@ let express = require('express');
 let co = require('co');
 let router = express.Router();
 
-let models = require('../models');
-let caches = require('../caches');
+let models = require('../../models');
+let caches = require('../../caches');
 
 router.route('/:sn')
     .get((req, res, next) => {
