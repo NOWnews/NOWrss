@@ -13,7 +13,7 @@ const upload = multer({
     dest: '/tmp'
 });
 
-module.exports = function(app) {
+module.exports = (app) => {
 
     app.use(compression());
     app.use(bodyParser.json());
@@ -43,7 +43,7 @@ module.exports = function(app) {
     app.use('/static', express.static(rootPath + '/public/'));
 
     // overwrite put and delete method
-    app.use(methodOverride(function(req, res) {
+    app.use(methodOverride((req, res) => {
         if (req.body && typeof req.body === 'object' && '_method' in req.body) {
             var method = req.body._method;
             delete req.body._method;
@@ -53,8 +53,6 @@ module.exports = function(app) {
 
      app.use(logger('dev'));
 
-    return function(req, res, next) {
-        return next();
-    };
+    return (req, res, next) => next();
 
 };

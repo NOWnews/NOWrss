@@ -1,7 +1,7 @@
 
-module.exports = function(app) {
+module.exports = (app) => {
 
-    return function(req, res, next) {
+    return (req, res, next) => {
         return next();
     };
 };
