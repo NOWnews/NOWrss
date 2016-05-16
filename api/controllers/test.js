@@ -1,32 +1,56 @@
+const debug = require('debug')('NOWrss:controllers:test');
 let express = require('express');
-let co = require('co');
 let router = express.Router();
 
 let models = require('../../models');
 let caches = require('../../caches');
 
-router.route('/:sn')
+let Promise = require('bluebird');
+let co = require('co');
+let RSS = require('rss');
+let fetch = require('node-fetch');
+var parser = require('xml2json');
+
+router.route('/')
     .get((req, res, next) => {
-        co(function*() {
+        let xmlUrl = 'http://feed.nownews.com/rss/34980269-E832-4C63-9F25-5FB1D135852A';
 
-            const sn = parseInt(req.params.sn, 10);
-
-            let cacheUser = yield caches.get(`USER${sn}`);
-
-            if (cacheUser) {
-                return res.json(cacheUser);
-            }
-
-            let user = yield models.user.findOne({
-                sn: sn
+        fetch( xmlUrl, {
+                timeout: 1000
+            })
+            .then((res) => {
+                return res.text();
+            }).then((xml) => {
+                var json = parser.toJson(xml, {
+                    object: true,
+                });
+                let data = json.rss.channel;
+                let feed = new RSS({
+                    title: data.title,
+                    image_url: data.image.url,
+                    link: data.link,
+                    language: data.language,
+                    pubDate: new Date(),
+                    description: data.description,
+                    copyright: data.copyright,
+                    ttl: data.ttl
+                });
+                _.map(data.item, (v,i)=>{
+                    if(true){
+                        feed.item({
+                            title: v.title + i,
+                            // description: v.description
+                            custom_elements: [
+                                {description: v.description}
+                            ]
+                        });
+                    }
+                });
+                res.charset = 'utf-8';
+                res.set('Content-Type', 'text/xml');
+                // res.json(json)
+                res.send(feed.xml({indent: true}));
             });
-
-            if (user) {
-                yield caches.set(`USER${user.sn}`, user, 30);
-            }
-
-            return res.json(user);
-        });
     });
 
 module.exports = router;

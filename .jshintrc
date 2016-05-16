@@ -104,7 +104,8 @@
         "rootPath": false,
         "async": false,
         "await": false,
-        "NODE_ENV": false
+        "NODE_ENV": false,
+        "fetch": true
     }
 
 }
