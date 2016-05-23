@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm install && DEBUG=NOWrss* ./node_modules/nodemon/bin/nodemon.js ./bin/www.js",
+    "cron": "npm install && DEBUG=NOWrss* ./node_modules/nodemon/bin/nodemon.js ./cron.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

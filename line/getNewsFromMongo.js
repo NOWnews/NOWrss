@@ -1,4 +1,5 @@
 
+const debug = require('debug')('NOWrss:line:getNewsFromMongo');
 const co = require('co');
 const Promise = require('bluebird');
 
@@ -21,6 +22,8 @@ module.exports = co.wrap(function*(start, end) {
             _bundle: 'news',
             _type: 'node',
             'field_source.target_id': 639,
+            'field_auth.value': 1,
+            'field_adult.value': 0,
             'field_release_date.value': {
                 '$gte': start,
                 '$lte': end
