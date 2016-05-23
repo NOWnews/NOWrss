@@ -1,8 +1,9 @@
 
-const MongoDB = Promise.promisifyAll(require('mongodb'));
-const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 const co = require('co');
 const Promise = require('bluebird');
+
+const MongoDB = Promise.promisifyAll(require('mongodb'));
+const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 
 module.exports = co.wrap(function*(start, end) {
 
