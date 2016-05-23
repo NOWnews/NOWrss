@@ -34,7 +34,7 @@ module.exports = (app) => {
     // view engine 設定與 views 擺放位置設定
     app.set('view engine', 'html');
     app.set('views', rootPath + '/views/');
-    nunjucks.configure('server/views', {
+    nunjucks.configure('views', {
         autoescape: true,
         express: app,
         watch: true
