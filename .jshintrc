@@ -98,14 +98,15 @@
         "models": true,
         "Debug": false,
         "moment": false,
-        "_": false,
+        "_": true,
         "config": false,
         "libs": false,
         "rootPath": false,
         "async": false,
         "await": false,
         "NODE_ENV": false,
-        "fetch": true
+        "fetch": true,
+        "libs": true
     }
 
 }
