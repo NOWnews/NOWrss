@@ -7,7 +7,7 @@ module.exports = (app) => {
 
     app.use('/test', demo);
     app.use('/qoo', qoo);
-    app.use('/admin', admin);
+    app.use('/', admin);
     app.use('/rss', rssGet);
 
     return (req, res, next) => next();
