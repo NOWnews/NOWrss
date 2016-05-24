@@ -10,9 +10,5 @@ module.exports = (app) => {
     app.use('/admin', admin);
     app.use('/rss', rssGet);
 
-    app.use('/', (req, res, next) => {
-        res.send('<h1>Hello World!</h1>');
-    });
-
     return (req, res, next) => next();
 };
