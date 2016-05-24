@@ -1,10 +1,10 @@
 require('../global.js');
 
 let colors = require('colors');
-let app = require('../api');
+let app = require('../server');
 let http = require('http');
 
-let port = process.env.PORT || '5493';
+let port = process.env.PORT || '9453';
 app.set('port', port);
 
 let server = http.createServer(app);
