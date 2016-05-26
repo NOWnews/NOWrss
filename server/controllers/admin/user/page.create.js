@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
         {
             title: 'E-mail',
             name: 'email',
-            type: 'text'
+            type: 'email'
         },
         {
             title: '密碼',

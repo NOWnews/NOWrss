@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     let formData = {
         title: '更新管理者',
         action: '/admin/user/create',
-        method: 'post',
+        method: 'put',
         formColumn: [{
             title: '姓名',
             name: 'name',
@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
         {
             title: 'E-mail',
             name: 'email',
-            type: 'text'
+            type: 'email'
         },
         {
             title: '密碼',

@@ -1,5 +1,6 @@
 {% extends "./../blocks/layout.html" %}
 
+
 {% block container %}
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -8,7 +9,7 @@
               {{ formData.title }}介面
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> 會員管理</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> 廠商RSS</a></li>
                 <li class="active">{{ formData.title }}</li>
             </ol>
         </section>
@@ -21,20 +22,9 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">{{ formData.title }}</h3>
                         </div>
-                        <form role="form" action="{{ formData.action }}" method="{{ formData.method }}">
-                            <div class="box-body">
-                                {% for item in formData.formColumn %}
-                                <div class="form-group">
-                                    <label for="{{ item.name + index }}">{{ item.title }}</label>
-                                    <input type="{{ item.type }}" name="{{ item.name }}" value="{{ item.value }}" class="form-control" id="{{ item.name + loop.index }}" placeholder="輸入您的{{ item.title }}" {{ item.disabled }} required>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            <div class="box-footer text-right">
-                                <button type="submit" class="btn btn-success">儲存</button>
-                                <button type="submit" class="btn btn-default">取消</button>
-                            </div>
-                        </form>
+
+                        {% include "../blocks/default-form.html" %}
+
                     </div>
                 </div>
             </div>
