@@ -25,7 +25,7 @@ module.exports = (req, res, next) => {
         },
         {
             title: '確認密碼',
-            name: 'checkPassword',
+            name: 'confirm',
             type: 'password'
         }]
     };
