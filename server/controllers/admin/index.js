@@ -34,7 +34,7 @@ router.route('/admin/user/create')
     .get(pageUserCreate)
     .post(actionUserCreate);
 
-router.route('/admin/user/update/:id')
+router.route('/admin/user/update/:sn')
     .get(pageUserUpdate)
     .put(actionUserUpdate);
 
