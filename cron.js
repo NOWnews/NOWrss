@@ -6,7 +6,7 @@ let uploadXml = require('./line/uploadXml');
 
 co(function*() {
     return yield new Promise(function(resolve, reject) {
-        let uploadXmlJob = schedule.scheduleJob('*/10 * * * * *', function(){
+        let uploadXmlJob = schedule.scheduleJob('*/30 * * * * *', function(){
             uploadXml();
         });
     });
