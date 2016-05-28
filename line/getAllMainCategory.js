@@ -21,7 +21,7 @@ module.exports = co.wrap(function*() {
             tid: true
         }).toArray();
 
-    debug('mainCategory = %j', mainCategory);
+    // debug('mainCategory = %j', mainCategory);
 
     return yield Promise.resolve(mainCategory);
 });

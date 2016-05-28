@@ -13,8 +13,8 @@ module.exports = co.wrap(function*() {
     let startTime = moment(Date.now()).add(-2, 'h');
     let endTime = moment(Date.now());
 
-    debug('start = %s', moment(startTime).format('YYYY/MM/DD hh:mm:ss'));
-    debug('end = %s', moment(endTime).format('YYYY/MM/DD hh:mm:ss'));
+    debug('start = %s', moment(startTime).format('YYYY/MM/DD HH:mm:ss'));
+    debug('end = %s', moment(endTime).format('YYYY/MM/DD HH:mm:ss'));
 
     // 取得所有新聞資料
     let news = yield getNewsFromMongo(startTime, endTime);
@@ -23,7 +23,7 @@ module.exports = co.wrap(function*() {
     // let formatNews = yield getNewsTaxonomyTerm(news);
     // debug('formatNews = %j', formatNews);
 
-    // let foo = yield buildXmlFromNews(news);
-    // debug('foo = %j', foo);
+    let foo = yield buildXmlFromNews(news);
+    debug('foo = %j', foo);
 
 });

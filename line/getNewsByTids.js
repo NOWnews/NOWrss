@@ -11,9 +11,9 @@ module.exports = co.wrap(function*(tids, start, end) {
 
     let db = yield MongoClient.connectAsync('mongodb://nowproduction:werocks@mongodb16.nownews.com.tw,mongodb15.nownews.com.tw,mongodb14.nownews.com.tw,mongodb18.nownews.com.tw/production');
 
-    debug('tids = %j', tids);
-    debug('start = %d', start);
-    debug('end = %d', end);
+    // debug('tids = %j', tids);
+    // debug('start = %d', start);
+    // debug('end = %d', end);
 
     // 找出所有最大分類的 tid
     let news = yield db.collection('fields_current.node').find({
@@ -37,11 +37,14 @@ module.exports = co.wrap(function*(tids, start, end) {
         }, {
             _id: true,
             title: true,
-            field_main_category: true
+            field_main_category: true,
+            field_release_date: true,
+            body: true,
+            field_news_ref: true
         }).toArray();
 
-    debug('news = %j', news);
-    debug('news total = %d', news.length);
+    // debug('news = %j', news);
+    // debug('news total = %d', news.length);
 
     return yield Promise.resolve(news);
 });
