@@ -4,6 +4,7 @@ const co = require('co');
 const Promise = require('bluebird');
 const uuid = require('node-uuid');
 const moment = require('moment-timezone');
+const js2xmlparser = require('js2xmlparser');
 const _ = require('lodash');
 
 module.exports = co.wrap(function*(newsArray) {
@@ -16,6 +17,10 @@ module.exports = co.wrap(function*(newsArray) {
     };
 
     jsonData.article = _.map(newsArray, function(news) {
+
+        let year = moment((news.field_release_date.value * 1000)).format('YYYY');
+        let month = moment((news.field_release_date.value * 1000)).format('MM');
+        let date = moment((news.field_release_date.value * 1000)).format('DD');
 
         let newsData = {
             ID: news._id,
@@ -47,7 +52,7 @@ module.exports = co.wrap(function*(newsArray) {
                 }
             },
             author: 'NOWnews 今日傳媒',
-
+            sourceUrl: 'http://www.nownews.com/n/' + year + '/' + month + '/' + date + '/' + news._id
         };
 
         if(news.refNews && news.refNews.length !== 0) {
@@ -66,5 +71,12 @@ module.exports = co.wrap(function*(newsArray) {
         return newsData;
     });
 
-    return jsonData;
+    let xml = js2xmlparser('articles', jsonData);
+
+    // debug('xml = %s', xml);
+    // debug('xml = %s', xml);
+    // console.log(xml);
+
+    return yield Promise.resolve(xml);
+    // return jsonData;
 });
