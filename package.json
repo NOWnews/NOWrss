@@ -36,8 +36,8 @@
     "nodemon": "^1.9.2",
     "nunjucks": "^2.3.0",
     "redis": "^2.4.2",
-    "rss": "git@github.com:webber0928/wb-rss.git",
-    "sequelize": "^3.23.2",
+    "rss": "git+ssh://git@github.com/webber0928/wb-rss.git",
+    "sequelize": "^3.23.3",
     "serve-favicon": "~2.3.0",
     "xml2json": "^0.9.1"
   },

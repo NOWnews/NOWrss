@@ -9,6 +9,9 @@ co(function*() {
         let uploadXmlJob = schedule.scheduleJob('*/2 * * * *', function(){
             uploadXml();
         });
+    })
+    .catch(function(err) {
+        return Promise.reject(err);
     });
 })
 .catch(function(err) {

@@ -1,3 +1,6 @@
+/*
+ * 帶入時間區間，去跟 mongodb 要新聞資料
+ */
 
 const debug = require('debug')('NOWrss:line:getNewsFromMongo');
 const co = require('co');

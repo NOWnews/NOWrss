@@ -48,11 +48,11 @@ module.exports = co.wrap(function*(news) {
         let year = moment(ref.field_release_date.value * 1000).format('YYYY');
         let month = moment(ref.field_release_date.value * 1000).format('MM');
         let date = moment(ref.field_release_date.value * 1000).format('DD');
-
+        debug('thumbnail = %s', ref.image.thumbnail);
         return {
             title: ref.title,
             url: 'http://www.nownews.com/n/' + year + '/' + month + '/' + date + '/' + ref._id,
-            thumbnail: ref.image.thumbnail
+            thumbnail: ref.image.thumbnail || 'http://www.nownews.com/assets/images/logo.png'
         };
     });
 
@@ -60,7 +60,7 @@ module.exports = co.wrap(function*(news) {
 
     news.refNews = newRefNews;
 
-    debug('news refNews = %j', news.refNews);
+    // debug('news refNews = %j', news.refNews);
 
     return yield Promise.resolve(news);
 });

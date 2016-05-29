@@ -1,3 +1,7 @@
+/*
+ * 上傳 xml 到 ftp server
+ */
+
 const debug = require('debug')('NOWrss:line:uploadXml');
 const co = require('co');
 const moment = require('moment-timezone');

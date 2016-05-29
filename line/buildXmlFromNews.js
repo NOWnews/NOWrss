@@ -39,7 +39,7 @@ module.exports = co.wrap(function*(newsArray) {
             title: news.title,
             category: news.category,
             publishTimeUnix: (news.field_release_date.value * 1000),
-            publishTime: moment((news.field_release_date.value * 1000)).format('YYYY/MM/DD hh:mm'),
+            publishTime: moment((news.field_release_date.value * 1000)).format('YYYY/MM/DD HH:mm'),
             content: {
                 image: {
                     title: news.title,
@@ -71,7 +71,9 @@ module.exports = co.wrap(function*(newsArray) {
         return newsData;
     });
 
-    let xml = js2xmlparser('articles', jsonData);
+    let xml = js2xmlparser('articles', jsonData, {
+        useCDATA: true
+    });
 
     // debug('xml = %s', xml);
     // debug('xml = %s', xml);
