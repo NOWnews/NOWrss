@@ -5,28 +5,33 @@ const libs = require('../../../../libs');
 
 module.exports = (req, res, next) => {
     let formData = {
-        title: '更新管理者',
+        title: '建立廠商 RSS',
         action: '/admin/rss/create',
         method: 'post',
-        formColumn: [{
-            title: '姓名',
+        fformColumn: [{
+            title: '名稱',
             name: 'name',
             type: 'text'
         },
         {
-            title: 'E-mail',
-            name: 'email',
-            type: 'email'
+            title: '分類',
+            name: 'catogry',
+            type: 'text'
         },
         {
-            title: '密碼',
-            name: 'password',
-            type: 'password'
+            title: '有效時間',
+            name: 'dateRange',
+            type: 'text'
         },
         {
-            title: '確認密碼',
-            name: 'checkPassword',
-            type: 'password'
+            title: '限定的IP',
+            name: 'confirmIP',
+            type: 'text'
+        },
+        {
+            title: '聯絡人資料 ( ex. 吳OO - 09xx123456 )',
+            name: 'contactPerson',
+            type: 'text'
         }]
     };
 
