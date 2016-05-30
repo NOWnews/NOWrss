@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
         title: '建立廠商 RSS',
         action: '/admin/rss/create',
         method: 'post',
-        fformColumn: [{
+        formColumn: [{
             title: '名稱',
             name: 'name',
             type: 'text'
