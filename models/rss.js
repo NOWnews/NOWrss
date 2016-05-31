@@ -12,18 +12,27 @@ const schema = new Schema({
         required: true
     },
 
-    type: {
+    catogry: {
         type: String,
         required: true
     },
 
-    expiry: {
+    confirmIP: {
+        type: String
+    },
+
+    contactPerson: {
+        type: String
+    },
+
+    startDate: {
         type: Date,
         required: true
     },
 
-    apis: {
-        type: Array
+    endDate: {
+        type: Date,
+        required: true
     },
 
     continued: {
@@ -48,11 +57,10 @@ const schema = new Schema({
 });
 
 schema.plugin(autoIncrement.plugin, {
-    model: 'user',
+    model: 'rss',
     field: 'sn',
     startAt: 1
 });
-
 
 /*
  * sn: [String, Number], 要查詢的編號
