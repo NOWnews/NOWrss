@@ -97,7 +97,7 @@
         "co": true,
         "models": true,
         "Debug": false,
-        "moment": false,
+        "moment": true,
         "_": true,
         "config": false,
         "libs": false,
