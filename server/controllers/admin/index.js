@@ -49,7 +49,7 @@ router.route('/admin/rss/create')
     .get(pageRssCreate)
     .post(actionRssCreate);
 
-router.route('/admin/rss/update/:id')
+router.route('/admin/rss/update/:sn')
     .get(pageRssUpdate)
     .put(actionRssUpdate);
 
