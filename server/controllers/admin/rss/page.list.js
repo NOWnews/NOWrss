@@ -4,7 +4,6 @@ const models = require('../../../../models');
 const libs = require('../../../../libs');
 
 const _ = require('lodash');
-const moment = require('moment-timezone');
 const co = require('co');
 
 module.exports = (req, res, next) => {
@@ -16,12 +15,9 @@ module.exports = (req, res, next) => {
             .execAsync();
 
         _.forEach(rssList, (rss)=>{
-            let startDate = moment(rss.startDate)
-                .tz('Asia/Taipei')
-                .format('YYYY/MM/DD');
-            let endDate = moment(rss.endDate)
-                .tz('Asia/Taipei')
-                .format('YYYY/MM/DD');
+            let startDate = libs.dateFormat(rss.startDate);
+            let endDate = libs.dateFormat(rss.endDate);
+
             rss.dateRange = `${startDate} - ${endDate}`;
         });
 
