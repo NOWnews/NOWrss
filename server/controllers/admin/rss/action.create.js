@@ -8,24 +8,29 @@ const co = require('co');
 module.exports = (req, res, next) => {
 
     let data = req.body;
-    debug('req.body = %j', data);
 
-    if(data.password !== data.confirm) {
-        return next(new Error('輸入密碼不一致'));
-    }
+    data.startDate = data.dateRange.split('-')[0].replace(/(^[\s]*)|([\s]*$)/g, '');
+    data.endDate = data.dateRange.split('-')[1].replace(/(^[\s]*)|([\s]*$)/g, '');
+
+    debug('data = %j', data);
+
+    // return res.http(204);
+
     co(function*() {
-
-        let newAdminUser = yield models.user.createAsync({
+        var a = {
             name: data.name,
-            email: data.email,
-            password: libs.hashPwd(data.password),
-            createdBy: data.createdBy || '500000000000000000000001'
-        });
-        debug('newAdminUser = %j', newAdminUser);
+            catogry: data.catogry,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            confirmIP: data.confirmIP || '',
+            contactPerson: data.contactPerson
+        };
+        console.log(a);
+        let vv = yield models.rss.createAsync(a);
+        console.log(vv);
 
-        return res.send('create');
-
-        // return res.redirect('/adminUser/');
+        return res.redirect('/admin/rss');
+        // return res.http(204);
     })
     .catch(next);
 };
