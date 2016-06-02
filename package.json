@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "bluebird": "^3.3.1",
+    "bluebird": "^3.4.0",
     "body-parser": "~1.13.2",
     "cheerio": "^0.20.0",
     "co": "^4.6.0",
@@ -24,9 +24,11 @@
     "fs-extra-promise": "^0.3.1",
     "is_js": "^0.8.0",
     "js2xmlparser": "^1.0.0",
-    "lodash": "^4.12.0",
+    "lodash": "^4.13.1",
     "md5": "^2.1.0",
     "method-override": "^2.3.5",
+    "moment-timezone": "^0.5.4",
+    "mongodb": "^2.1.21",
     "mongoose": "^4.4.3",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "~1.6.1",
