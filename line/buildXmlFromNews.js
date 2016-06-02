@@ -9,6 +9,8 @@ const _ = require('lodash');
 
 module.exports = co.wrap(function*(newsArray) {
 
+    // debug('newsArray = %j', newsArray);
+
     let time = Math.floor(moment(Date.now()));
 
     let jsonData = {
@@ -38,47 +40,63 @@ module.exports = co.wrap(function*(newsArray) {
             },
             title: news.title,
             category: news.category,
+            startYmdtUnix: (news.field_release_date.value * 1000),
+            endYmdtUnix: moment((news.field_release_date.value * 1000)).add(5, 'y').format('x'),
             publishTimeUnix: (news.field_release_date.value * 1000),
             publishTime: moment((news.field_release_date.value * 1000)).format('YYYY/MM/DD HH:mm'),
-            content: {
-                image: {
-                    title: news.title,
-                    description: news.title,
-                    url: news.image.url || 'http://www.nownews.com/assets/images/logo.png',
-                    thumbnail: news.image.thumbnail || 'http://www.nownews.com/assets/images/logo.png'
-                },
+            contents: {
+                // image: {
+                //     // title: news.title,
+                //     description: news.title,
+                //     url: 'imgs/' + news.image.fileName,
+                //     // thumbnail: news.image.thumbnail || 'http://www.nownews.com/assets/images/logo.png'
+                // },
                 text: {
                     content: news.body.value
                 }
             },
-            author: 'NOWnews 今日傳媒',
+            author: 'NOWnews 今日新聞',
             sourceUrl: 'http://www.nownews.com/n/' + year + '/' + month + '/' + date + '/' + news._id
         };
 
-        if(news.refNews && news.refNews.length !== 0) {
-            let refNewsData = _.map(news.refNews, function(refNews) {
-                return {
-                    title: refNews.title,
-                    url: refNews.url,
-                    thumbnail: refNews.thumbnail
-                };
-            });
-
-            newsData.content.recommendArticles = {};
-            newsData.content.recommendArticles.article = refNewsData;
+        if(news.image && news.image.fileName) {
+            newsData.contents.image = {};
+            newsData.contents.image.description = news.title;
+            newsData.contents.image.url = 'imgs/' + news.image.fileName;
         }
+        // debug('newsData image = %j', newsData.contents.image);
+        // debug('newsData = %j', newsData);
 
+        // 判斷是否有圖片
+        // if(news.image && news.image.fileName) {
+        //     newsData.contents.image = {};
+        //     newsData.contents.image.title = news.title;
+        //     newsData.contents.image.description = news.title;
+        //     newsData.contents.image.url = 'imgs/' + news.image.fileName;
+        // }
+
+        // 推薦新聞，目前先拿掉
+        // if(news.refNews && news.refNews.length !== 0) {
+        //     let refNewsData = _.map(news.refNews, function(refNews) {
+        //         return {
+        //             title: refNews.title,
+        //             url: refNews.url,
+        //             thumbnail: refNews.thumbnail
+        //         };
+        //     });
+
+        //     newsData.contents.recommendArticles = {};
+        //     newsData.contents.recommendArticles.article = refNewsData;
+        // }
+        // debug('newsData = %j', newsData);
         return newsData;
     });
 
-    let xml = js2xmlparser('articles', jsonData, {
-        useCDATA: true
-    });
+    // debug('articles json = %j', jsonData);
 
-    // debug('xml = %s', xml);
-    // debug('xml = %s', xml);
-    // console.log(xml);
+    let xml = js2xmlparser('articles', jsonData);
+
+    // debug('articles xml = %j', xml);
 
     return yield Promise.resolve(xml);
-    // return jsonData;
 });

@@ -12,16 +12,15 @@ module.exports = co.wrap(function*(news) {
     // 這一段專門在處理不能外送的新聞內文圖片
     $('img').filter(function(i, el) {
 
-        // 找出不能外送的 class name
-        let classString = $(this).attr('class');
-        let regexpString = /media__[0-9]+__isAuth__0/;
-        let result = classString.match(regexpString);
+        $(this).remove();
 
-        // // 將這個 class 的老爸們刪除
-        // debug('result = %s', result);
-        if(result !== null) {
-            $('.' + classString).remove();
-        }
+        // TODO: 找出不能外送的圖片 class name 並刪除
+        // let classString = $(this).attr('class');
+        // let regexpString = /media__[0-9]+__isAuth__0/;
+        // let result = classString.match(regexpString);
+        // if(result !== null) {
+        //     $('.' + classString).remove();
+        // }
     });
 
     // 把圖說拿掉因為他真的很討厭幹你娘勒

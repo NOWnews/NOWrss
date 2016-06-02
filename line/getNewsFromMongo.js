@@ -80,19 +80,16 @@ module.exports = co.wrap(function*(start, end) {
         return Promise.resolve(checkedNews);
     });
 
-    debug('step 4 = %s', '找出推薦新聞');
-    // 找出推薦新聞
-    allNews = yield Promise.map(allNews, function(news) {
-        return getRefNews(news);
-    })
-    .then(function(updateRefNews) {
-        debug('updateRefNews = %j', updateRefNews);
-        return Promise.resolve(updateRefNews);
-    });
-    // 確認新聞內文圖是否可以外送
-    // allNews = yield checkBodyImageIsAuth(allNews);
+    // 找出推薦新聞，先拿掉，有點危險
+    // debug('step 4 = %s', '找出推薦新聞');
+    // allNews = yield Promise.map(allNews, function(news) {
+    //     return getRefNews(news);
+    // })
+    // .then(function(updateRefNews) {
+    //     debug('updateRefNews = %j', updateRefNews);
+    //     return Promise.resolve(updateRefNews);
+    // });
 
     // debug('allNews = %j', allNews);
-
     return yield Promise.resolve(allNews);
 });

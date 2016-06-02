@@ -17,7 +17,7 @@ module.exports = co.wrap(function*(news) {
         return refNews.target_id;
     });
 
-    debug('refNodeIds = %j', refNodeIds);
+    // debug('refNodeIds = %j', refNodeIds);
 
     // 找出所有推薦新聞
     let refNews = yield db.collection('fields_current.node').find({
@@ -48,7 +48,7 @@ module.exports = co.wrap(function*(news) {
         let year = moment(ref.field_release_date.value * 1000).format('YYYY');
         let month = moment(ref.field_release_date.value * 1000).format('MM');
         let date = moment(ref.field_release_date.value * 1000).format('DD');
-        debug('thumbnail = %s', ref.image.thumbnail);
+        // debug('thumbnail = %s', ref.image.thumbnail);
         return {
             title: ref.title,
             url: 'http://www.nownews.com/n/' + year + '/' + month + '/' + date + '/' + ref._id,
