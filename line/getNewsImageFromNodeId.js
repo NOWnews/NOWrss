@@ -5,6 +5,7 @@ const Promise = require('bluebird');
 const _ = require('lodash');
 const md5 = require('md5');
 const fs = require('fs');
+const config = require('../config');
 // const request = require('request-promise');
 
 const MongoDB = Promise.promisifyAll(require('mongodb'));
@@ -20,7 +21,7 @@ module.exports = co.wrap(function*(news) {
 
     news.image = {};
 
-    let db = yield MongoClient.connectAsync('mongodb://nowproduction:werocks@mongodb16.nownews.com.tw,mongodb15.nownews.com.tw,mongodb14.nownews.com.tw,mongodb18.nownews.com.tw/production');
+    let db = yield MongoClient.connectAsync(config.mongodb);
 
     let imageNodeId = yield db.collection('fields_current.relation').findOne({
             _bundle: 'relation_news_image',

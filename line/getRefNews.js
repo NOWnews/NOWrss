@@ -3,6 +3,7 @@ const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
 const moment = require('moment-timezone');
+const config = require('../config');
 
 const MongoDB = Promise.promisifyAll(require('mongodb'));
 const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
@@ -11,7 +12,7 @@ const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 
 module.exports = co.wrap(function*(news) {
 
-    let db = yield MongoClient.connectAsync('mongodb://nowproduction:werocks@mongodb16.nownews.com.tw,mongodb15.nownews.com.tw,mongodb14.nownews.com.tw,mongodb18.nownews.com.tw/production');
+    let db = yield MongoClient.connectAsync(config.mongodb);
 
     let refNodeIds = _.map(news.field_news_ref, function(refNews) {
         return refNews.target_id;
