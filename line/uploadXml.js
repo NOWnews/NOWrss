@@ -47,10 +47,14 @@ module.exports = co.wrap(function*() {
 
     let ftp = new PromiseFtp();
     yield ftp.connect({
-            host: 'gln-ftps.line-beta.me',
-            port: 20021,
+            // host: 'gln-ftps.line-beta.me',
+            // user: 'nownews',
+            // password: 'changedPassword',
+            // port: 20021,
+            host: 'ftps-today.line.me',
             user: 'nownews',
-            password: 'changedPassword',
+            password: '9f_nQTmP',
+            port: 20021,
             secure: true,
             secureOptions: {
                 // secureProtocol: 'TLSv1_2_method',
