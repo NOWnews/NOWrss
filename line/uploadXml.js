@@ -17,6 +17,16 @@ const buildXmlFromNews = require('./buildXmlFromNews');
 
 module.exports = co.wrap(function*() {
 
+    if(fs.existsSync('./article.xml')){
+        console.log('prepare: 刪除未刪除成功的 article.xml');
+        fs.removeSync('./article.xml');
+    }
+
+    if(fs.existsSync('./line/newsImages/')){
+        console.log('prepare: 未刪除成功 imgs 資料夾');
+        fs.removeSync('./line/newsImages');
+    }
+
     // 開始時間為 15 分鐘前
     let startTime = moment(Date.now()).add(-15, 'm');
     // let startTime = moment(Date.now()).add(-30, 'm');
@@ -92,7 +102,7 @@ module.exports = co.wrap(function*() {
         .then(function () {
             console.log('上傳 xml finished');
             let filesName = fs.readFileSync('./article.xml.finished');
-            return ftp.put(filesName, folderName + '/article.xml.finished');
+            return ftp.put(filesName, '/' + folderName + '/article.xml.finished');
         })
         .then(function() {
             console.log('刪除 xml');
