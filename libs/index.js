@@ -8,11 +8,5 @@ module.exports = {
     hashPwd: hashPwd,
     dateFormat: dateFormat,
     rssTemplate: rssTemplate,
-    getNeedNewsFromMongo: getNeedNewsFromMongo,
-
-    getAllMainCategory: getAllMainCategory,
-    getNewsByTids: getNewsByTids,
-    getNewsImageFromNodeId: getNewsImageFromNodeId,
-    checkBodyImageIsAuth: checkBodyImageIsAuth,
-    getRefNews: getRefNews
+    getNeedNewsFromMongo: getNeedNewsFromMongo
 };

@@ -7,13 +7,12 @@ const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');
 const _ = require('lodash');
-const libs = require('../libs');
 
-const getAllMainCategory = libs.getAllMainCategory;
-const getNewsByTids = libs.getNewsByTids;
-const getNewsImageFromNodeId = libs.getNewsImageFromNodeId;
-const checkBodyImageIsAuth = libs.checkBodyImageIsAuth;
-const getRefNews = libs.getRefNews;
+const getAllMainCategory = require('./getAllMainCategory');
+const getNewsByTids = require('./getNewsByTids');
+const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
+const checkBodyImageIsAuth = require('./checkBodyImageIsAuth');
+const getRefNews = require('./getRefNews');
 
 module.exports = co.wrap(function*(start, end) {
 
