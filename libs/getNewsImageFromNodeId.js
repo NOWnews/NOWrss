@@ -1,12 +1,11 @@
 
-const debug = require('debug')('NOWrss:line:getNewsImageFromNodeId');
+const debug = require('debug')('NOWrss:libs:getNewsImageFromNodeId');
 const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
 const md5 = require('md5');
 const fs = require('fs');
 const config = require('../config');
-// const request = require('request-promise');
 
 const MongoDB = Promise.promisifyAll(require('mongodb'));
 const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);

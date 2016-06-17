@@ -1,4 +1,4 @@
-const debug = require('debug')('NOWrss:line:getRefNews');
+const debug = require('debug')('NOWrss:libs:getRefNews');
 const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
@@ -65,4 +65,3 @@ module.exports = co.wrap(function*(news) {
 
     return yield Promise.resolve(news);
 });
-

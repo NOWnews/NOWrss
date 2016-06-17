@@ -1,4 +1,4 @@
-const debug = require('debug')('NOWrss:line:checkBodyImageIsAuth');
+const debug = require('debug')('NOWrss:libs:checkBodyImageIsAuth');
 const co = require('co');
 const Promise = require('bluebird');
 const cheerio = require('cheerio');

@@ -1,5 +1,5 @@
 
-const debug = require('debug')('NOWrss:line:getAllMainCategory');
+const debug = require('debug')('NOWrss:libs:getAllMainCategory');
 const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');

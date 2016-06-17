@@ -1,5 +1,5 @@
 
-const debug = require('debug')('NOWrss:line:getNewsByTids');
+const debug = require('debug')('NOWrss:libs:getNewsByTids');
 const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
@@ -24,15 +24,15 @@ module.exports = co.wrap(function*(tids, start, end) {
                 $in: tids
            },
            $and: [
-               { 
-                   'field_release_date.value': { 
-                       $gte: start
-                   } 
-               },
-               { 
+               {
                    'field_release_date.value': {
-                       $lte: end 
-                   } 
+                       $gte: start
+                   }
+               },
+               {
+                   'field_release_date.value': {
+                       $lte: end
+                   }
                }
            ]
         }, {

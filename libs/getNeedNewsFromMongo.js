@@ -1,8 +1,8 @@
 /*
- * 帶入時間區間，去跟 mongodb 要新聞資料
+ * 帶入時間區間及塞選條件(陣列)，去跟 mongodb 要新聞資料
  */
 
-const debug = require('debug')('NOWrss:line:getNewsFromMongo');
+const debug = require('debug')('NOWrss:libs:getNeedNewsFromMongo');
 const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');
@@ -14,7 +14,7 @@ const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 const checkBodyImageIsAuth = require('./checkBodyImageIsAuth');
 const getRefNews = require('./getRefNews');
 
-module.exports = co.wrap(function*(start, end) {
+module.exports = co.wrap(function*(start, end, searchCondition) {
 
     if(!start) {
         return Promise.reject(new Error('要帶入 start 的 epoch 時間'));
@@ -32,25 +32,23 @@ module.exports = co.wrap(function*(start, end) {
     // 去 db 撈取所有 main category(主要分類) 的資料
     let mainCategories = yield getAllMainCategory();
 
-    // 所有 main category(主要分類) 的 tid
-    let mainTids = _.map(mainCategories, function(category) {
-        return category.tid;
-    });
-    console.log(mainTids,'####4####');
-    // tid 對應中文名稱
-     var mainMappingObject = {};
-    _.forEach(mainCategories, function(category) {
-        mainMappingObject[category.tid] = category.name;
-    });
-    console.log(mainMappingObject, '####4####');
+    // 塞選後的 main category(主要分類) 的 tid
+    let mainTids = [];
+    // 塞選後的 tid 對應中文名稱
+    let mainMappingObject = {};
 
-    // debug('mainTids = %j', mainTids);
-    // debug('mainMappingObject = %j', mainMappingObject);
+    _.forEach(mainCategories, function(mainCategorie){
+        if ( !searchCondition || searchCondition.indexOf(mainCategorie.name) !== -1 ){
+            mainTids.push(mainCategorie.tid);
+            mainMappingObject[mainCategorie.tid] = mainCategorie.name;
+        }
+    });
 
+    debug('mainTids = %j', mainTids);
+    debug('mainMappingObject = %j', mainMappingObject);
 
     // 用 tid 與時間區間去撈取新聞
     let allNews = yield getNewsByTids(mainTids, startEpoch, endEpoch);
-    console.log(mainTids, '####4####', startEpoch, endEpoch);
 
     debug('step 1 = %s', '撈取新聞');
     debug('總共撈到 %d 則', allNews.length);

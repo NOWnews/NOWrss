@@ -1,10 +1,9 @@
-
+const debug = require('debug')('NOWrss:libs:downloadImage');
 const co = require('co');
 const Promise = require('bluebird');
 const request = require('request-promise');
 const fs = require('fs');
 
-const debug = require('debug')('NOWrss:line:downloadImage');
 
 module.exports = co.wrap(function*(url, folderName, fileName) {
 
