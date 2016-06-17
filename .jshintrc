@@ -94,12 +94,12 @@
     ],
     "globals": {
         "Promise": true,
+        "config": true,
         "co": true,
         "models": true,
         "Debug": false,
         "moment": true,
         "_": true,
-        "config": false,
         "libs": false,
         "rootPath": false,
         "async": false,
