@@ -6,7 +6,7 @@ const libs = require('../../../../libs');
 const co = require('co');
 
 module.exports = (req, res, next) => {
-    const updateFields = ['name', 'dateRange', 'contactPerson'];
+    const updateFields = ['name', 'dateRange', 'contactPerson', 'catogry'];
     let data = _.pick(req.body, updateFields);
     let sn = req.params.sn;
 

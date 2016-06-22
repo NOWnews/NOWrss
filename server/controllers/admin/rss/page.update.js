@@ -30,11 +30,10 @@ module.exports = (req, res, next) => {
                 value: rssData.name
             },
             {
-                title: '分類',
+                title: '分類(請用 , 隔開)',
                 name: 'catogry',
                 type: 'text',
                 value: rssData.catogry,
-                disabled: 'disabled'
             },
             {
                 title: '有效時間',
