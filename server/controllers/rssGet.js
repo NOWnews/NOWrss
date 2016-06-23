@@ -17,18 +17,25 @@ let mongoose = require('mongoose');
 
 router.route('/:id')
     .get((req, res, next) => {
-        // let id = mongoose.Types.ObjectId(req.params.id);
+        let id = mongoose.Types.ObjectId(req.params.id);
 
         co(function*() {
             let startTime = moment(Date.now()).add(-15, 'm');
             let endTime = moment(Date.now());
+            let rssData = yield models.rss.findOne()
+            .where('_id').equals(id)
+            .execAsync();
 
-            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, ['運動']);
+            // console.log('L28', rssData.catogry);
 
-            // let rssData = yield models.rss.findOne()
-            // .where('_id').equals(id)
-            // .execAsync();
+            let news = yield libs.getNeedNewsFromMongo(startTime, endTime);
 
+            let rssXml = yield libs.buildRssFromNews(news);
+
+
+            // res.charset = 'utf-8';
+            // res.set('Content-Type', 'text/xml');
+            // res.send(rssXml);
             res.json(news);
         }).catch(next);
 
