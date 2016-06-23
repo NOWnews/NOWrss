@@ -1,0 +1,33 @@
+<form role="form" action="{{ formData.action }}" method="{{ 'get' if formData.method == 'get' else 'post' }}">
+    {% if formData.method == 'put' or formData.method == 'fatch' %}
+        <input type="hidden" name="_method" value="{{ formData.method }}"/>
+    {% endif %}
+    <div class="box-body">
+        <!-- /.form group -->
+        {% for item in formData.formColumn %}
+            {% if item.name == 'dateRange' %}
+                {# date range 版型 #}
+                <div class="form-group">
+                    <label>{{ item.title }}</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input name="{{ item.name }}" type="text" value="{{ item.value }}" class="form-control pull-right" id="dateRange">
+                    </div>
+                </div>
+            {% else %}
+                {# 預設 input 版型 #}
+                <div class="form-group">
+                    <label for="{{ item.name + loop.index }}">{{ item.title }}</label>
+                    <input type="{{ item.type }}" name="{{ item.name }}" value="{{ item.value }}" class="form-control" id="{{ item.name + loop.index }}" placeholder="輸入您的{{ item.title }}" {{ item.disabled }} required>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+    </div>
+    <div class="box-footer text-right">
+        <button type="submit" class="btn btn-success">儲存</button>
+        <a href="javascript:history.back()" class="btn btn-default">取消</a>
+    </div>
+</form>

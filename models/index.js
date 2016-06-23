@@ -7,7 +7,8 @@ let autoIncrement = require('mongoose-auto-increment');
  */
 Promise.promisifyAll(mongoose);
 
-const dbUrl = `${config.mongodb}/rss_${NODE_ENV}`;
+// const dbUrl = `${config.mongodb}/rss_${NODE_ENV}`;
+const dbUrl = `${config.localMongodb}/rss_${NODE_ENV}`;
 mongoose.connect(dbUrl);
 const connection = mongoose.connection;
 
