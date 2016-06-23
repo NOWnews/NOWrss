@@ -15,9 +15,14 @@ module.exports = co.wrap(function*(news) {
         $(this).remove();
 
         // TODO: 找出不能外送的圖片 class name 並刪除
-        // let classString = $(this).attr('class');
-        // let regexpString = /media__[0-9]+__isAuth__0/;
-        // let result = classString.match(regexpString);
+        let classString = $(this).attr('class');
+        let regexpString = /media__[0-9]+__isAuth__0/;
+        let result = classString.match(regexpString);
+
+        console.log('Class String = ' + classString);
+        console.log('regexpString = ' + regexpString);
+        console.log('result = ' + result);
+        console.log('---------------- 觀察用 ----------------');
         // if(result !== null) {
         //     $('.' + classString).remove();
         // }

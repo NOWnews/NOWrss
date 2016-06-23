@@ -20,6 +20,9 @@ module.exports = co.wrap(function*(tids, start, end) {
     let news = yield db.collection('fields_current.node').find({
            _bundle: 'news',
            _type: 'node',
+           'field_adult.value': '0', // 是否為成人
+           'field_auth.value': '1', // 是否可以外送
+           'field_release_status.value': 1,  // 發佈狀態
            'field_main_category.tid': {
                 $in: tids
            },
