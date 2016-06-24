@@ -9,6 +9,9 @@ module.exports = (req, res, next) => {
     let sn = req.params.sn;
 
     co(function*() {
+        // 取得資料庫的分類
+        let mainCategories = yield libs.getAllMainCategory();
+        let mainCategoriesString = _.map(mainCategories, (o) => o.name).join(', ');
 
         let rssData = yield models.rss.findOne()
             .where('sn').equals(sn)
@@ -31,6 +34,7 @@ module.exports = (req, res, next) => {
             },
             {
                 title: '分類(請用 , 隔開)',
+                subTitle: '( 目前分類有: ' + mainCategoriesString + ' )',
                 name: 'catogry',
                 type: 'text',
                 value: rssData.catogry,

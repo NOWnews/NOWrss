@@ -21,6 +21,7 @@
                 <div class="form-group">
                     <label for="{{ item.name + loop.index }}">{{ item.title }}</label>
                     <input type="{{ item.type }}" name="{{ item.name }}" value="{{ item.value }}" class="form-control" id="{{ item.name + loop.index }}" placeholder="輸入您的{{ item.title }}" {{ item.disabled }} required>
+                    <span class="users-list-date">{{ item.subTitle }}</span>
                 </div>
             {% endif %}
 
