@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
                 type: 'text'
             },
             {
-                title: '分類(請用 , 隔開，如果全抓請留空)',
+                title: '分類(請用 , 隔開，如果要全抓請留 all)',
                 subTitle: '( 目前分類有: ' + mainCategoriesString + ' )',
                 name: 'catogry',
                 type: 'text'

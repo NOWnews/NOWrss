@@ -10,7 +10,7 @@ const _ = require('lodash');
 
 const getAllMainCategory = require('./getAllMainCategory');
 const getNewsByTids = require('./getNewsByTids');
-const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
+// const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 const checkBodyImageIsAuth = require('./checkBodyImageIsAuth');
 const getRefNews = require('./getRefNews');
 
@@ -61,24 +61,24 @@ module.exports = co.wrap(function*(start, end, searchCondition) {
     _.forEach(allNews, function(news) {
         news.category = mainMappingObject[news.field_main_category.tid];
     });
-
-    debug('step 2 = %s', '找尋新聞主圖');
-    // 找尋新聞主圖
-    allNews = yield Promise.map(allNews, function(news) {
-        return getNewsImageFromNodeId(news);
-    })
-    .then(function(newsHaveImage) {
-        return Promise.resolve(newsHaveImage);
-    });
-
-    debug('step 3 = %s', '確認新聞內文圖是否可以外送');
-    // 確認新聞內文圖是否可以外送
-    allNews = yield Promise.map(allNews, function(news) {
-        return checkBodyImageIsAuth(news);
-    })
-    .then(function(checkedNews) {
-        return Promise.resolve(checkedNews);
-    });
+    // 
+    // debug('step 2 = %s', '找尋新聞主圖');
+    // // 找尋新聞主圖
+    // allNews = yield Promise.map(allNews, function(news) {
+    //     return getNewsImageFromNodeId(news);
+    // })
+    // .then(function(newsHaveImage) {
+    //     return Promise.resolve(newsHaveImage);
+    // });
+    //
+    // debug('step 3 = %s', '確認新聞內文圖是否可以外送');
+    // // 確認新聞內文圖是否可以外送
+    // allNews = yield Promise.map(allNews, function(news) {
+    //     return checkBodyImageIsAuth(news);
+    // })
+    // .then(function(checkedNews) {
+    //     return Promise.resolve(checkedNews);
+    // });
 
     // 找出推薦新聞，先拿掉，有點危險
     // debug('step 4 = %s', '找出推薦新聞');

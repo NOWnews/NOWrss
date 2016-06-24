@@ -33,7 +33,7 @@ module.exports = (req, res, next) => {
                 value: rssData.name
             },
             {
-                title: '分類(請用 , 隔開)',
+                title: '分類(請用 , 隔開，如果要全抓請留 all)',
                 subTitle: '( 目前分類有: ' + mainCategoriesString + ' )',
                 name: 'catogry',
                 type: 'text',

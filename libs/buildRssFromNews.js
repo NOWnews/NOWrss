@@ -10,7 +10,7 @@ const RSS = require('./RSSLib');
 
 module.exports = co.wrap(function*(newsArray) {
 
-    debug('newsArray = %j', newsArray);
+    // debug('newsArray = %j', newsArray);
 
     var feed = new RSS({
         title: 'NOWnews 今日新聞網',
@@ -23,16 +23,19 @@ module.exports = co.wrap(function*(newsArray) {
         ttl: '60',
     });
 
-    newsArray = newsArray[0];
     /* loop over data and add to feed */
-    feed.item({
-        title:  newsArray.title,
-        url: 'http://www.nownews.com/n/2016/06/23/2143858',
-        description: newsArray.body.value,
-        summary: newsArray.body.summary,
-        date: new Date(),
-        subcategory: newsArray.category
+    _.forEach(newsArray, (news) => {
+        let dateFormat = moment(news.field_release_date.value * 1000).format('YYYY/MM/DD');
+        feed.item({
+            title:  news.title,
+            url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
+            description: news.body.value,
+            summary: news.body.summary,
+            date: new Date(),
+            subcategory: news.category
+        });
     });
+
 
 
     // let time = Math.floor(moment(Date.now()));
