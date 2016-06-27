@@ -20,23 +20,27 @@ router.route('/:id')
         let id = mongoose.Types.ObjectId(req.params.id);
 
         co(function*() {
-            let startTime = moment(Date.now()).add(-15, 'm');
-            let endTime = moment(Date.now());
+            // let startTime = moment(Date.now()).add(-15, 'm');
+            let startTime = moment().add(-1, 'day');
+            let endTime = moment();
+
             let rssData = yield models.rss.findOne()
             .where('_id').equals(id)
             .execAsync();
 
-            // console.log('L28', rssData.catogry);
+            let categoryOption = rssData.catogry === 'all' ? null : rssData.catogry.replace(' ', '').split(',');
 
-            let news = yield libs.getNeedNewsFromMongo(startTime, endTime);
+            debug('categoryOption = %s', categoryOption);
+
+            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption);
 
             let rssXml = yield libs.buildRssFromNews(news);
 
 
-            // res.charset = 'utf-8';
-            // res.set('Content-Type', 'text/xml');
-            // res.send(rssXml);
-            res.json(news);
+            res.charset = 'utf-8';
+            res.set('Content-Type', 'text/xml');
+            res.send(rssXml);
+            // res.json(mainCategories);
         }).catch(next);
 
     });
