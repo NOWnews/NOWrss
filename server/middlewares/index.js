@@ -1,13 +1,15 @@
-let express = require('express');
-let compression = require('compression');
-let logger = require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser = require('body-parser');
-let cors = require('cors');
-let multer = require('multer');
-let cookieSession = require('cookie-session');
-let nunjucks = require('nunjucks');
-let methodOverride = require('method-override');
+const express = require('express');
+const compression = require('compression');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const multer = require('multer');
+const cookieSession = require('cookie-session');
+const nunjucks = require('nunjucks');
+const methodOverride = require('method-override');
+
+const defaultUser = require('./defaultUser');
 
 const upload = multer({
     dest: '/tmp'
@@ -53,6 +55,8 @@ module.exports = (app) => {
     }));
 
      app.use(logger('dev'));
+
+     app.use(defaultUser());
 
     return (req, res, next) => next();
 
