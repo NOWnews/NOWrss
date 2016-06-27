@@ -1,0 +1,15 @@
+.datoutie-img {
+    width: 42px;
+    height: 42px;
+    background-color: #edf9fd;
+    position: relative;
+    font-size: 15px;
+}
+.datoutie-name {
+    color: #27b6e8;
+    left: 50%;
+    position: absolute;
+    top: 54%;
+    transform: translate(-50%, -50%);
+    -webkit-user-select: none;
+}
