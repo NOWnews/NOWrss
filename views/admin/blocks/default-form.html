@@ -5,7 +5,7 @@
     <div class="box-body">
         <!-- /.form group -->
         {% for item in formData.formColumn %}
-            {% if item.name == 'dateRange' %}
+            {% if item.type == 'dateRange' %}
                 {# date range 版型 #}
                 <div class="form-group">
                     <label>{{ item.title }}</label>
@@ -15,6 +15,24 @@
                       </div>
                       <input name="{{ item.name }}" type="text" value="{{ item.value }}" class="form-control pull-right" id="dateRange">
                     </div>
+                </div>
+            {% elif item.type == 'checkBox'%}
+                {# catogry 版型 #}
+                <div class="form-group">
+                    <label for="{{ item.name + loop.index }}">{{ item.title }}</label>
+                    {% for d in item.data %}
+                        <div class="checkbox">
+                            <label>
+                                {% if d.value %}
+                                    <input type="checkbox" name="{{ item.name }}" value="{{ d.name }}" class="minimal" checked>
+                                {% else %}
+                                    <input type="checkbox" name="{{ item.name }}" value="{{ d.name }}" class="minimal">
+                                {% endif %}
+                                {{ d.name }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <span class="users-list-date">{{ item.subTitle }}</span>
                 </div>
             {% else %}
                 {# 預設 input 版型 #}

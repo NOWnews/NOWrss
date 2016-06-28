@@ -9,7 +9,6 @@ module.exports = (req, res, next) => {
     co(function*() {
         // 取得資料庫的分類
         let mainCategories = yield libs.getAllMainCategory();
-        let mainCategoriesString = _.map(mainCategories, (o)=> o.name).join(', ');
 
         let formData = {
             title: '建立廠商 RSS',
@@ -21,15 +20,15 @@ module.exports = (req, res, next) => {
                 type: 'text'
             },
             {
-                title: '分類(請用 , 隔開，如果要全抓請留 all)',
-                subTitle: '( 目前分類有: ' + mainCategoriesString + ' )',
+                title: '分類',
                 name: 'catogry',
-                type: 'text'
+                data: mainCategories,
+                type: 'checkBox'
             },
             {
                 title: '有效時間',
                 name: 'dateRange',
-                type: 'text'
+                type: 'dateRange'
             },
             {
                 title: '限定的IP',

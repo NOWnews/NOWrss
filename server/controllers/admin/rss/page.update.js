@@ -11,13 +11,26 @@ module.exports = (req, res, next) => {
     co(function*() {
         // 取得資料庫的分類
         let mainCategories = yield libs.getAllMainCategory();
-        let mainCategoriesString = _.map(mainCategories, (o) => o.name).join(', ');
 
         let rssData = yield models.rss.findOne()
             .where('sn').equals(sn)
             .where('trashed').equals(false)
             .lean()
             .execAsync();
+
+        // let selectCategories =
+        console.log(rssData.catogry);
+        if (rssData.catogry === 'all'){
+            let mainCategoriesString = _.map(mainCategories, (o) => o.value = true);
+        } else {
+            let mainCategoriesString = _.map(mainCategories, (o) => {
+                if(rssData.catogry.indexOf(o.name) > -1) {
+                    o.value = true;
+                    console.log('false', o);
+                }
+                return o;
+            });
+        }
 
         let startDate = libs.dateFormat(rssData.startDate);
         let endDate = libs.dateFormat(rssData.endDate);
@@ -33,11 +46,11 @@ module.exports = (req, res, next) => {
                 value: rssData.name
             },
             {
-                title: '分類(請用 , 隔開，如果要全抓請留 all)',
-                subTitle: '( 目前分類有: ' + mainCategoriesString + ' )',
+                title: '分類',
                 name: 'catogry',
-                type: 'text',
+                data: mainCategories,
                 value: rssData.catogry,
+                type: 'checkBox'
             },
             {
                 title: '有效時間',
