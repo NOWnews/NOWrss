@@ -68,4 +68,8 @@ router.route('/admin/rss/update/:sn')
 router.route('/admin')
     .get(isLogin, pageHome);
 
+// TODO 暫時用
+router.route('/')
+    .get(isLogin, pageHome);
+
 module.exports = router;
