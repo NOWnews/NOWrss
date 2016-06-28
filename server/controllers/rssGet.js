@@ -15,7 +15,7 @@ let co = require('co');
 let mongoose = require('mongoose');
 
 
-router.route('rss/:id')
+router.route('/rss/:id')
     .get((req, res, next) => {
         let id = mongoose.Types.ObjectId(req.params.id);
 
