@@ -31,7 +31,7 @@ module.exports = co.wrap(function*(newsArray) {
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
             description: news.body.value,
             summary: news.body.summary,
-            date: new Date(),
+            date: moment(news.field_release_date.value * 1000),
             subcategory: news.category
         });
     });

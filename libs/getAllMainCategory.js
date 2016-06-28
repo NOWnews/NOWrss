@@ -10,7 +10,7 @@ const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 
 module.exports = co.wrap(function*() {
 
-    let db = yield MongoClient.connectAsync(config.mongodb);
+    let db = yield MongoClient.connectAsync(config.newsMongodb);
 
     // 找出所有最大分類的 tid
     let mainCategory = yield db.collection('fields_current.taxonomy_term').find({
