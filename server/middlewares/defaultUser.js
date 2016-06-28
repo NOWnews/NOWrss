@@ -16,14 +16,14 @@ module.exports = function() {
 
         let adminUser;
 
-        adminUser = yield models.user.find()
+        adminUser = yield models.user.findOne()
             .where('email').equals(defaultEmail)
             .where('password').equals(libs.hashPwd(defaultPassword))
             .where('name').equals(defaultName)
             .where('trashed').equals(false)
             .execAsync();
 
-        if(!adminUser[0]){
+        if(!adminUser){
             adminUser = yield models.user.createAsync({
                 _id: '500000000000000000000001',
                 email: defaultEmail,
