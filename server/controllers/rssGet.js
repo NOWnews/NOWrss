@@ -20,7 +20,6 @@ router.route('/:id')
         let id = mongoose.Types.ObjectId(req.params.id);
 
         co(function*() {
-            // let startTime = moment(Date.now()).add(-15, 'm');
             let startTime = moment().add(-1, 'day');
             let endTime = moment();
 
@@ -28,7 +27,7 @@ router.route('/:id')
             .where('_id').equals(id)
             .execAsync();
 
-            let categoryOption = rssData.catogry === 'all' ? null : rssData.catogry.replace(' ', '').split(',');
+            let categoryOption = rssData.catogry.split(',');
 
             debug('categoryOption = %s', categoryOption);
 
