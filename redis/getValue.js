@@ -1,0 +1,18 @@
+import co from 'co';
+
+const debug = require('debug')('NOWapis:redis:getValue');
+const client = require('./client');
+
+/*
+ * 利用 key 把 redis 的資料拉出來
+ */
+module.exports = co.wrap(function*(key) {
+    let cacheValue = yield client.getAsync(key);
+
+    if(!cacheValue) {
+        return yield Promise.resolve([]);
+    }
+
+    let valueObject = JSON.parse(cacheValue);
+    return yield Promise.resolve(valueObject);
+});
