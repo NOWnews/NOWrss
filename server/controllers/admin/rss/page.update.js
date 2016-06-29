@@ -18,15 +18,12 @@ module.exports = (req, res, next) => {
             .lean()
             .execAsync();
 
-        // let selectCategories =
-        console.log(rssData.catogry);
         if (rssData.catogry === 'all'){
             let mainCategoriesString = _.map(mainCategories, (o) => o.value = true);
         } else {
             let mainCategoriesString = _.map(mainCategories, (o) => {
                 if(rssData.catogry.indexOf(o.name) > -1) {
                     o.value = true;
-                    console.log('false', o);
                 }
                 return o;
             });
