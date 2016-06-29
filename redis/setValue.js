@@ -1,6 +1,6 @@
 
-import co from 'co';
-import Promise from 'bluebird';
+const co = require('co');
+const Promise = require('bluebird');
 
 const debug = require('debug')('NOWvote:redis:setValue');
 const client = require('./client');

@@ -1,4 +1,4 @@
-import co from 'co';
+const co = require('co');
 
 const debug = require('debug')('NOWapis:redis:getValue');
 const client = require('./client');

@@ -1,6 +1,6 @@
 
-import Promise from 'bluebird';
-import redis from 'redis';
+const Promise = require('bluebird');
+const redis = require('redis');
 
 const config = require('../config');
 
