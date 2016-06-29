@@ -2,6 +2,7 @@
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.update');
 const models = require('../../../../models');
 const libs = require('../../../../libs');
+const redis = require('../../../../redis');
 
 const co = require('co');
 
@@ -10,7 +11,7 @@ module.exports = (req, res, next) => {
 
     co(function*() {
         // 取得資料庫的分類
-        let mainCategories = yield libs.getAllMainCategory();
+        let mainCategories = yield redis.getMainCategoriesRedis();
 
         let rssData = yield models.rss.findOne()
             .where('sn').equals(sn)

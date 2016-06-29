@@ -16,7 +16,7 @@ module.exports = co.wrap(function*(key, value, expire) {
     client.set(key, valueString);
 
     if(expire) {
-        client.expire(key, expireTime);
+        client.expire(key, expire);
     }
 
     let cacheValue = yield client.getAsync(key);
