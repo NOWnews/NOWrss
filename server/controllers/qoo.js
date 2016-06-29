@@ -4,7 +4,7 @@ let express = require('express');
 let router = express.Router();
 
 let models = require('../../models');
-let caches = require('../../caches');
+let redis = require('../../redis');
 
 let RSS = require('rss');
 
