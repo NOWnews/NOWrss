@@ -1,7 +1,6 @@
 
 const co = require('co');
 const is = require('is_js');
-const fetch = require('node-fetch');
 
 const debug = require('debug')('NOWrss:redis:getMainCategoriesRedis');
 const client = require('./client');

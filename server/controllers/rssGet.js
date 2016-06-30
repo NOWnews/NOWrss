@@ -31,7 +31,7 @@ router.route('/rss/:id')
 
             debug('categoryOption = %s', categoryOption);
 
-            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption);
+            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, id);
 
             let rssXml = yield libs.buildRssFromNews(news);
 
