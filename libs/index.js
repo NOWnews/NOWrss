@@ -12,5 +12,5 @@ module.exports = {
     rssTemplate: rssTemplate,
     getNeedNewsFromMongo: getNeedNewsFromMongo,
     buildRssFromNews: buildRssFromNews,
-    getAllMainCategory: getAllMainCategory,
+    getAllMainCategory: getAllMainCategory
 };

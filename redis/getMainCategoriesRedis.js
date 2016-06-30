@@ -6,7 +6,7 @@ const debug = require('debug')('NOWrss:redis:getMainCategoriesRedis');
 const client = require('./client');
 const getRedisValue = require('./getValue');
 const setRedisValue = require('./setValue');
-const libs = require('../libs');
+const getAllMainCategory = require('./../libs/getAllMainCategory');
 
 /*
  * 撈取新聞 Mongo 裡面的 Menu
@@ -22,7 +22,7 @@ module.exports = co.wrap(function*() {
         return yield Promise.resolve(mainCategoriesRedis);
     }
 
-    let mainCategories = yield libs.getAllMainCategory();
+    let mainCategories = yield getAllMainCategory();
 
     // debug('mainCategories From Api = %j', mainCategories);
 
