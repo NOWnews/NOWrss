@@ -25,18 +25,18 @@ module.exports = co.wrap(function*(newsArray) {
 
     /* loop over data and add to feed */
     _.forEach(newsArray, (news) => {
-        let dateFormat = moment(news.field_release_date.value * 1000).format('YYYY/MM/DD');
+        let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
         feed.item({
             title:  news.title,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
             description: news.body.value,
             summary: news.body.summary,
-            date: moment(news.field_release_date.value * 1000),
+            date: moment(news.field_release_date.value * 1000).tz('Asia/Taipei'),
             subcategory: news.category
         });
     });
 
     // debug('articles xml = %j', xml);
-
-    return yield Promise.resolve(feed.xml(true));
+    let xml = feed.xml(true);
+    return yield Promise.resolve(xml);
 });
