@@ -5,7 +5,7 @@
     <div class="box-body">
         <!-- /.form group -->
         {% for item in formData.formColumn %}
-            {% if item.name == 'dateRange' %}
+            {% if item.type == 'dateRange' %}
                 {# date range 版型 #}
                 <div class="form-group">
                     <label>{{ item.title }}</label>
@@ -16,11 +16,35 @@
                       <input name="{{ item.name }}" type="text" value="{{ item.value }}" class="form-control pull-right" id="dateRange">
                     </div>
                 </div>
+            {% elif item.type == 'checkBox'%}
+                {# catogry 版型 #}
+                <div class="form-group">
+                    <label for="{{ item.name + loop.index }}">{{ item.title }}</label>
+                    <div class="checkbox">
+                        <label class="text-red">
+                            <input type="checkbox" class="checkAll" /> 全選/全不選
+                        </label>
+                    </div>
+                    {% for d in item.data %}
+                        <div class="checkbox">
+                            <label>
+                                {% if d.value %}
+                                    <input type="checkbox" name="{{ item.name }}" value="{{ d.name }}" class="checkbox-input minimal" checked>
+                                {% else %}
+                                    <input type="checkbox" name="{{ item.name }}" value="{{ d.name }}" class="checkbox-input minimal">
+                                {% endif %}
+                                {{ d.name }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <span class="users-list-date">{{ item.subTitle }}</span>
+                </div>
             {% else %}
                 {# 預設 input 版型 #}
                 <div class="form-group">
                     <label for="{{ item.name + loop.index }}">{{ item.title }}</label>
                     <input type="{{ item.type }}" name="{{ item.name }}" value="{{ item.value }}" class="form-control" id="{{ item.name + loop.index }}" placeholder="輸入您的{{ item.title }}" {{ item.disabled }} required>
+                    <span class="users-list-date">{{ item.subTitle }}</span>
                 </div>
             {% endif %}
 

@@ -10,7 +10,7 @@ const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 
 module.exports = co.wrap(function*(tids, start, end) {
 
-    let db = yield MongoClient.connectAsync(config.mongodb);
+    let db = yield MongoClient.connectAsync(config.newsMongodb);
 
     // debug('tids = %j', tids);
     // debug('start = %d', start);

@@ -20,7 +20,7 @@ module.exports = co.wrap(function*(news) {
 
     news.image = {};
 
-    let db = yield MongoClient.connectAsync(config.mongodb);
+    let db = yield MongoClient.connectAsync(config.newsMongodb);
 
     let imageNodeId = yield db.collection('fields_current.relation').findOne({
             _bundle: 'relation_news_image',

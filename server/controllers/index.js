@@ -6,10 +6,10 @@ let rssGet = require('./rssGet');
 module.exports = (app) => {
 
     app.use('/', admin);
+    app.use('/', rssGet);
 
-    app.use('/test', demo);
-    app.use('/qoo', qoo);
-    app.use('/rss', rssGet);
+    // app.use('/test', demo);
+    // app.use('/qoo', qoo);
 
     return (req, res, next) => next();
 };

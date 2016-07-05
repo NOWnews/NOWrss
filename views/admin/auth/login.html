@@ -7,7 +7,7 @@
     <title>NOWrss | Log in</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    {% include "./blocks/basicCss.html" %}
+    {% include "../blocks/basicCss.html" %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,18 +20,18 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="/admin/login"><b>Admin</b>NOWRSS</a>
+            <a href="/admin/auth/login"><b>Admin</b>NOWRSS</a>
         </div>
         <div class="login-box-body">
             <p class="login-box-msg">歡迎登入</p>
 
-            <form action="/admin/login" method="post">
+            <form action="/admin/auth/login" method="post">
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="email" name="email" class="form-control" placeholder="Email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" class="form-control" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    {% include "./blocks/basicJs.html" %}
+    {% include "../blocks/basicJs.html" %}
 
 </body>
 

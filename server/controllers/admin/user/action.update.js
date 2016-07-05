@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 
     co(function*() {
 
-        let updatedUser = req.session.adminUser;
+        let updatedUser = req.session.user;
         let user = yield models.user.findBySn(sn);
 
         updateFields.forEach(function(field) {

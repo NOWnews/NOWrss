@@ -106,6 +106,7 @@
         "await": false,
         "NODE_ENV": false,
         "fetch": true,
+        "$": true,
         "libs": true
     }
 

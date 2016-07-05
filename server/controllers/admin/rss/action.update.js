@@ -10,6 +10,12 @@ module.exports = (req, res, next) => {
     let data = _.pick(req.body, updateFields);
     let sn = req.params.sn;
 
+    if(!data.catogry) {
+        return next(new Error('至少要填入一個分類'));
+    }
+
+    // debug('req.body = %j', req.body);
+
     co(function*() {
 
         let rssModels = yield models.rss.findBySn(sn);

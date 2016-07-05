@@ -9,12 +9,11 @@ const moment = require('moment-timezone');
 const _ = require('lodash');
 
 const getAllMainCategory = require('./getAllMainCategory');
-const getNewsByTids = require('./getNewsByTids');
-const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 const checkBodyImageIsAuth = require('./checkBodyImageIsAuth');
 const getRefNews = require('./getRefNews');
+const redis = require('../redis');
 
-module.exports = co.wrap(function*(start, end, searchCondition) {
+module.exports = co.wrap(function*(start, end, searchCondition, mongoId) {
 
     if(!start) {
         return Promise.reject(new Error('要帶入 start 的 epoch 時間'));
@@ -30,7 +29,7 @@ module.exports = co.wrap(function*(start, end, searchCondition) {
 
     debug('step 0 = %s', '撈取所有 main category');
     // 去 db 撈取所有 main category(主要分類) 的資料
-    let mainCategories = yield getAllMainCategory();
+    let mainCategories = yield redis.getMainCategoriesRedis();
 
     // 塞選後的 main category(主要分類) 的 tid
     let mainTids = [];
@@ -48,7 +47,8 @@ module.exports = co.wrap(function*(start, end, searchCondition) {
     debug('mainMappingObject = %j', mainMappingObject);
 
     // 用 tid 與時間區間去撈取新聞
-    let allNews = yield getNewsByTids(mainTids, startEpoch, endEpoch);
+
+    let allNews = yield redis.getRssIdByRedis(mainTids, startEpoch, endEpoch, mongoId);
 
     debug('step 1 = %s', '撈取新聞');
     debug('總共撈到 %d 則', allNews.length);
@@ -61,24 +61,24 @@ module.exports = co.wrap(function*(start, end, searchCondition) {
     _.forEach(allNews, function(news) {
         news.category = mainMappingObject[news.field_main_category.tid];
     });
-
-    debug('step 2 = %s', '找尋新聞主圖');
-    // 找尋新聞主圖
-    allNews = yield Promise.map(allNews, function(news) {
-        return getNewsImageFromNodeId(news);
-    })
-    .then(function(newsHaveImage) {
-        return Promise.resolve(newsHaveImage);
-    });
-
-    debug('step 3 = %s', '確認新聞內文圖是否可以外送');
-    // 確認新聞內文圖是否可以外送
-    allNews = yield Promise.map(allNews, function(news) {
-        return checkBodyImageIsAuth(news);
-    })
-    .then(function(checkedNews) {
-        return Promise.resolve(checkedNews);
-    });
+    //
+    // debug('step 2 = %s', '找尋新聞主圖');
+    // // 找尋新聞主圖
+    // allNews = yield Promise.map(allNews, function(news) {
+    //     return getNewsImageFromNodeId(news);
+    // })
+    // .then(function(newsHaveImage) {
+    //     return Promise.resolve(newsHaveImage);
+    // });
+    //
+    // debug('step 3 = %s', '確認新聞內文圖是否可以外送');
+    // // 確認新聞內文圖是否可以外送
+    // allNews = yield Promise.map(allNews, function(news) {
+    //     return checkBodyImageIsAuth(news);
+    // })
+    // .then(function(checkedNews) {
+    //     return Promise.resolve(checkedNews);
+    // });
 
     // 找出推薦新聞，先拿掉，有點危險
     // debug('step 4 = %s', '找出推薦新聞');
