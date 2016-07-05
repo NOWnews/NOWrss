@@ -19,6 +19,7 @@ const pageRssCreate = require('./rss/page.create');
 const actionRssCreate = require('./rss/action.create');
 const pageRssUpdate = require('./rss/page.update');
 const actionRssUpdate = require('./rss/action.update');
+const actionRssRemove = require('./rss/action.remove');
 
 const isLogin = require('../../middlewares/isLogin');
 const saveUrlType = require('../../middlewares/saveUrlType');
@@ -63,6 +64,9 @@ router.route('/admin/rss/create')
 router.route('/admin/rss/update/:sn')
     .get(isLogin, saveUrlType, pageRssUpdate)
     .put(isLogin, actionRssUpdate);
+
+router.route('/admin/rss/delete/:sn')
+    .delete(isLogin, actionRssRemove);
 
 
 router.route('/admin')

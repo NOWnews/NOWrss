@@ -10,6 +10,27 @@ $(function() {
     $('.checkbox-input').change(function() {
         checkOrRemoveCheckAll($checkAll);
     });
+
+    // remove rss
+    $('.remove-btn').on('click', function() {
+        event.preventDefault();
+        var sn = $(this).attr('item-sn');
+        var url = $(this).attr('page-route');
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            success: function(data, err) {
+                if (data.trashed) {
+                    location.reload();
+                } else {
+                    swal({
+                        title: '資料有誤 請重新整理！!',
+                        type: 'error'
+                    });
+                }
+            }
+        });
+    });
 });
 
 function checkOrRemoveCheckAll($checkAll) {
