@@ -31,7 +31,7 @@ module.exports = function(feedOptions, feedItem) {
 
     let feed = new RSS({
         title: feedOptions.title,
-        image_url: feedOptions.image_url,
+        image_url: 'http://imgapi.nownews.com/?w=640&q=60&src=' + feedOptions.image_url,
         link: feedOptions.link,
         language: feedOptions.language,
         pubDate: feedOptions.pubDate,
