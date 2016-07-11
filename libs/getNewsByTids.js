@@ -13,8 +13,8 @@ module.exports = co.wrap(function*(tids, start, end) {
     let db = yield MongoClient.connectAsync(config.newsMongodb);
 
     // debug('tids = %j', tids);
-    // debug('start = %d', start);
-    // debug('end = %d', end);
+    debug('start = %d', start);
+    debug('end = %d', end);
 
     // 找出所有最大分類的 tid
     let news = yield db.collection('fields_current.node').find({
@@ -42,7 +42,7 @@ module.exports = co.wrap(function*(tids, start, end) {
             field_release_date: true,
             body: true,
             field_news_ref: true
-        }).toArray();
+        }).sort({'field_release_date.value': -1}).limit(40).toArray();
 
     // debug('news = %j', news);
     // debug('news total = %d', news.length);
