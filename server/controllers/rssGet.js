@@ -20,8 +20,8 @@ router.route('/rss/:id')
         let id = mongoose.Types.ObjectId(req.params.id);
 
         co(function*() {
-            let startTime = moment().add(-1, 'day');
-            let endTime = moment();
+            let startTime = moment().tz('Asia/Taipei').add(-1, 'day');
+            let endTime = moment().tz('Asia/Taipei');
 
             let rssData = yield models.rss.findOne()
             .where('_id').equals(id)
