@@ -6,22 +6,30 @@ const uuid = require('node-uuid');
 const moment = require('moment-timezone');
 const js2xmlparser = require('js2xmlparser');
 const _ = require('lodash');
-const RSS = require('./RSSLib');
+const rssDefaultTp = require('./rssDefaultTp');
+const rssYahooTp = require('./rssYahooTp');
 
-module.exports = co.wrap(function*(newsArray) {
+module.exports = co.wrap(function*(newsArray, template) {
 
     // debug('newsArray = %j', newsArray);
 
-    var feed = new RSS({
-        title: 'NOWnews 今日新聞網',
-        description: 'Latest news from www.nownews.com',
-        site_url: 'http://www.nownews.com',
-        image_url: 'http://static.nownews.com/ad2004/141107-170318-3250p.png',
-        copyright: 'Copyright 2013, NOWnews Network Inc.',
-        language: 'zh-tw',
-        pubDate: new Date(),
-        ttl: '60',
-    });
+    let feedOption = {
+      title: 'NOWnews 今日新聞網',
+      description: 'Latest news from www.nownews.com',
+      site_url: 'http://www.nownews.com',
+      image_url: 'http://static.nownews.com/ad2004/141107-170318-3250p.png',
+      copyright: 'Copyright 2013, NOWnews Network Inc.',
+      language: 'zh-tw',
+      pubDate: new Date(),
+      ttl: '60'
+    };
+
+    let feed;
+    if (template === 'YAHOO'){
+      feed = new rssYahooTp(feedOption);
+    } else {
+      feed = new rssDefaultTp(feedOption);
+    }
 
     /* loop over data and add to feed */
     _.forEach(newsArray, (news) => {

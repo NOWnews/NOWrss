@@ -32,6 +32,19 @@ module.exports = (req, res, next) => {
                 type: 'dateRange'
             },
             {
+                title: '選擇版型',
+                name: 'template',
+                data: [{
+                    title: '基本版型',
+                    value: 'DEFAULT',
+                    attr: 'selected'
+                },{
+                    title: 'Yahoo 版型',
+                    value: 'TAHOO'
+                }],
+                type: 'select'
+            },
+            {
                 title: '限定的IP',
                 name: 'confirmIP',
                 type: 'text'

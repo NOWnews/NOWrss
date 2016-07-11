@@ -21,6 +21,7 @@ module.exports = (req, res, next) => {
             startDate: data.startDate,
             endDate: data.endDate,
             confirmIP: data.confirmIP || '',
+            template: data.template,
             contactPerson: data.contactPerson
         };
 

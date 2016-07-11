@@ -33,6 +33,8 @@ module.exports = (req, res, next) => {
         let startDate = libs.dateFormat(rssData.startDate);
         let endDate = libs.dateFormat(rssData.endDate);
 
+        debug('rssData = %j', rssData);
+
         let formData = {
             title: '更新廠商 RSS',
             action: `/admin/rss/update/${sn}`,
@@ -55,6 +57,20 @@ module.exports = (req, res, next) => {
                 name: 'dateRange',
                 type: 'text',
                 value: `${startDate} - ${endDate}`
+            },
+            {
+                title: '選擇版型',
+                name: 'template',
+                data: [{
+                    title: '基本版型',
+                    value: 'DEFAULT',
+                    selected: rssData.template === 'DEFAULT' ? 'selected' : ''
+                },{
+                    title: 'Yahoo 版型',
+                    value: 'YAHOO',
+                    selected: rssData.template === 'YAHOO' ? 'selected' : ''
+                }],
+                type: 'select'
             },
             {
                 title: '限定的IP',

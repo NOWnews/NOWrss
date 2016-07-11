@@ -25,6 +25,12 @@ const schema = new Schema({
         type: String
     },
 
+    template: {
+        type: String,
+        default: 'DEFAULT',
+        enum: ['DEFAULT', 'YAHOO']
+    },
+
     startDate: {
         type: Date,
         required: true
