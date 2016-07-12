@@ -24,6 +24,8 @@ module.exports = co.wrap(function*(newsArray, template) {
       ttl: '60'
     };
 
+    let hr8 = 60 * 60 * 8 * 1000;
+
     let feed;
     if (template === 'YAHOO'){
       feed = new rssYahooTp(feedOption);
@@ -40,7 +42,7 @@ module.exports = co.wrap(function*(newsArray, template) {
             description: news.body.value,
             author: news.field_newsby.value,
             summary: news.body.summary,
-            date: moment(news.field_release_date.value * 1000).tz('Asia/Taipei'),
+            date: moment(news.field_release_date.value * 1000 + hr8 ).tz('Asia/Taipei'),
             subcategory: news.category
         });
     });
