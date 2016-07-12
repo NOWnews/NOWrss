@@ -57,38 +57,12 @@ module.exports = co.wrap(function*(start, end, searchCondition, mongoId) {
         return yield Promise.resolve([]);
     }
 
+    debug('step 3 = %s', '將分類與新聞 mapping，並確認新聞內文圖是否可以外送');
     // 將分類與新聞 mapping
     _.forEach(allNews, function(news) {
+        checkBodyImageIsAuth(news);
         news.category = mainMappingObject[news.field_main_category.tid];
     });
-    //
-    // debug('step 2 = %s', '找尋新聞主圖');
-    // // 找尋新聞主圖
-    // allNews = yield Promise.map(allNews, function(news) {
-    //     return getNewsImageFromNodeId(news);
-    // })
-    // .then(function(newsHaveImage) {
-    //     return Promise.resolve(newsHaveImage);
-    // });
-    //
-    // debug('step 3 = %s', '確認新聞內文圖是否可以外送');
-    // // 確認新聞內文圖是否可以外送
-    // allNews = yield Promise.map(allNews, function(news) {
-    //     return checkBodyImageIsAuth(news);
-    // })
-    // .then(function(checkedNews) {
-    //     return Promise.resolve(checkedNews);
-    // });
-
-    // 找出推薦新聞，先拿掉，有點危險
-    // debug('step 4 = %s', '找出推薦新聞');
-    // allNews = yield Promise.map(allNews, function(news) {
-    //     return getRefNews(news);
-    // })
-    // .then(function(updateRefNews) {
-    //     debug('updateRefNews = %j', updateRefNews);
-    //     return Promise.resolve(updateRefNews);
-    // });
 
     // debug('allNews = %j', allNews);
     return yield Promise.resolve(allNews);
