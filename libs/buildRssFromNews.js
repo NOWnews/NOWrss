@@ -38,6 +38,7 @@ module.exports = co.wrap(function*(newsArray, template) {
             title:  news.title,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
             description: news.body.value,
+            author: news.field_newsby.value,
             summary: news.body.summary,
             date: moment(news.field_release_date.value * 1000).tz('Asia/Taipei'),
             subcategory: news.category
