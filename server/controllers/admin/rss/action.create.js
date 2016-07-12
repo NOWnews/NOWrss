@@ -4,6 +4,7 @@ const models = require('../../../../models');
 const libs = require('../../../../libs');
 
 const co = require('co');
+const uuid = require('node-uuid');
 
 module.exports = (req, res, next) => {
 
@@ -22,7 +23,8 @@ module.exports = (req, res, next) => {
             endDate: data.endDate,
             confirmIP: data.confirmIP || '',
             template: data.template,
-            contactPerson: data.contactPerson
+            contactPerson: data.contactPerson,
+            channelId: uuid()
         };
 
         yield models.rss.createAsync(rssObj);

@@ -25,6 +25,11 @@ const schema = new Schema({
         type: String
     },
 
+    channelId: {
+        type: String,
+        required: true
+    },
+
     template: {
         type: String,
         default: 'DEFAULT',
