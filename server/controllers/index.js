@@ -1,5 +1,3 @@
-let demo = require('./test');
-let qoo = require('./qoo');
 let admin = require('./admin');
 let rssGet = require('./rssGet');
 
@@ -7,9 +5,6 @@ module.exports = (app) => {
 
     app.use('/', admin);
     app.use('/', rssGet);
-
-    // app.use('/test', demo);
-    // app.use('/qoo', qoo);
 
     return (req, res, next) => next();
 };
