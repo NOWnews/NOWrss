@@ -40,7 +40,7 @@ module.exports = (req, res, next) => {
                     attr: 'selected'
                 },{
                     title: 'Yahoo 版型',
-                    value: 'TAHOO'
+                    value: 'YAHOO'
                 }],
                 type: 'select'
             },
