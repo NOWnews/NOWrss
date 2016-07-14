@@ -6,7 +6,7 @@ const libs = require('../../../../libs');
 const co = require('co');
 
 module.exports = (req, res, next) => {
-    const updateFields = ['name', 'dateRange', 'contactPerson', 'catogry', 'template'];
+    const updateFields = ['name', 'dateRange', 'contactPerson', 'catogry', 'template', 'channelId'];
     let data = _.pick(req.body, updateFields);
     let sn = req.params.sn;
 
@@ -19,6 +19,9 @@ module.exports = (req, res, next) => {
     co(function*() {
 
         let rssModels = yield models.rss.findBySn(sn);
+
+        // 儲存時將 channelId 改成小寫
+        data.channelId = data.channelId.toLowerCase();
 
         updateFields.forEach(function(field) {
             if(field === 'dateRange'){
