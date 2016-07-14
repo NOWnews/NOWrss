@@ -16,6 +16,16 @@
                       <input name="{{ item.name }}" type="text" value="{{ item.value }}" class="form-control pull-right" id="dateRange">
                     </div>
                 </div>
+            {% elif item.type == 'select' %}
+                {# date select 版型 #}
+                <div class="form-group">
+                    <label>{{ item.title }}</label>
+                    <select class="form-control" name="{{ item.name }}">
+                        {% for d in item.data %}
+                            <option value="{{ d.value }}" {{ d.selected }}>{{ d.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             {% elif item.type == 'checkBox'%}
                 {# catogry 版型 #}
                 <div class="form-group">
