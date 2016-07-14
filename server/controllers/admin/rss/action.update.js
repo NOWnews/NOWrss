@@ -21,7 +21,9 @@ module.exports = (req, res, next) => {
         let rssModels = yield models.rss.findBySn(sn);
 
         // 儲存時將 channelId 改成小寫
-        data.channelId = data.channelId.toLowerCase();
+        if(data.channelId){
+            data.channelId = data.channelId.toLowerCase();
+        }
 
         updateFields.forEach(function(field) {
             if(field === 'dateRange'){
