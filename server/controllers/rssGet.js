@@ -15,23 +15,23 @@ let co = require('co');
 let mongoose = require('mongoose');
 
 
-router.route('/rss/:id')
+router.route('/rss/:channelId')
     .get((req, res, next) => {
-        let id = mongoose.Types.ObjectId(req.params.id);
+        let channelId = req.params.channelId.toLowerCase();
 
         co(function*() {
             let startTime = moment().tz('Asia/Taipei').add(-1, 'day');
             let endTime = moment().tz('Asia/Taipei');
 
             let rssData = yield models.rss.findOne()
-            .where('_id').equals(id)
+            .where('channelId').equals(channelId)
             .execAsync();
 
             let categoryOption = rssData.catogry.split(',');
 
             debug('categoryOption = %s', categoryOption);
 
-            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, id);
+            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, channelId);
 
             let rssXml = yield libs.buildRssFromNews(news);
 

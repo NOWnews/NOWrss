@@ -13,7 +13,7 @@ const checkBodyImageIsAuth = require('./checkBodyImageIsAuth');
 const getRefNews = require('./getRefNews');
 const redis = require('../redis');
 
-module.exports = co.wrap(function*(start, end, searchCondition, mongoId) {
+module.exports = co.wrap(function*(start, end, searchCondition, channelId) {
 
     if(!start) {
         return Promise.reject(new Error('要帶入 start 的 epoch 時間'));
@@ -48,7 +48,7 @@ module.exports = co.wrap(function*(start, end, searchCondition, mongoId) {
 
     // 用 tid 與時間區間去撈取新聞
 
-    let allNews = yield redis.getRssIdByRedis(mainTids, startEpoch, endEpoch, mongoId);
+    let allNews = yield redis.getRssIdByRedis(mainTids, startEpoch, endEpoch, channelId);
 
     debug('step 1 = %s', '撈取新聞');
     debug('總共撈到 %d 則', allNews.length);

@@ -19,6 +19,8 @@ module.exports = (req, res, next) => {
             let endDate = libs.dateFormat(rss.endDate);
 
             rss.dateRange = `${startDate} - ${endDate}`;
+            // 列表時將 channelId 改成大寫
+            rss.channelId = rss.channelId.toUpperCase();
         });
 
         return res.render('admin/rss/list', {

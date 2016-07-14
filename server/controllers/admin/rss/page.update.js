@@ -33,6 +33,9 @@ module.exports = (req, res, next) => {
         let startDate = libs.dateFormat(rssData.startDate);
         let endDate = libs.dateFormat(rssData.endDate);
 
+        // 更新時將 channelId 改成大寫
+        rssData.channelId = rssData.channelId.toUpperCase();
+
         debug('rssData = %j', rssData);
 
         let formData = {
@@ -78,6 +81,12 @@ module.exports = (req, res, next) => {
                 type: 'text',
                 value: rssData.confirmIP,
                 disabled: 'disabled'
+            },
+            {
+                title: '頻道的ID',
+                name: 'channelId',
+                type: 'text',
+                value: rssData.channelId
             },
             {
                 title: '聯絡人資料 ( ex. 吳OO - 09xx123456 )',
