@@ -11,9 +11,9 @@ const getNewsByTids = require('../libs/getNewsByTids');
 /*
  * 撈取新聞 Mongo 裡面的 Menu
  */
-module.exports = co.wrap(function*(mainTids, startEpoch, endEpoch, mongoId) {
-    let mongoIdString = mongoId.toString();
-    let allNewsRedis = yield getValue(mongoIdString);
+module.exports = co.wrap(function*(mainTids, startEpoch, endEpoch, channelId) {
+    let channelIdString = channelId.toString();
+    let allNewsRedis = yield getValue(channelIdString);
 
     // debug('allNewsRedis = %j', allNewsRedis);
 
@@ -26,7 +26,7 @@ module.exports = co.wrap(function*(mainTids, startEpoch, endEpoch, mongoId) {
 
     // debug('allNews From Api = %j', allNews);
 
-    let updateRedisAllNews = yield setValue(mongoIdString, allNews, 360);
+    let updateRedisAllNews = yield setValue(channelIdString, allNews, 360);
 
     return yield Promise.resolve(updateRedisAllNews);
 });
