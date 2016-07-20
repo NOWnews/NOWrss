@@ -12,7 +12,7 @@ module.exports = co.wrap(function*(news) {
     // 這一段專門在處理不能外送的新聞內文圖片
     $('img').filter(function(i, el) {
 
-        $(this).remove();
+        // $(this).remove();
 
         // TODO: 找出不能外送的圖片 class name 並刪除
         let classString = $(this).attr('class');
@@ -23,14 +23,16 @@ module.exports = co.wrap(function*(news) {
         console.log('regexpString = ' + regexpString);
         console.log('result = ' + result);
         console.log('---------------- 觀察用 ----------------');
-        // if(result !== null) {
-        //     $('.' + classString).remove();
-        // }
+        if(result !== null) {
+            $(this).remove();
+            // $('.' + classString).remove();
+        }
     });
 
     // 把圖說拿掉因為他真的很討厭幹你娘勒
     $('cite').filter(function(i, el) {
-        $(el).parents().remove();
+        $(el).remove();
+        // $(el).parents().remove();
     });
 
     news.body.value = $.html();
