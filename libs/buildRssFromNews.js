@@ -36,10 +36,12 @@ module.exports = co.wrap(function*(newsArray, template) {
     /* loop over data and add to feed */
     _.forEach(newsArray, (news) => {
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
+        let body = news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
+        let mainPhotoBody = news.image.body || '';
         feed.item({
             title:  news.title,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
-            description: news.body.value,
+            description: mainPhotoBody + body,
             author: news.field_newsby.value,
             summary: news.body.summary,
             date: moment(news.field_release_date.value * 1000 + hr8 ).tz('Asia/Taipei'),

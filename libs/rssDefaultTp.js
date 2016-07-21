@@ -78,7 +78,7 @@ function generateXML (data){
             ifTruePush(category, item_values, { category: { _cdata: category } });
         });
 
-        ifTruePush(item.author || data.author, item_values, { 'dc:creator': item.author || data.author });
+        ifTruePush(item.author || data.author, item_values, { 'author': item.author || data.author });
         ifTruePush(item.date, item_values, { pubDate:      new Date(item.date).toGMTString() });
 
         //Set GeoRSS to true if lat and long are set

@@ -10,7 +10,7 @@ const config = require('../config');
 const MongoDB = Promise.promisifyAll(require('mongodb'));
 const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 
-const downloadImage = require('./downloadImage');
+// const downloadImage = require('./downloadImage');
 
 module.exports = co.wrap(function*(news) {
 
@@ -77,13 +77,14 @@ module.exports = co.wrap(function*(news) {
     let imgUrl = 'http://s.nownews.com/' + hash.substr(0, 2) + '/' + hash.substr(2, 2) + '/' + hash + '.' + ext;
 
     // 下載圖片，帶入 url, 資料夾位置， 檔案名稱
-    let imageInfo = yield downloadImage(imgUrl, __dirname + '/newsImages', hash + '.' + ext);
+    // let imageInfo = yield downloadImage(imgUrl, __dirname + '/newsImages', hash + '.' + ext);
 
     news.image.title = imageNode.title;
     news.image.description = imageNode.title;
     news.image.uri = imageData.uri;
-    news.image.url = 'http://imgapi.nownews.com/?w=1280&q=70&src=' + imgUrl;
-    news.image.fileName = imageInfo.fileName;
+    news.image.url = 'http://imgapi.nownews.com/?w=600&q=70&src=' + imgUrl;
+    news.image.body = '<div class="main-photo"><img src="http://imgapi.nownews.com/?w=600&q=70&src=' + imgUrl + '" width="320px;" class="editorial" /><br>' + imageNode.title +'</div>';
+    // news.image.fileName = imageInfo.fileName;
     // news.image.thumbnail = 'http://imgapi.nownews.com/?w=640&q=60&src=' + imgUrl;
     // debug('news = %j', news);
 
