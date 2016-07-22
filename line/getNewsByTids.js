@@ -49,6 +49,6 @@ module.exports = co.wrap(function*(tids, start, end) {
 
     // debug('news = %j', news);
     // debug('news total = %d', news.length);
-
+    yield db.closeAsync();
     return yield Promise.resolve(news);
 });

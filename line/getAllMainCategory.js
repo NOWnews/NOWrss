@@ -24,5 +24,7 @@ module.exports = co.wrap(function*() {
 
     // debug('mainCategory = %j', mainCategory);
 
+    yield db.closeAsync();
+
     return yield Promise.resolve(mainCategory);
 });

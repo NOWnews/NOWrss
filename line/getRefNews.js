@@ -62,7 +62,7 @@ module.exports = co.wrap(function*(news) {
     news.refNews = newRefNews;
 
     // debug('news refNews = %j', news.refNews);
-
+    yield db.closeAsync();
     return yield Promise.resolve(news);
 });
 
