@@ -6,12 +6,14 @@ const uuid = require('node-uuid');
 const moment = require('moment-timezone');
 const js2xmlparser = require('js2xmlparser');
 const _ = require('lodash');
+const chineseConv = require('chinese-conv');
 const rssDefaultTp = require('./rssDefaultTp');
 const rssYahooTp = require('./rssYahooTp');
 
-module.exports = co.wrap(function*(newsArray, template) {
+module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
     // debug('newsArray = %j', newsArray);
+    debug('simplifiedChinese = %j', simplifiedChinese);
 
     let feedOption = {
       title: 'NOWnews 今日新聞網',
@@ -24,8 +26,6 @@ module.exports = co.wrap(function*(newsArray, template) {
       ttl: '60'
     };
 
-    let hr8 = 60 * 60 * 8 * 1000;
-
     let feed;
     if (template === 'YAHOO'){
       feed = new rssYahooTp(feedOption);
@@ -36,16 +36,32 @@ module.exports = co.wrap(function*(newsArray, template) {
     /* loop over data and add to feed */
     _.forEach(newsArray, (news) => {
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
-        let body = news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
         let mainPhotoBody = news.image.body || '';
+
+        // 最後傳進去的變數
+        let description = mainPhotoBody + news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
+        let title = news.title;
+        let author = news.field_newsby.value;
+        let summary = news.body.summary;
+        let subcategory = news.category;
+
+        // 確認語系
+        if (simplifiedChinese) {
+            description = chineseConv.sify(description);
+            title = chineseConv.sify(title);
+            author = chineseConv.sify(author);
+            summary = chineseConv.sify(summary);
+            subcategory = chineseConv.sify(subcategory);
+        }
+
         feed.item({
-            title:  news.title,
+            title:  title,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
-            description: mainPhotoBody + body,
-            author: news.field_newsby.value,
-            summary: news.body.summary,
-            date: moment(news.field_release_date.value * 1000 + hr8 ).tz('Asia/Taipei'),
-            subcategory: news.category
+            description: description,
+            author: author,
+            summary: summary,
+            date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei'),
+            subcategory: subcategory
         });
     });
 

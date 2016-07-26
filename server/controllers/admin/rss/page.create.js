@@ -21,6 +21,19 @@ module.exports = (req, res, next) => {
                 type: 'text'
             },
             {
+                title: '選擇語系',
+                name: 'simplifiedChinese',
+                data: [{
+                    title: '繁體',
+                    value: 'false',
+                    attr: 'selected'
+                },{
+                    title: '簡體',
+                    value: 'true'
+                }],
+                type: 'select'
+            },
+            {
                 title: '分類',
                 name: 'catogry',
                 data: mainCategories,

@@ -29,6 +29,7 @@
                                     <thead>
                                         <th>編號</th>
                                         <th>名稱</th>
+                                        <th>語系</th>
                                         <th>有效時間</th>
                                         <th>RSS連結</th>
                                         <th>編輯</th>
@@ -39,6 +40,13 @@
                                             <tr>
                                                 <td>{{ rss.sn }}</td>
                                                 <td>{{ rss.name }}</td>
+                                                <td>
+                                                    {% if rss.simplifiedChinese %}
+                                                        簡
+                                                    {% else %}
+                                                        繁
+                                                    {% endif %}
+                                                </td>
                                                 <td>{{ rss.dateRange }}</td>
                                                 <td>
                                                     <a target="_blank" href="/rss/{{ rss.channelId }}">RSS端點</a>

@@ -28,12 +28,14 @@ router.route('/rss/:channelId')
             .execAsync();
 
             let categoryOption = rssData.catogry.split(',');
+            let simplifiedChinese = rssData.simplifiedChinese;
 
             debug('categoryOption = %s', categoryOption);
+            debug('simplifiedChinese = %s', simplifiedChinese);
 
             let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, channelId);
 
-            let rssXml = yield libs.buildRssFromNews(news);
+            let rssXml = yield libs.buildRssFromNews(news, simplifiedChinese);
 
 
             res.charset = 'utf-8';

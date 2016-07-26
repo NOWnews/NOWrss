@@ -36,6 +36,11 @@ const schema = new Schema({
         enum: ['DEFAULT', 'YAHOO']
     },
 
+    simplifiedChinese: {
+        type: Boolean,
+        default: false
+    },
+
     startDate: {
         type: Date,
         required: true

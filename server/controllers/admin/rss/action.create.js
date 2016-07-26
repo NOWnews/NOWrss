@@ -18,6 +18,7 @@ module.exports = (req, res, next) => {
     co(function*() {
         var rssObj = {
             name: data.name,
+            simplifiedChinese: data.simplifiedChinese,
             catogry: data.catogry,
             startDate: data.startDate,
             endDate: data.endDate,

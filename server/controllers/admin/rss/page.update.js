@@ -49,6 +49,20 @@ module.exports = (req, res, next) => {
                 value: rssData.name
             },
             {
+                title: '選擇語系',
+                name: 'simplifiedChinese',
+                data: [{
+                    title: '繁體',
+                    value: 'false',
+                    selected: rssData.simplifiedChinese === false ? 'selected' : ''
+                },{
+                    title: '簡體',
+                    value: 'true',
+                    selected: rssData.simplifiedChinese === true ? 'selected' : ''
+                }],
+                type: 'select'
+            },
+            {
                 title: '分類',
                 name: 'catogry',
                 data: mainCategories,
