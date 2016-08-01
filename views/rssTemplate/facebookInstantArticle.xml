@@ -1,0 +1,48 @@
+{% extends "./base/base.xml" %}
+
+{% block item %}
+    {% for item in items %}
+        <item>
+            <title>{{ item.title }}</title>
+            <link>{{ item.link }}</link>
+            <guid>{{ item.guid }}</guid>
+            <pubDate>{{ item.date }}</pubDate>
+            <author>{{ item.author }}</author>
+            <description>{{ item.description }}</description>
+            <content:encoded>
+                <!doctype html>
+                <html lang="en" prefix="op: http://media.facebook.com/op#">
+                    <head>
+                        <meta charset="utf-8">
+                        <link rel="canonical" href="{{ item.link }}">
+                        <meta property="op:markup_version" content="v1.0">
+                    </head>
+                    <body>
+                        <article>
+                            <header>
+                                <h1>{{ item.title }}</h1>
+                                <time class="op-published" datetime="{{ item.isoDate }}">{{ item.date }}</time>
+                                <time class="op-modified" dateTime="{{ item.isoDate }}">{{ item.date }}</time>
+                                <address>
+                                    <a rel="facebook" href="https://www.facebook.com/nownews">NOWnews 今日新聞</a>
+                                    提供多元的媒體服務，並以分享的精神，期許新聞媒體的新世代。
+                                </address>
+                            </header>
+
+                            {{ item.body | safe }}
+
+                            <figure>
+                                <img src="{{ item.imgUrl }}" />
+                                <figcaption>{{ item.imgTitle }}</figcaption>
+                            </figure>
+                            <footer>
+                                <aside>NOWnews 今日傳媒股份有限公司</aside>
+                                <small>Copyright © 2016 今日傳媒股份有限公司</small>
+                            </footer>
+                        </article>
+                    </body>
+                </html>
+            </content:encoded>
+        </item>
+    {% endfor %}
+{% endblock %}

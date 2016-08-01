@@ -5,6 +5,7 @@ const dateFormat = require('./dateFormat');
 const getNeedNewsFromMongo = require('./getNeedNewsFromMongo');
 const buildRssFromNews = require('./buildRssFromNews');
 const getAllMainCategory = require('./getAllMainCategory');
+const rssFacebookInstantArticleTp = require('./rssFacebookInstantArticleTp');
 
 module.exports = {
     hashPwd: hashPwd,
@@ -12,5 +13,6 @@ module.exports = {
     rssTemplate: rssTemplate,
     getNeedNewsFromMongo: getNeedNewsFromMongo,
     buildRssFromNews: buildRssFromNews,
-    getAllMainCategory: getAllMainCategory
+    getAllMainCategory: getAllMainCategory,
+    rssFacebookInstantArticleTp: rssFacebookInstantArticleTp
 };
