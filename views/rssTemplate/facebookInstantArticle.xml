@@ -10,7 +10,7 @@
       <author>{{ item.author }}</author>
       <description>{{ item.description }}</description>
       <content:encoded>
-
+        <![CDATA[
         <!doctype html>
         <html lang="en" prefix="op: http://media.facebook.com/op#">
           <head>
@@ -48,7 +48,7 @@
             </article>
           </body>
         </html>
-
+        ]]>
       </content:encoded>
     </item>
   {% endfor %}
