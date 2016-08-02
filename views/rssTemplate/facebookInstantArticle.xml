@@ -31,10 +31,12 @@
                                         <a rel="facebook" href="https://www.facebook.com/nownews">NOWnews 今日新聞</a>
                                         提供多元的媒體服務，並以分享的精神，期許新聞媒體的新世代。
                                     </address>
-                                    <figure>
-                                        <img src="{{ item.imgUrl }}" />
-                                        <figcaption>{{ item.imgTitle }}</figcaption>
-                                    </figure>
+                                    {% if item.imgUrl %}
+                                        <figure>
+                                            <img src="{{ item.imgUrl }}" />
+                                            <figcaption>{{ item.imgTitle }}</figcaption>
+                                        </figure>
+                                    {% endif %}
                                 </header>
                                 {{ item.body | safe }}
                                 <footer>
