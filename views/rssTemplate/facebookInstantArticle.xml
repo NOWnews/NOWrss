@@ -17,7 +17,6 @@
             <meta charset="utf-8">
             <link rel="canonical" href="{{ item.link }}">
             <title>{{ item.title }}</title>
-            <meta property="fb:article_style" content="Test Article Style">
             <meta property="op:markup_version" content="v1.0">
           </head>
           <body>
