@@ -16,26 +16,26 @@
                         <head>
                             <meta charset="utf-8">
                             <link rel="canonical" href="{{ item.link }}">
-                            <meta property="op:markup_version" content="v1.0">
+                            <link rel="stylesheet" title="default" href="#">
+                            <title>{{ item.title }}</title>
+                            <meta property="fb:article_style" content="Test Article Style">
                         </head>
                         <body>
                             <article>
                                 <header>
-                                    <h1>{{ item.title }}</h1>
+                                    <h1>★{{ item.title }}</h1>
                                     <time class="op-published" datetime="{{ item.isoDate }}">{{ item.date }}</time>
                                     <time class="op-modified" dateTime="{{ item.isoDate }}">{{ item.date }}</time>
                                     <address>
                                         <a rel="facebook" href="https://www.facebook.com/nownews">NOWnews 今日新聞</a>
                                         提供多元的媒體服務，並以分享的精神，期許新聞媒體的新世代。
                                     </address>
+                                    <figure>
+                                        <img src="{{ item.imgUrl }}" />
+                                        <figcaption>{{ item.imgTitle }}</figcaption>
+                                    </figure>
                                 </header>
-
                                 {{ item.body | safe }}
-
-                                <figure>
-                                    <img src="{{ item.imgUrl }}" />
-                                    <figcaption>{{ item.imgTitle }}</figcaption>
-                                </figure>
                                 <footer>
                                     <aside>NOWnews 今日傳媒股份有限公司</aside>
                                     <small>Copyright © 2016 今日傳媒股份有限公司</small>
