@@ -9,6 +9,10 @@ module.exports = co.wrap(function*(newsArray) {
 
     let items = [];
     _.forEach(newsArray, function(news) {
+        if(!news.image.url){
+            return true;
+        }
+
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
 
         items.push({
