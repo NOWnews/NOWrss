@@ -29,6 +29,10 @@ module.exports = co.wrap(function*(news) {
             'endpoints.entity_id': news._id
         })
         .then(function(node) {
+            // 防止空的新聞
+            if(!node){
+                return Promise.resolve(node);
+            }
             return Promise.resolve(node.endpoints[1].entity_id);
         });
 
