@@ -18,6 +18,7 @@
             <link rel="canonical" href="{{ item.link }}">
             <title>{{ item.title }}</title>
             <meta property="op:markup_version" content="v1.0">
+            <meta property="fb:likes_and_comments" content="enable">
           </head>
           <body>
             <article>
