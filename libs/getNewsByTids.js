@@ -57,6 +57,7 @@ module.exports = co.wrap(function*(tids, start, end) {
         return Promise.resolve(checkedNews);
     });
 
+    yield db.closeAsync();
     // debug('news = %j', news);
     // debug('setNewsPhotoByNews = %j', setNewsPhotoByNews);
     // debug('setNewsPhotoByNews total = %d', setNewsPhotoByNews.length);

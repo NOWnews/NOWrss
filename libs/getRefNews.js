@@ -60,6 +60,7 @@ module.exports = co.wrap(function*(news) {
     // debug('newRefNews = %j', newRefNews);
 
     news.refNews = newRefNews;
+    yield db.closeAsync();
 
     // debug('news refNews = %j', news.refNews);
 

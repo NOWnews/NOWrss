@@ -91,6 +91,7 @@ module.exports = co.wrap(function*(news) {
     // news.image.fileName = imageInfo.fileName;
     // news.image.thumbnail = 'http://imgapi.nownews.com/?w=640&q=60&src=' + imgUrl;
     // debug('news = %j', news);
+    yield db.closeAsync();
 
     return Promise.resolve(news);
 });
