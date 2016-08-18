@@ -112,9 +112,11 @@ module.exports = co.wrap(function*() {
         .then(function () {
             console.log('成功');
             // debug('upload finished');
-            return ftp.end();
+            // return ftp.end();
+            return ftp.destroy();
         })
         .catch(function(err) {
             console.log(err);
+            return ftp.destroy();
         });
 });
