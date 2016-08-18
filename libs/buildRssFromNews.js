@@ -35,6 +35,9 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
     /* loop over data and add to feed */
     _.forEach(newsArray, (news) => {
+        // 沒有新聞的話，就離開
+        if(!news){ return true; }
+
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
         let mainPhotoBody = news.image.body || '';
 

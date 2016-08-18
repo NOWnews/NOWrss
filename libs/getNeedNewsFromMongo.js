@@ -59,9 +59,12 @@ module.exports = co.wrap(function*(start, end, searchCondition, channelId) {
 
     debug('step 3 = %s', '將分類與新聞 mapping，並確認新聞內文圖是否可以外送');
     // 將分類與新聞 mapping
-    _.forEach(allNews, function(news) {
-        checkBodyImageIsAuth(news);
+    _.forEach(allNews, function(news, index) {
+        // 如果沒有此類別就刪掉
         news.category = mainMappingObject[news.field_main_category.tid];
+
+        if(!news.category){ delete allNews[index]; }
+        checkBodyImageIsAuth(news);
     });
 
     // debug('allNews = %j', allNews);
