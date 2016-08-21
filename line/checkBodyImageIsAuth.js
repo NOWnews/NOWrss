@@ -24,7 +24,7 @@ module.exports = co.wrap(function*(news) {
         console.log('result = ' + result);
         console.log('---------------- 觀察用 ----------------');
         // if(result !== null) {
-        //     $('.' + classString).remove();
+        //     $('.' + result).remove();
         // }
     });
 

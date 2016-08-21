@@ -83,6 +83,10 @@ module.exports = co.wrap(function*() {
         })
         .then(function() {
             console.log('上傳圖片');
+            if(!fs.existsSync('./line/newsImages/')) {
+                console.log('沒有圖片可以上傳');
+                return Promise.resolve({});
+            }
             let filesName = fs.readdirSync('./line/newsImages/');
             return Promise.map(filesName, function(fileName) {
                 let imageBuffer = fs.readFileSync('./line/newsImages/' + fileName);
@@ -91,6 +95,10 @@ module.exports = co.wrap(function*() {
         })
         .then(function() {
             console.log('刪除圖片');
+            if(!fs.existsSync('./line/newsImages/')) {
+                console.log('沒有圖片可以刪除');
+                return Promise.resolve({});
+            }
             fs.removeSync('./line/newsImages');
             return Promise.resolve({});
         })
