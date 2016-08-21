@@ -11,7 +11,7 @@ const _ = require('lodash');
 module.exports = co.wrap(function*(tids, start, end) {
 
     // let db = yield MongoClient.connectAsync(config.newsMongodb);
-    let mongodb14 = yield require('../../mongodb14');
+    let mongodb14 = yield require('../mongodb14');
 
     // debug('tids = %j', tids);
     // debug('start = %d', start);

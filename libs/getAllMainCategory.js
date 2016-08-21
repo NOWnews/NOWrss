@@ -10,7 +10,7 @@ const _ = require('lodash');
 
 module.exports = co.wrap(function*() {
 
-    let mongodb14 = yield require('../../mongodb14');
+    let mongodb14 = yield require('../mongodb14');
     // let db = yield MongoClient.connectAsync(config.newsMongodb);
 
     // 找出所有最大分類的 tid

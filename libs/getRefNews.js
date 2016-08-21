@@ -13,7 +13,7 @@ const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 module.exports = co.wrap(function*(news) {
 
     // let db = yield MongoClient.connectAsync(config.newsMongodb);
-    let mongodb14 = yield require('../../mongodb14');
+    let mongodb14 = yield require('../mongodb14');
 
     let refNodeIds = _.map(news.field_news_ref, function(refNews) {
         return refNews.target_id;

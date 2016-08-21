@@ -12,7 +12,7 @@ const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 
 module.exports = co.wrap(function*(tids, start, end) {
 
-    let mongodb14 = yield require('../../mongodb14');
+    let mongodb14 = yield require('../mongodb14');
     // let db = yield MongoClient.connectAsync(config.newsMongodb);
 
     // debug('tids = %j', tids);

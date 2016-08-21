@@ -11,7 +11,7 @@ const _ = require('lodash');
 module.exports = co.wrap(function*() {
 
     // let db = yield MongoClient.connectAsync(config.newsMongodb);
-    let mongodb14 = yield require('../../mongodb14');
+    let mongodb14 = yield require('../mongodb14');
 
     // 找出所有最大分類的 tid
     let mainCategory = yield mongodb14.collection('fields_current.taxonomy_term').find({
