@@ -3,16 +3,17 @@ const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
 const moment = require('moment-timezone');
-const config = require('../config');
+// const config = require('../config');
 
-const MongoDB = Promise.promisifyAll(require('mongodb'));
-const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
+// const MongoDB = Promise.promisifyAll(require('mongodb'));
+// const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 
 const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 
 module.exports = co.wrap(function*(news) {
 
-    let db = yield MongoClient.connectAsync(config.newsMongodb);
+    // let db = yield MongoClient.connectAsync(config.newsMongodb);
+    let mongodb14 = yield require('../../mongodb14');
 
     let refNodeIds = _.map(news.field_news_ref, function(refNews) {
         return refNews.target_id;
@@ -21,7 +22,7 @@ module.exports = co.wrap(function*(news) {
     // debug('refNodeIds = %j', refNodeIds);
 
     // 找出所有推薦新聞
-    let refNews = yield db.collection('fields_current.node').find({
+    let refNews = yield mongodb14.collection('fields_current.node').find({
             _bundle: 'news',
             _type: 'node',
             _id: {
@@ -60,7 +61,7 @@ module.exports = co.wrap(function*(news) {
     // debug('newRefNews = %j', newRefNews);
 
     news.refNews = newRefNews;
-    yield db.closeAsync();
+    // yield db.closeAsync();
 
     // debug('news refNews = %j', news.refNews);
 

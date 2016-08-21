@@ -3,21 +3,22 @@ const debug = require('debug')('NOWrss:line:getNewsByTids');
 const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
-const config = require('../config');
+// const config = require('../config');
 
-const MongoDB = Promise.promisifyAll(require('mongodb'));
-const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
+// const MongoDB = Promise.promisifyAll(require('mongodb'));
+// const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 
 module.exports = co.wrap(function*(tids, start, end) {
 
-    let db = yield MongoClient.connectAsync(config.newsMongodb);
+    // let db = yield MongoClient.connectAsync(config.newsMongodb);
+    let mongodb14 = yield require('../../mongodb14');
 
     // debug('tids = %j', tids);
     // debug('start = %d', start);
     // debug('end = %d', end);
 
     // 找出所有最大分類的 tid
-    let news = yield db.collection('fields_current.node').find({
+    let news = yield mongodb14.collection('fields_current.node').find({
            _bundle: 'news',
            _type: 'node',
            'field_adult.value': '0', // 是否為成人
@@ -49,6 +50,6 @@ module.exports = co.wrap(function*(tids, start, end) {
 
     // debug('news = %j', news);
     // debug('news total = %d', news.length);
-    yield db.closeAsync();
+    // yield db.closeAsync();
     return yield Promise.resolve(news);
 });
