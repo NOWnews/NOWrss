@@ -19,14 +19,17 @@ module.exports = co.wrap(function*(news) {
         let regexpString = /media__[0-9]+__isAuth__0/;
         let result = classString.match(regexpString);
 
-        console.log('Class String = ' + classString);
-        console.log('regexpString = ' + regexpString);
-        console.log('result = ' + result);
-        console.log('---------------- 觀察用 ----------------');
+        console.log('newsId = ' + news._id);
+        // console.log('Class String = ' + classString);
+        // console.log('regexpString = ' + regexpString);
+        // console.log('result = ' + result);
+        console.log('不刪除: ' + result);
         if(result !== null) {
-            $(this).remove();
+            console.log('刪除: ' + result);
+            $(el).remove();
             // $('.' + classString).remove();
         }
+        console.log('---------------- 觀察用 ----------------');
     });
 
     // 把圖說拿掉因為他真的很討厭幹你娘勒
