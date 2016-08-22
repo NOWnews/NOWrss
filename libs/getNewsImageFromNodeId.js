@@ -5,10 +5,10 @@ const Promise = require('bluebird');
 const _ = require('lodash');
 const md5 = require('md5');
 const fs = require('fs');
-const config = require('../config');
+// const config = require('../config');
 
-const MongoDB = Promise.promisifyAll(require('mongodb'));
-const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
+// const MongoDB = Promise.promisifyAll(require('mongodb'));
+// const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 
 // const downloadImage = require('./downloadImage');
 
@@ -20,9 +20,10 @@ module.exports = co.wrap(function*(news) {
 
     news.image = {};
 
-    let db = yield MongoClient.connectAsync(config.newsMongodb);
+    // let db = yield MongoClient.connectAsync(config.newsMongodb);
+    let mongodb14 = yield require('../mongodb14');
 
-    let imageNodeId = yield db.collection('fields_current.relation').findOne({
+    let imageNodeId = yield mongodb14.collection('fields_current.relation').findOne({
             _bundle: 'relation_news_image',
             _type: 'relation',
             'endpoints.entity_id': news._id
@@ -39,7 +40,7 @@ module.exports = co.wrap(function*(news) {
         return Promise.resolve(news);
     }
 
-    let imageNode = yield db.collection('fields_current.node').findOne({
+    let imageNode = yield mongodb14.collection('fields_current.node').findOne({
             _bundle: 'media',
             _type: 'node',
             _id: imageNodeId,
@@ -58,7 +59,7 @@ module.exports = co.wrap(function*(news) {
 
     let fid = imageNode.field_media_entity.fid;
 
-    let imageData = yield db.collection('fields_current.file').findOne({
+    let imageData = yield mongodb14.collection('fields_current.file').findOne({
             _bundle: 'image',
             _type: 'file',
             fid: fid
@@ -91,7 +92,7 @@ module.exports = co.wrap(function*(news) {
     // news.image.fileName = imageInfo.fileName;
     // news.image.thumbnail = 'http://imgapi.nownews.com/?w=640&q=60&src=' + imgUrl;
     // debug('news = %j', news);
-    yield db.closeAsync();
+    // yield db.closeAsync();
 
     return Promise.resolve(news);
 });

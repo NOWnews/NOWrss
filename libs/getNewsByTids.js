@@ -3,23 +3,24 @@ const debug = require('debug')('NOWrss:libs:getNewsByTids');
 const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
-const config = require('../config');
+// const config = require('../config');
 
-const MongoDB = Promise.promisifyAll(require('mongodb'));
-const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
+// const MongoDB = Promise.promisifyAll(require('mongodb'));
+// const MongoClient = Promise.promisifyAll(MongoDB.MongoClient);
 
 const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 
 module.exports = co.wrap(function*(tids, start, end) {
 
-    let db = yield MongoClient.connectAsync(config.newsMongodb);
+    let mongodb14 = yield require('../mongodb14');
+    // let db = yield MongoClient.connectAsync(config.newsMongodb);
 
     // debug('tids = %j', tids);
     debug('start = %d', start);
     debug('end = %d', end);
 
     // 找出所有最大分類的 tid
-    let news = yield db.collection('fields_current.node').find({
+    let news = yield mongodb14.collection('fields_current.node').find({
            _bundle: 'news',
            _type: 'node',
            'field_auth.value': '1', // 是否可以外送
@@ -57,7 +58,7 @@ module.exports = co.wrap(function*(tids, start, end) {
         return Promise.resolve(checkedNews);
     });
 
-    yield db.closeAsync();
+    // yield db.closeAsync();
     // debug('news = %j', news);
     // debug('setNewsPhotoByNews = %j', setNewsPhotoByNews);
     // debug('setNewsPhotoByNews total = %d', setNewsPhotoByNews.length);
