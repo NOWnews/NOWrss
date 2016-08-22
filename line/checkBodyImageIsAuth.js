@@ -12,20 +12,22 @@ module.exports = co.wrap(function*(news) {
     // 這一段專門在處理不能外送的新聞內文圖片
     $('img').filter(function(i, el) {
 
-        $(this).remove();
+        // $(this).remove();
 
         // TODO: 找出不能外送的圖片 class name 並刪除
         let classString = $(this).attr('class');
         let regexpString = /media__[0-9]+__isAuth__0/;
         let result = classString.match(regexpString);
 
+        console.log('newsId = ' + news._id);
         console.log('Class String = ' + classString);
         console.log('regexpString = ' + regexpString);
         console.log('result = ' + result);
         console.log('---------------- 觀察用 ----------------');
-        // if(result !== null) {
-        //     $('.' + result).remove();
-        // }
+        if(result !== null) {
+            // $('.' + result).remove();
+            $(el).remove();
+        }
     });
 
     // 把圖說拿掉因為他真的很討厭幹你娘勒
