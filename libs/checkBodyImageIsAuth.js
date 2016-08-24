@@ -26,10 +26,14 @@ module.exports = co.wrap(function*(news) {
         console.log('不刪除: ' + result);
         if(result !== null) {
             console.log('刪除: ' + result);
-            $(el).remove();
+            $(el).parent().remove();
             // $('.' + classString).remove();
         }
         console.log('---------------- 觀察用 ----------------');
+        // console.log($(el).parent().find('cite'));
+        // $(el).parent().find('cite').remove();
+        // $(el).parent().find('em').remove();
+        // $(el).parent().find('br').remove();
     });
 
     // 把圖說拿掉因為他真的很討厭幹你娘勒

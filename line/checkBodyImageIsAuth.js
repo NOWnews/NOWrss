@@ -27,15 +27,16 @@ module.exports = co.wrap(function*(news) {
         if(result !== null) {
             // $('.' + result).remove();
             console.log('刪除: ' + result);
-            $(el).remove();
+            $(el).parent().remove();
+            // $(el).remove();
         }
         console.log('---------------- 觀察用 ----------------');
     });
 
     // 把圖說拿掉因為他真的很討厭幹你娘勒
-    $('cite').filter(function(i, el) {
-        $(el).parents().remove();
-    });
+    // $('cite').filter(function(i, el) {
+    //     $(el).parents().remove();
+    // });
 
     news.body.value = $.html();
     return yield Promise.resolve(news);
