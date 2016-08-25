@@ -35,7 +35,7 @@ router.route('/rss/:channelId')
 
             let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, channelId);
 
-            let rssXml = yield libs.buildRssFromNews(news, simplifiedChinese);
+            let rssXml = yield libs.buildRssFromNews(news, simplifiedChinese, rssData.template);
 
 
             res.charset = 'utf-8';
