@@ -3,18 +3,24 @@
 {% block item %}
     {% for item in items %}
         <item>
-            <h1>我是 default</h1>
             <title>{{ item.title }}</title>
-            <link>{{ item.link }}</link>
-            <guid>{{ item.guid }}</guid>
-            <pubDate>{{ item.date }}</pubDate>
-            <author>{{ item.author }}</author>
-            <!-- <description>{{ item.description }}</description> -->
-            <content:encoded>
+            <link>{{ item.url }}</link>
+            <description>
                 <![CDATA[
-            {{ item.description | safe }}
-        ]]>
-            </content:encoded>
+                    {{ item.description | safe }}
+                ]]>
+            </description>
+            <summary>
+                {{ item.summary }}
+            </summary>
+            <guid isPermaLink="true">{{ item.url }}</guid>
+            <subcategory>
+                <![CDATA[
+                    {{ item.subcategory }}
+                ]]>
+            </subcategory>
+            <author>{{ item.author }}</author>
+            <pubDate>{{ item.date }}</pubDate>
         </item>
     {% endfor %}
 {% endblock %}

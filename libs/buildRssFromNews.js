@@ -62,7 +62,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             description: description,
             author: author,
             summary: summary,
-            date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format(),
+            date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').toString(),
             subcategory: subcategory
         });
     });
