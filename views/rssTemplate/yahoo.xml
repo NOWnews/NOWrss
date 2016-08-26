@@ -1,0 +1,20 @@
+{% extends "./base/base.xml" %}
+
+{% block item %}
+  {% for item in items %}
+    <item>
+      <h1>我是 yahoo</h1>
+      <title>{{ item.title }}</title>
+      <link>{{ item.link }}</link>
+      <guid>{{ item.guid }}</guid>
+      <pubDate>{{ item.date }}</pubDate>
+      <author>{{ item.author }}</author>
+      <!-- <description>{{ item.description }}</description> -->
+      <content:encoded>
+        <![CDATA[
+            {{ item.description | safe }}
+        ]]>
+      </content:encoded>
+    </item>
+  {% endfor %}
+{% endblock %}
