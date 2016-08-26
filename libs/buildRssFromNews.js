@@ -7,8 +7,6 @@ const moment = require('moment-timezone');
 const js2xmlparser = require('js2xmlparser');
 const _ = require('lodash');
 const chineseConv = require('chinese-conv');
-const rssDefaultTp = require('./rssDefaultTp');
-const rssYahooTp = require('./rssYahooTp');
 
 module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
