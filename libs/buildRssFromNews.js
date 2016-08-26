@@ -29,7 +29,6 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             templateFile = 'default';
     }
 
-    console.log('L34', template);
     /* loop over data and add to feed */
     _.forEach(newsArray, (news) => {
         // 沒有新聞的話，就離開
@@ -37,9 +36,10 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
         let mainPhotoBody = news.image.body || '';
+        let mainPhotoUrl = news.image.url || '';
 
         // 最後傳進去的變數
-        let description = mainPhotoBody + news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
+        let description = news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
         let title = news.title;
         let author = news.field_newsby.value;
         let summary = news.body.summary;
@@ -48,6 +48,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         // 確認語系
         if (simplifiedChinese) {
             description = chineseConv.sify(description);
+            mainPhotoBody = chineseConv.sify(mainPhotoBody);
             title = chineseConv.sify(title);
             author = chineseConv.sify(author);
             summary = chineseConv.sify(summary);
@@ -57,6 +58,8 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         items.push({
             title:  title,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
+            mainPhotoUrl: mainPhotoUrl,
+            mainPhotoBody: mainPhotoBody,
             description: description,
             author: author,
             summary: summary,

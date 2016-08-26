@@ -7,7 +7,7 @@
             <link>{{ item.url }}</link>
             <description>
                 <![CDATA[
-                    {{ item.description | safe }}
+                    {{ item.mainPhotoBody | safe }}{{ item.description | safe }}
                 ]]>
             </description>
             <summary>

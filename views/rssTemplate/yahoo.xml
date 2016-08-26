@@ -5,22 +5,15 @@
         <item>
             <title>{{ item.title }}</title>
             <link>{{ item.url }}</link>
-            <description>
-                <![CDATA[
-                    {{ item.description | safe }}
-                ]]>
-            </description>
-            <summary>
-              {{ item.summary }}
-            </summary>
-            <guid isPermaLink="true">{{ item.url }}</guid>
-            <category>
-                <![CDATA[
-                    {{ item.subcategory }}
-                ]]>
-            </category>
-            <author>{{ item.author }}</author>
+            <description>{{ item.summary }}</description>
             <pubDate>{{ item.date }}</pubDate>
+            <guid isPermaLink="true">{{ item.url }}</guid>
+            <category>{{ item.subcategory }}</category>
+            <author>{{ item.author }}</author>
+            {% if item.mainPhotoUrl %}<media:content url="{{ item.mainPhotoUrl | safe }}" type="image/jpeg"></media:content>{% endif %}
+            <content:encoded>
+                {{ item.description }}
+            </content:encoded>
         </item>
     {% endfor %}
 {% endblock %}
