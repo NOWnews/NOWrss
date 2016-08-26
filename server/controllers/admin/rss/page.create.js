@@ -54,6 +54,9 @@ module.exports = (req, res, next) => {
                 },{
                     title: 'Yahoo 版型',
                     value: 'YAHOO'
+                },{
+                    title: 'Facebook InstantArticle 版型',
+                    value: 'FACEBOOK'
                 }],
                 type: 'select'
             },

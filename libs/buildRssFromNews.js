@@ -7,30 +7,26 @@ const moment = require('moment-timezone');
 const js2xmlparser = require('js2xmlparser');
 const _ = require('lodash');
 const chineseConv = require('chinese-conv');
-const rssDefaultTp = require('./rssDefaultTp');
-const rssYahooTp = require('./rssYahooTp');
 
 module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
     // debug('newsArray = %j', newsArray);
     debug('simplifiedChinese = %j', simplifiedChinese);
 
-    let feedOption = {
-      title: 'NOWnews 今日新聞網',
-      description: 'Latest news from www.nownews.com',
-      site_url: 'http://www.nownews.com',
-      image_url: 'http://static.nownews.com/ad2004/141107-170318-3250p.png',
-      copyright: 'Copyright 2013, NOWnews Network Inc.',
-      language: 'zh-tw',
-      pubDate: new Date(),
-      ttl: '60'
-    };
+    // let feed;
+    let items = [];
+    let templateFile = '';
+    let ISOTime = moment().tz('Asia/Taipei').format();
 
-    let feed;
-    if (template === 'YAHOO'){
-      feed = new rssYahooTp(feedOption);
-    } else {
-      feed = new rssDefaultTp(feedOption);
+    switch(template) {
+        case 'YAHOO':
+            templateFile = 'yahoo';
+            break;
+        case 'FACEBOOK':
+            templateFile = 'default';
+            break;
+        default:
+            templateFile = 'default';
     }
 
     /* loop over data and add to feed */
@@ -40,9 +36,10 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
         let mainPhotoBody = news.image.body || '';
+        let mainPhotoUrl = news.image.url || '';
 
         // 最後傳進去的變數
-        let description = mainPhotoBody + news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
+        let description = news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
         let title = news.title;
         let author = news.field_newsby.value;
         let summary = news.body.summary;
@@ -51,24 +48,29 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         // 確認語系
         if (simplifiedChinese) {
             description = chineseConv.sify(description);
+            mainPhotoBody = chineseConv.sify(mainPhotoBody);
             title = chineseConv.sify(title);
             author = chineseConv.sify(author);
             summary = chineseConv.sify(summary);
             subcategory = chineseConv.sify(subcategory);
         }
 
-        feed.item({
+        items.push({
             title:  title,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
+            mainPhotoUrl: mainPhotoUrl,
+            mainPhotoBody: mainPhotoBody,
             description: description,
             author: author,
             summary: summary,
-            date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format(),
+            date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').toString(),
             subcategory: subcategory
         });
     });
 
-    // debug('articles xml = %j', xml);
-    let xml = feed.xml(true);
-    return yield Promise.resolve(xml);
+    return yield Promise.resolve({
+        items: items,
+        ISOTime: ISOTime,
+        xml: `rssTemplate/${templateFile}.xml`
+    });
 });

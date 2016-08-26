@@ -10,7 +10,6 @@ const libs = require('../../libs');
 let models = require('../../models');
 let redis = require('../../redis');
 
-let RSS = require('rss');
 let co = require('co');
 let mongoose = require('mongoose');
 
@@ -22,6 +21,8 @@ router.route('/rss/:channelId')
         co(function*() {
             let startTime = moment().tz('Asia/Taipei').add(-1, 'day');
             let endTime = moment().tz('Asia/Taipei');
+            let ISOTime = moment().tz('Asia/Taipei').format();
+            let dateTime = moment().tz('Asia/Taipei').toString();
 
             let rssData = yield models.rss.findOne()
             .where('channelId').equals(channelId)
@@ -37,10 +38,9 @@ router.route('/rss/:channelId')
 
             let rssXml = yield libs.buildRssFromNews(news, simplifiedChinese, rssData.template);
 
-
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml');
-            res.send(rssXml);
+            res.render(rssXml.xml, {items: rssXml.items, dateTime: dateTime, ISOTime: ISOTime});
             // res.json(mainCategories);
         }).catch(next);
 

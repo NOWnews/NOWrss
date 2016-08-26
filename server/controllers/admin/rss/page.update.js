@@ -86,6 +86,10 @@ module.exports = (req, res, next) => {
                     title: 'Yahoo 版型',
                     value: 'YAHOO',
                     selected: rssData.template === 'YAHOO' ? 'selected' : ''
+                },{
+                    title: 'Facebook InstantArticle 版型',
+                    value: 'FACEBOOK',
+                    selected: rssData.template === 'FACEBOOK' ? 'selected' : ''
                 }],
                 type: 'select'
             },
