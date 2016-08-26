@@ -15,24 +15,23 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
     // debug('newsArray = %j', newsArray);
     debug('simplifiedChinese = %j', simplifiedChinese);
 
-    let feedOption = {
-      title: 'NOWnews 今日新聞網',
-      description: 'Latest news from www.nownews.com',
-      site_url: 'http://www.nownews.com',
-      image_url: 'http://static.nownews.com/ad2004/141107-170318-3250p.png',
-      copyright: 'Copyright 2013, NOWnews Network Inc.',
-      language: 'zh-tw',
-      pubDate: new Date(),
-      ttl: '60'
-    };
+    // let feed;
+    let items = [];
+    let templateFile = '';
+    let ISOTime = moment().tz('Asia/Taipei').format();
 
-    let feed;
-    if (template === 'YAHOO'){
-      feed = new rssYahooTp(feedOption);
-    } else {
-      feed = new rssDefaultTp(feedOption);
+    switch(template) {
+        case 'YAHOO':
+            templateFile = 'yahoo';
+            break;
+        case 'FACEBOOK':
+            templateFile = 'default';
+            break;
+        default:
+            templateFile = 'default';
     }
 
+    console.log('L34', template);
     /* loop over data and add to feed */
     _.forEach(newsArray, (news) => {
         // 沒有新聞的話，就離開
@@ -57,7 +56,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             subcategory = chineseConv.sify(subcategory);
         }
 
-        feed.item({
+        items.push({
             title:  title,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
             description: description,
@@ -68,7 +67,9 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         });
     });
 
-    // debug('articles xml = %j', xml);
-    let xml = feed.xml(true);
-    return yield Promise.resolve(xml);
+    return yield Promise.resolve({
+        items: items,
+        ISOTime: ISOTime,
+        xml: `rssTemplate/${templateFile}.xml`
+    });
 });
