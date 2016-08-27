@@ -36,7 +36,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
         let mainPhotoBody = news.image.body || '';
-        let mainPhotoUrl = news.image.url || '';
+        let mainPhotoUrl = news.image.originalUrl || '';
 
         // 最後傳進去的變數
         let description = news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
