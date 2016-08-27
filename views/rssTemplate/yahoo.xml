@@ -10,7 +10,7 @@
             <guid isPermaLink="true">{{ item.url }}</guid>
             <category>{{ item.subcategory }}</category>
             <author>{{ item.author }}</author>
-            {% if item.mainPhotoUrl %}<media:content url="{{ item.mainPhotoUrl | safe }}" type="image/jpeg"></media:content>{% endif %}
+            {% if item.mainPhotoUrl %}<media:content url="{{ item.originalUrl }}" type="image/jpeg"></media:content>{% endif %}
             <content:encoded>
                 {{ item.description }}
             </content:encoded>

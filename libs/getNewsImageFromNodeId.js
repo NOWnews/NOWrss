@@ -88,6 +88,7 @@ module.exports = co.wrap(function*(news) {
     news.image.description = imageNode.title;
     news.image.uri = imageData.uri;
     news.image.url = 'http://imgapi.nownews.com/?w=600&q=70&src=' + imgUrl;
+    news.image.originalUrl = 'http://imgapi.nownews.com/?w=600&q=70&src=' + imgUrl;
     news.image.body = '<div class="main-photo"><img src="http://imgapi.nownews.com/?w=600&q=70&src=' + imgUrl + '" width="320px;" class="editorial" /><br>' + imageNode.title +'</div>';
     // news.image.fileName = imageInfo.fileName;
     // news.image.thumbnail = 'http://imgapi.nownews.com/?w=640&q=60&src=' + imgUrl;
