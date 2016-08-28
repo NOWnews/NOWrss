@@ -1,4 +1,4 @@
-{% extends "./base/base.xml" %}
+{% extends "./base/yahooBase.xml" %}
 
 {% block item %}
     {% for item in items %}
