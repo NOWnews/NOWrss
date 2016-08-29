@@ -6,7 +6,7 @@
             <title>{{ item.title }}</title>
             <link>{{ item.url }}</link>
             <description>{{ item.summary }}</description>
-            <pubDate>{{ item.date }}</pubDate>
+            <pubDate>{{ item.UTCdate }}</pubDate>
             <guid isPermaLink="true">{{ item.url }}</guid>
             <category>{{ item.subcategory }}</category>
             <author>{{ item.author }}</author>
