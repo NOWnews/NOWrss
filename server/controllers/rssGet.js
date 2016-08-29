@@ -23,6 +23,7 @@ router.route('/rss/:channelId')
             let endTime = moment().tz('Asia/Taipei');
             let ISOTime = moment().tz('Asia/Taipei').format();
             let dateTime = moment().tz('Asia/Taipei').toString();
+            let UTCTime = new Date().toUTCString();
 
             let rssData = yield models.rss.findOne()
             .where('channelId').equals(channelId)
@@ -40,7 +41,7 @@ router.route('/rss/:channelId')
 
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml');
-            res.render(rssXml.xml, {items: rssXml.items, dateTime: dateTime, ISOTime: ISOTime});
+            res.render(rssXml.xml, {items: rssXml.items, dateTime: dateTime, ISOTime: ISOTime, UTCTime: UTCTime});
             // res.json(mainCategories);
         }).catch(next);
 

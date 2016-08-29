@@ -11,8 +11,8 @@
         </image>
         <link>http://www.nownews.com</link>
         <language>zh-tw</language>
-        <pubDate>{{ dateTime }}</pubDate>
-        <lastBuildDate>{{ dateTime }}</lastBuildDate>
+        <pubDate>{{ UTCTime }}</pubDate>
+        <lastBuildDate>{{ UTCTime }}</lastBuildDate>
         <description>Latest news from www.nownews.com</description>
         <copyright>Copyright 2016, NOWnews Network Inc.</copyright>
         <ttl>60</ttl>
