@@ -23,7 +23,7 @@ router.route('/rss/:channelId')
             let endTime = moment().tz('Asia/Taipei');
             let ISOTime = moment().tz('Asia/Taipei').format();
             let dateTime = moment().tz('Asia/Taipei').toString();
-            let UTCTime = new Date().toUTCString();
+            let UTCTime = moment().tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z');
 
             let rssData = yield models.rss.findOne()
             .where('channelId').equals(channelId)

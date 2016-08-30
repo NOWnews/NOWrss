@@ -64,7 +64,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             author: author,
             summary: summary,
             date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').toString(),
-            UTCdate: new Date().toUTCString(),
+            UTCdate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory
         });
     });
