@@ -29,6 +29,11 @@ router.route('/rss/:channelId')
             .where('channelId').equals(channelId)
             .execAsync();
 
+            if (!rssData) {
+                res.status(404);
+                return res.render('404');
+            }
+
             let categoryOption = rssData.catogry.split(',');
             let simplifiedChinese = rssData.simplifiedChinese;
 
