@@ -19,6 +19,7 @@
             <title>{{ item.title }}</title>
             <meta property="op:markup_version" content="v1.0">
             <meta property="fb:likes_and_comments" content="enable">
+            <meta property="fb:use_automatic_ad_placement" content="true">
           </head>
           <body>
             <article>
@@ -30,6 +31,11 @@
                   <a rel="facebook" href="https://www.facebook.com/nownews">NOWnews 今日新聞</a>
                   提供多元的媒體服務，並以分享的精神，期許新聞媒體的新世代。
                 </address>
+
+                <figure class="op-ad">
+                  <iframe src="https://www.adserver.com/ss;adtype=banner320x50" height="50" width="320"></iframe>
+                </figure>
+
                 {% if item.imgUrl %}
                   <figure>
                     <img src="{{ item.imgUrl }}"/>
@@ -39,6 +45,10 @@
               </header>
 
               {{ item.body | safe }}
+
+              <figure class="op-ad">
+                <iframe src="https://www.adserver.com/ss;adtype=banner320x50" height="60" width="320"></iframe>
+              </figure>
 
               <footer>
                 <aside>NOWnews 今日傳媒股份有限公司</aside>
