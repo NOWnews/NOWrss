@@ -42,6 +42,7 @@ module.exports = co.wrap(function*(news) {
     //     // $(el).parents().remove();
     // });
 
-    news.body.value = $.html();
+    let bodyHtml = $.html().replace('"foaf:Image"', '"foaf:Image"/');
+    news.body.value = bodyHtml;
     return yield Promise.resolve(news);
 });
