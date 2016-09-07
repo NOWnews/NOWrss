@@ -42,7 +42,7 @@ module.exports = co.wrap(function*(news) {
     //     // $(el).parents().remove();
     // });
 
-    let bodyHtml = $.html().replace(/"foaf:Image"/gi, '"foaf:Image"/').replace(/br/gi, 'br/');
+    let bodyHtml = $.html().replace(/"foaf:Image"/gi, '"foaf:Image"/').replace(/<br>/gi, '<br/>');
     news.body.value = bodyHtml;
     return yield Promise.resolve(news);
 });
