@@ -27,6 +27,7 @@ module.exports = co.wrap(function*(news) {
         if(result !== null) {
             // $('.' + result).remove();
             console.log('刪除: ' + result);
+            console.log($(el).parent());
             $(el).parent().remove();
             // $(el).remove();
         }
