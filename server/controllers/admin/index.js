@@ -70,10 +70,10 @@ router.route('/admin/rss/delete/:sn')
 
 
 router.route('/admin')
-    .get(isLogin, pageHome);
+    .get(isLogin, pageRssList);
 
 // TODO 暫時用
 router.route('/')
-    .get(isLogin, pageHome);
+    .get(isLogin, pageRssList);
 
 module.exports = router;

@@ -12,6 +12,9 @@ module.exports = co.wrap(function*(news) {
     // 這一段專門在處理不能外送的新聞內文圖片
     $('img').filter(function(i, el) {
 
+        // 台哥大說要把 br 拿掉...
+        $(el).parent().find('br').remove();
+
         // $(this).remove();
 
         // TODO: 找出不能外送的圖片 class name 並刪除
