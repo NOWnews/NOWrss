@@ -1,7 +1,7 @@
 {% extends "./base/base.xml" %}
 
 {% block item %}
-    {% for item in items %}{% if item.id != 2245718 %}
+    {% for item in items %}{% if item.id != 2245718 and item.id != 2245560 and item.id != 2246093 %}
         <item>
             <id>{{item.id}}</id>
             <title>{{ item.title }}</title>
