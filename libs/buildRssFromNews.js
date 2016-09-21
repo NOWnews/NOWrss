@@ -56,6 +56,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         }
 
         items.push({
+            id: news._id,
             title:  title,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
             mainPhotoUrl: mainPhotoUrl,
