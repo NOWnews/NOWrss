@@ -1,14 +1,14 @@
 {% extends "./base/base.xml" %}
 
 {% block item %}
-    {% for item in items %}
+    {% for item in items %}{% if item.id != 2245718 and item.id != 2245560 and item.id != 2246093 and item.id != 2245848 and item.id != 2245828 %}
         <item>
             <id>{{item.id}}</id>
             <title>{{ item.title }}</title>
             <link>{{ item.url }}</link>
             <description>
                 <![CDATA[
-                    {{ item.mainPhotoBody | safe }}{{ item.description | safe }}
+                    {{ item.mainPhotoBody | safe }}%THISISAD%{{ item.description | safe }}
                 ]]>
             </description>
             <summary>
@@ -23,5 +23,5 @@
             <author>{{ item.author }}</author>
             <pubDate>{{ item.date }}</pubDate>
         </item>
-    {% endfor %}
+    {% endif %}{% endfor %}
 {% endblock %}

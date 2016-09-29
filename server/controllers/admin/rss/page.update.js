@@ -90,6 +90,10 @@ module.exports = (req, res, next) => {
                     title: 'Facebook InstantArticle 版型',
                     value: 'FACEBOOK',
                     selected: rssData.template === 'FACEBOOK' ? 'selected' : ''
+                },{
+                    title: '台灣大哥大 版型',
+                    value: 'TAIWANMOBILE',
+                    selected: rssData.template === 'TAIWANMOBILE' ? 'selected' : ''
                 }],
                 type: 'select'
             },

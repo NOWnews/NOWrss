@@ -57,6 +57,9 @@ module.exports = (req, res, next) => {
                 },{
                     title: 'Facebook InstantArticle 版型',
                     value: 'FACEBOOK'
+                },{
+                    title: '台灣大哥大 版型',
+                    value: 'TAIWANMOBILE'
                 }],
                 type: 'select'
             },
