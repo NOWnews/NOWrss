@@ -25,6 +25,9 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         case 'FACEBOOK':
             templateFile = 'default';
             break;
+        case 'TAIWANMOBILE':
+            templateFile = 'taiwan-mobile';
+            break;
         default:
             templateFile = 'default';
     }
