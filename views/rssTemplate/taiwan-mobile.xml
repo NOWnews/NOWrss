@@ -1,4 +1,4 @@
-{% extends "./base/base.xml" %}
+{% extends "./base/taiwanMobileBase.xml" %}
 
 {% block item %}
     {% for item in items %}
@@ -21,7 +21,7 @@
                 ]]>
             </subcategory>
             <author>{{ item.author }}</author>
-            <pubDate>{{ item.date }}</pubDate>
+            <pubDate>{{ item.UTCdate }}</pubDate>
         </item>
     {% endfor %}
 {% endblock %}
