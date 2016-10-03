@@ -51,9 +51,9 @@ module.exports = co.wrap(function*(newsArray) {
                 //     url: 'imgs/' + news.image.fileName,
                 //     // thumbnail: news.image.thumbnail || 'http://www.nownews.com/assets/images/logo.png'
                 // },
-                text: {
-                    content: news.body.value
-                }
+                // text: {
+                //     content: news.body.value
+                // }
             },
             author: 'NOWnews 今日新聞',
             sourceUrl: 'http://www.nownews.com/n/' + year + '/' + month + '/' + date + '/' + news._id
@@ -64,6 +64,8 @@ module.exports = co.wrap(function*(newsArray) {
             newsData.contents.image.description = news.title;
             newsData.contents.image.url = 'imgs/' + news.image.fileName;
         }
+
+        newsData.contents.text = { content: news.body.value };
         // debug('newsData image = %j', newsData.contents.image);
         // debug('newsData = %j', newsData);
 

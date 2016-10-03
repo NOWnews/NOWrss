@@ -35,9 +35,9 @@ module.exports = co.wrap(function*(news) {
     });
 
     // 把圖說拿掉因為他真的很討厭幹你娘勒
-    // $('cite').filter(function(i, el) {
-    //     $(el).parents().remove();
-    // });
+    $('cite').filter(function(i, el) {
+        $(el).remove();
+    });
 
     news.body.value = $.html();
     return yield Promise.resolve(news);
