@@ -47,7 +47,7 @@ router.route('/rss/:channelId')
 
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml');
-            res.render(rssXml.xml, {items: rssXml.items, dateTime: dateTime, ISOTime: ISOTime, UTCTime: UTCTime});
+            res.render(rssXml.xml, {items: rssXml.items, dateTime: dateTime, TaiwanMobileDate: TaiwanMobileDate, ISOTime: ISOTime, UTCTime: UTCTime});
             // res.json(mainCategories);
         }).catch(next);
 
