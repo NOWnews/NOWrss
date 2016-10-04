@@ -21,7 +21,7 @@
                 ]]>
             </subcategory>
             <author>{{ item.author }}</author>
-            <pubDate>{{ item.UTCdate }}</pubDate>
+            <pubDate>{{ item.TaiwanMobileDate }}</pubDate>
         </item>
     {% endfor %}
 {% endblock %}

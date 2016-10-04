@@ -1,6 +1,6 @@
 {
     "name": "nowrss",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "NOWnews RSS service",
     "main": "index.js",
     "scripts": {
