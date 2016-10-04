@@ -22,7 +22,7 @@ router.route('/rss/:channelId')
             let startTime = moment().tz('Asia/Taipei').add(-1, 'day');
             let endTime = moment().tz('Asia/Taipei');
             let ISOTime = moment().tz('Asia/Taipei').format();
-            let dateTime = moment().tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss ZZ');
+            let dateTime = moment().tz('Asia/Taipei').format('ddd DD MMM YYYY HH:mm:ss ZZ');
             let TaiwanMobileDate = moment().tz('Asia/Taipei').format('ddd DD MMM YYYY HH:mm:ss [GMT]Z');
             let UTCTime = moment().tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z');
 

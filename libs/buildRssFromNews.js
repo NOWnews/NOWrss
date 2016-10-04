@@ -67,7 +67,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             description: description,
             author: author,
             summary: summary,
-            date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss ZZ'),
+            date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd DD MMM YYYY HH:mm:ss ZZ'),
             TaiwanMobileDate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd DD MMM YYYY HH:mm:ss [GMT]Z'),
             UTCdate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory
