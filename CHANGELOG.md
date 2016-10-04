@@ -4,6 +4,18 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 格式基於 [Keep a Changelog](http://keepachangelog.com/zh-TW/0.3.0/)
 而項目則基於 [Semantic Versioning](http://semver.org/lang/zh-TW/).
 
+## 1.0.6 - 2016-10-04
+### Change
+
+修正時間格式
+
+```
+  一般 - Wed 02 Oct 2002 15:00:00 +0200`
+  台哥大 - Wed Oct 02 2002 15:00:00 GMT+02:00`
+  雅虎 - Wed, 02 Oct 2002 15:00:00 GMT+02:00`
+```
+@webber
+
 ## 1.0.5 - 2016-10-04
 ### Change
 
