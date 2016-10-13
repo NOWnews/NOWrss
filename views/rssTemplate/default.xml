@@ -1,7 +1,7 @@
 {% extends "./base/base.xml" %}
 
 {% block item %}
-    {% for item in items %}
+    {% for item in items %}{% if item.id != 2269796 %}
         <item>
             <id>{{item.id}}</id>
             <title>{{ item.title }}</title>
@@ -23,5 +23,5 @@
             <author>{{ item.author }}</author>
             <pubDate>{{ item.date }}</pubDate>
         </item>
-    {% endfor %}
+    {% endif %}{% endfor %}
 {% endblock %}
