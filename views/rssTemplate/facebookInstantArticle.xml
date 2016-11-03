@@ -36,10 +36,6 @@
                   <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1789112951323406_1797144030520298&adtype=banner300x250"></iframe>
                 </figure>
 
-                <figure class="op-ad">
-                  <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1789112951323406_1797144030520298&adtype=banner300x250"></iframe>
-                </figure>
-
                 {% if item.imgUrl %}
                   <figure>
                     <img src="{{ item.imgUrl }}"/>
@@ -49,10 +45,6 @@
               </header>
 
               {{ item.body | safe }}
-
-              <figure class="op-ad">
-                <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1789112951323406_1797144030520298&adtype=banner300x250"></iframe>
-              </figure>
 
               <figure class="op-ad">
                 <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1789112951323406_1797144030520298&adtype=banner300x250"></iframe>
@@ -105,6 +97,10 @@
                     </noscript>
                     <!-- End comScore Tag -->
                   </iframe>
+              </figure>
+
+              <figure class="op-ad">
+                <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1789112951323406_1797144030520298&adtype=banner300x250"></iframe>
               </figure>
 
               <footer>
