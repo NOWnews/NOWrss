@@ -68,8 +68,10 @@
 
                       ga('create', 'UA-4021556-54', 'auto');
                       ga('create', 'UA-4021556-26', {'name':'26'});
-                      ga('send', 'pageview');
-                      ga('26.send', 'pageview');
+                      ga('set', 'campaignSource', 'Facebook');
+                      ga('set', 'campaignMedium', 'Facebook Instant Article');
+                      ga('send', 'pageview', {title: '{{ item.title }}'});
+                      ga('26.send', 'pageview', {title: '{{ item.title }}'});
                     </script>
                   </iframe>
               </figure>
