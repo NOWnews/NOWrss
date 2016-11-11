@@ -60,6 +60,9 @@ module.exports = (req, res, next) => {
                 },{
                     title: '台灣大哥大 版型',
                     value: 'TAIWANMOBILE'
+                },{
+                    title: '社群用 版型',
+                    value: 'SOCIAL'
                 }],
                 type: 'select'
             },

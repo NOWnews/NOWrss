@@ -1,0 +1,27 @@
+{% extends "./base/base.xml" %}
+
+{% block item %}
+    {% for item in items %}{% if item.id != 2269796 %}
+        <item>
+            <id>{{item.id}}</id>
+            <title>{{ item.shortTitle or item.title }}</title>
+            <link>{{ item.url }}</link>
+            <description>
+                <![CDATA[
+                    {{ item.mainPhotoBody | safe }}{{ item.description | safe }}
+                ]]>
+            </description>
+            <summary>
+                {{ item.summary }}
+            </summary>
+            <guid isPermaLink="true">{{ item.url }}</guid>
+            <subcategory>
+                <![CDATA[
+                    {{ item.subcategory }}
+                ]]>
+            </subcategory>
+            <author>{{ item.author }}</author>
+            <pubDate>{{ item.date }}</pubDate>
+        </item>
+    {% endif %}{% endfor %}
+{% endblock %}

@@ -46,6 +46,7 @@ module.exports = co.wrap(function*(tids, start, end) {
             field_main_category: true,
             field_release_date: true,
             body: true,
+            field_short_title: true,
             field_free_body: true,
             field_news_ref: true,
             field_newsby: true

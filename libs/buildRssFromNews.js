@@ -28,6 +28,9 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         case 'TAIWANMOBILE':
             templateFile = 'taiwan-mobile';
             break;
+        case 'SOCIAL':
+            templateFile = 'social';
+            break;
         default:
             templateFile = 'default';
     }
@@ -44,6 +47,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         // 最後傳進去的變數
         let description = news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
         let title = news.title;
+        let shortTitle = news.field_short_title.value;
         let author = news.field_newsby.value;
         let summary = news.body.summary;
         let subcategory = news.category;
@@ -61,6 +65,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         items.push({
             id: news._id,
             title:  title,
+            shortTitle: shortTitle,
             url: 'http://www.nownews.com/n/' + dateFormat + '/' + news._id,
             mainPhotoUrl: mainPhotoUrl,
             mainPhotoBody: mainPhotoBody,
