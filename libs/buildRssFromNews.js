@@ -39,6 +39,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
     _.forEach(newsArray, (news) => {
         // 沒有新聞的話，就離開
         if(!news){ return true; }
+        if(!news.field_short_title){ console.error('id: ' + news._id + ' 沒有下短標。'); }
 
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
         let mainPhotoBody = news.image.body || '';
