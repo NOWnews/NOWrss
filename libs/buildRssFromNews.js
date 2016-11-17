@@ -47,7 +47,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         // 最後傳進去的變數
         let description = news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
         let title = news.title;
-        let shortTitle = news.field_short_title.value;
+        let shortTitle = news.field_short_title ? news.field_short_title.value : title;
         let author = news.field_newsby.value;
         let summary = news.body.summary;
         let subcategory = news.category;

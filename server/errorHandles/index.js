@@ -13,7 +13,7 @@ module.exports = (app) => {
             message: err.message,
             stack: err.stack.split('\n')
         };
-
+        console.error(errObject);
         return res.render('503', {
             error: errObject
         });
