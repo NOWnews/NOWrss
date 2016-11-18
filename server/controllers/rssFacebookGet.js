@@ -11,7 +11,7 @@ let models = require('../../models');
 
 let co = require('co');
 let mongoose = require('mongoose');
-
+const isFacebookInstantArticle = true;
 
 router.route('/rssFacebookGet')
     .get((req, res, next) => {
@@ -32,7 +32,7 @@ router.route('/rssFacebookGet')
             // debug('categoryOption = %s', categoryOption);
             // debug('simplifiedChinese = %s', simplifiedChinese);
 
-            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, channelId);
+            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, channelId, isFacebookInstantArticle);
 
             let rssXml = yield libs.rssFacebookInstantArticleTp(news);
 

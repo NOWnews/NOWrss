@@ -13,7 +13,7 @@ const checkBodyImageIsAuth = require('./checkBodyImageIsAuth');
 const getRefNews = require('./getRefNews');
 const redis = require('../redis');
 
-module.exports = co.wrap(function*(start, end, searchCondition, channelId) {
+module.exports = co.wrap(function*(start, end, searchCondition, channelId, isFacebookInstantArticle) {
 
     if(!start) {
         return Promise.reject(new Error('要帶入 start 的 epoch 時間'));
@@ -63,8 +63,13 @@ module.exports = co.wrap(function*(start, end, searchCondition, channelId) {
         // 如果沒有此類別就刪掉
         news.category = mainMappingObject[news.field_main_category.tid];
 
-        if(!news.category){ delete allNews[index]; }
-        checkBodyImageIsAuth(news);
+        if(!news.category){
+            delete allNews[index];
+        }
+
+        if(isFacebookInstantArticle !== true) {
+            checkBodyImageIsAuth(news);
+        }
     });
 
     // debug('allNews = %j', allNews);
