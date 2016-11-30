@@ -63,7 +63,7 @@ module.exports = co.wrap(function*() {
             // port: 20021,
             host: 'ftps-today.line.me',
             user: 'nownews',
-            password: '5Bx-HTSh',
+            password: '^z48z1GS',
             port: 20021,
             secure: true,
             secureOptions: {
