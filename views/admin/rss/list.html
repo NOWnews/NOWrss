@@ -30,7 +30,8 @@
                                         <th>編號</th>
                                         <th>名稱</th>
                                         <th>語系</th>
-                                        <th>有效時間</th>
+                                        <th>頻道ID</th>
+                                        <th>版型</th>
                                         <th>RSS連結</th>
                                         <th>編輯</th>
                                         <th>刪除</th>
@@ -47,7 +48,8 @@
                                                         繁
                                                     {% endif %}
                                                 </td>
-                                                <td>{{ rss.dateRange }}</td>
+                                                <td>{{ rss.channelId }}</td>
+                                                <td>{{ rss.template }}</td>
                                                 <td>
                                                     <a target="_blank" href="/rss/{{ rss.channelId }}">RSS端點</a>
                                                 </td>
