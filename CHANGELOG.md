@@ -4,6 +4,12 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 格式基於 [Keep a Changelog](http://keepachangelog.com/zh-TW/0.3.0/)
 而項目則基於 [Semantic Versioning](http://semver.org/lang/zh-TW/).
 
+## 1.0.13 - 2017-01-09
+### Change
+- 加上過期機制 `libs/checkDateRange.js`  @Webber
+- RSS 列表頁加上過期狀態
+- RSS 會判斷是否過期，過期會給 404 頁面
+
 ## 1.0.12 - 2016-11-18
 ### Change
 - 調整 `libs/getNeedNewsFromMongo.js` 加入一個參數，讓 facebook instant article 可以繞過圖片判斷的機制 @SimonSun
