@@ -36,10 +36,8 @@ router.route('/rss/:channelId')
             }
 
             // 如果過期
-            let start = moment(rssData.startDate).tz('Asia/Taipei').valueOf();
-            let today = moment().tz('Asia/Taipei').valueOf();
-            let end = moment(rssData.endDate).add(1, 'day').tz('Asia/Taipei').valueOf();
-            if(today >= end || today < start){
+            let isExpired = libs.checkDateRange(rssData.startDate, rssData.endDate);
+            if(isExpired){
                 console.error(`/rss/${req.params.channelId} 此頁面已過期`)
                 res.status(404);
                 return res.render('404');

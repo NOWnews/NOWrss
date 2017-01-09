@@ -28,6 +28,7 @@
                                 <table id="main-list" class="table table-bordered table-hover">
                                     <thead>
                                         <th>編號</th>
+                                        <th>狀態</th>
                                         <th>名稱</th>
                                         <th>語系</th>
                                         <th>頻道ID</th>
@@ -40,6 +41,7 @@
                                         {% for rss in rssList %}
                                             <tr>
                                                 <td>{{ rss.sn }}</td>
+                                                <td class="{{ 'danger' if rss.isExpired else 'success' }}">{{ rss.dateRange }}</td>
                                                 <td>{{ rss.name }}</td>
                                                 <td>
                                                     {% if rss.simplifiedChinese %}

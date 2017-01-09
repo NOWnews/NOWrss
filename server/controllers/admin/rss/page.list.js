@@ -21,8 +21,10 @@ module.exports = (req, res, next) => {
             rss.dateRange = `${startDate} - ${endDate}`;
             // 列表時將 channelId 改成大寫
             rss.channelId = rss.channelId.toUpperCase();
-        });
 
+            //確認是否過期
+            rss.isExpired = libs.checkDateRange(rss.startDate, rss.endDate);
+        });
         return res.render('admin/rss/list', {
             rssList
         });
