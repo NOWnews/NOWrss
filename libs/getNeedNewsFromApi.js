@@ -26,9 +26,9 @@ module.exports = async (startEpoch, endEpoch, categories, channelId, isFacebookI
     let queryCategories = querystring.stringify({
         "categories": JSON.stringify(categories)
     });
-    let devUrl = `/rss?limit=${limit}&${queryCategories}`;
-    // let url = `/rss?start=${startEpoch}&end=${endEpoch}limit=${limit}&${queryCategories}`;
-    let { data: allNews } = await axios.get(devUrl);
+    
+    let url = `/rss?start=${startEpoch}&end=${endEpoch}limit=${limit}&${queryCategories}`;
+    let { data: allNews } = await axios.get(url);
     debug('before format allNews %j' , allNews);
     allNews = toOldFormat(allNews);
     
