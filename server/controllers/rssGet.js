@@ -49,7 +49,7 @@ router.route('/rss/:channelId')
             debug('categoryOption = %s', categoryOption);
             debug('simplifiedChinese = %s', simplifiedChinese);
 
-            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, channelId);
+            let news = yield libs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId);
 
             let rssXml = yield libs.buildRssFromNews(news, simplifiedChinese, rssData.template);
 

@@ -21,4 +21,13 @@ module.exports = {
         expireSeconds: 3600
      },
 
+     /*
+     * api server
+     */
+     apiServer:process.env.NODE_ENV === 'production'?'http://localhost:10000':'http://localhost:10000'
+     ,
+     headers: {
+        "X-NOWnews-API": ["NOWnewsIsFeature"]
+    }
+
 };
