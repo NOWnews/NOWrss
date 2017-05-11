@@ -4,6 +4,10 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 格式基於 [Keep a Changelog](http://keepachangelog.com/zh-TW/0.3.0/)
 而項目則基於 [Semantic Versioning](http://semver.org/lang/zh-TW/).
 
+## 1.0.14 - 2017-05-09
+### Change
+- 加入 LINE 專屬的 HEAD `LineBase.xml` @Webber
+
 ## 1.0.13 - 2017-01-09
 ### Change
 - 加上過期機制 `libs/checkDateRange.js`  @Webber
