@@ -83,6 +83,10 @@ module.exports = (req, res, next) => {
                     value: 'DEFAULT',
                     selected: rssData.template === 'DEFAULT' ? 'selected' : ''
                 },{
+                    title: 'Line 版型',
+                    value: 'LINE',
+                    selected: rssData.template === 'LINE' ? 'selected' : ''
+                },{
                     title: 'Yahoo 版型',
                     value: 'YAHOO',
                     selected: rssData.template === 'YAHOO' ? 'selected' : ''

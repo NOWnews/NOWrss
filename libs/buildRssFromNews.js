@@ -19,6 +19,9 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
     let ISOTime = moment().tz('Asia/Taipei').format();
 
     switch(template) {
+        case 'LINE':
+            templateFile = 'line';
+            break;
         case 'YAHOO':
             templateFile = 'yahoo';
             break;

@@ -1,0 +1,26 @@
+{% extends "./base/LineBase.xml" %}
+
+{% block item %}
+    {% for item in items %}
+        <article>
+            <ID>{{item.id}}</ID>
+            <nativeCountry>TW</nativeCountry>
+            <language>zh</language>
+            <publishCountries>
+                <country>TW</country>
+            </publishCountries>
+            <excludedCountries>
+                <country>CN</country>
+            </excludedCountries>
+            <title>{{ item.title }}</title>
+            <category>{{ item.subcategory }}</category>
+            <startYmdtUnix>1494324000000</startYmdtUnix>
+            <endYmdtUnix>1652090400000</endYmdtUnix>
+            <publishTimeUnix>1494324000000</publishTimeUnix>
+            <publishTime>2017/05/09 18:00</publishTime>
+            <contents>{{ item.mainPhotoBody | safe }}{{ item.description | safe }}</contents>
+            <author>NOWnews 今日新聞</author>
+            <sourceUrl>{{ item.url }}</sourceUrl>
+        </article>
+    {% endfor %}
+{% endblock %}
