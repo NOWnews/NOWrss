@@ -48,7 +48,7 @@ module.exports = co.wrap(function*(start, end, searchCondition, channelId, isFac
 
     // 用 tid 與時間區間去撈取新聞
 
-    let allNews = yield redis.getRssIdByRedis(mainTids, startEpoch, endEpoch, channelId);
+    let allNews = yield redis.getRssIdByRedis(mainTids, startEpoch, endEpoch, channelId, isFacebookInstantArticle);
 
     debug('step 1 = %s', '撈取新聞');
     debug('總共撈到 %d 則', allNews.length);

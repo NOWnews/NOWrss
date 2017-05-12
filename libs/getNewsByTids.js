@@ -10,7 +10,7 @@ const _ = require('lodash');
 
 const getNewsImageFromNodeId = require('./getNewsImageFromNodeId');
 
-module.exports = co.wrap(function*(tids, start, end) {
+module.exports = co.wrap(function*(tids, start, end, isFacebookInstantArticle) {
 
     let mongodb14 = yield require('../mongodb14');
     // let db = yield MongoClient.connectAsync(config.newsMongodb);
@@ -19,28 +19,32 @@ module.exports = co.wrap(function*(tids, start, end) {
     debug('start = %d', start);
     debug('end = %d', end);
 
-    // 找出所有最大分類的 tid
-    let news = yield mongodb14.collection('fields_current.node').find({
-           _bundle: 'news',
-           _type: 'node',
-           'field_auth.value': '1', // 是否可以外送
-           'field_release_status.value': 1,  // 發佈狀態
-           'field_main_category.tid': {
-                $in: tids
-           },
-           $and: [
-               {
-                   'field_release_date.value': {
-                       $gte: start
-                   }
-               },
-               {
-                   'field_release_date.value': {
-                       $lte: end
-                   }
+    let findOption = {
+       _bundle: 'news',
+       _type: 'node',
+       'field_release_status.value': 1,  // 發佈狀態
+       'field_main_category.tid': {
+            $in: tids
+       }, $and: [
+           {
+               'field_release_date.value': {
+                   $gte: start
                }
-           ]
-        }, {
+           },
+           {
+               'field_release_date.value': {
+                   $lte: end
+               }
+           }
+       ]
+    };
+
+    if (!isFacebookInstantArticle) {
+        findOption['field_auth.value'] = '1'; // 是否可以外送
+    }
+
+    // 找出所有最大分類的 tid
+    let news = yield mongodb14.collection('fields_current.node').find(findOption, {
             _id: true,
             title: true,
             field_main_category: true,
@@ -50,7 +54,7 @@ module.exports = co.wrap(function*(tids, start, end) {
             field_free_body: true,
             field_news_ref: true,
             field_newsby: true
-        }).sort({'field_release_date.value': -1}).limit(60).toArray();
+        }).sort({'field_release_date.value': -1}).toArray();
 
     let setNewsPhotoByNews = yield Promise.map(news, function(n) {
         return getNewsImageFromNodeId(n);
