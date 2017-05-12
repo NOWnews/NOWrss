@@ -11,9 +11,12 @@ const is = require('is_js');
 const querystring = require('querystring');
 const checkBodyImageIsAuth = require('./checkBodyImageIsAuth');
 const getRefNews = require('./getRefNews');
+const newsToOldFormat = require('./newsToOldFormat')
+const imagesIsDeliveryFilter = require('./imagesIsDeliveryFilter')
 const redis = require('../redis');
 
-module.exports = async(startEpoch, endEpoch, categories, channelId, isFromRedis) => {
+module.exports = async(startEpoch, endEpoch, categories, channelId,isFacebookInstantArticle) => {
+    debug('categories',categories)
     if (!startEpoch) {
         return Promise.reject(new Error('要帶入 start 的 epoch 時間'));
     }
@@ -33,8 +36,13 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFromRedis)
     let url = `/rss?start=${startEpoch}&end=${endEpoch}limit=${limit}&${queryCategories}`;
 
     let { data: allNews } = await axios.get(url);
+
+    if(!isFacebookInstantArticle){
+        allNews = await imagesIsDeliveryFilter(allNews);
+    }
+    
     debug('before format allNews %j' , allNews);
-    allNews = toOldFormat(allNews);
+    allNews = await newsToOldFormat(allNews,isFacebookInstantArticle);
     debug('after format allNews = %j', allNews);
 
     //update redis data
@@ -44,50 +52,13 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFromRedis)
 };
 
 
-
-function toOldFormat(allNews) {
-        return allNews.map((news, i) => {
+// function imagesIsDeliveryFilter(allNews){
+//         return allNews.map((news, i) => {
+//             //主圖
+//             if(news.MainPhoto.isDeliver===false){
+//                 delete news.MainPhoto.isDeliver;
+//             }
+//             //內容圖
             
-            //主分類+所有子分類都放進categories
-            let categories = (news.Menus.map(menu => menu['name']));
-            categories.unshift(news.MainMenu.name);
-
-            return {
-                "_id": news.sn,
-                "title": news.title,
-                "body": {
-                    "summary": news.summary,
-                    "value": "",
-                    "format": "full_html"
-                },
-                "field_free_body": {
-                    "value": news.content,
-                    "format": "free_style"
-                },
-                "field_news_ref": [],
-                "field_newsby": {
-                    "value": news.newsby
-                },
-                "field_release_date": {
-                    "value": (new Date(news.createdAt).getTime()) / 1000
-                },
-                "field_short_title": {
-                    "value": news.shortTitle
-                },
-                "field_main_category": {
-                    "tid": ""
-                },
-                "image": {
-                    "title": news.MainPhoto ? news.MainPhoto.title : "",
-                    "description": news.MainPhoto ? news.MainPhoto.desc : "",
-                    "uri": news.MainPhoto ? news.MainPhoto.url : "",
-                    "url": news.MainPhoto ? news.MainPhoto.url : "",
-                    "originalUrl": news.MainPhoto ? news.MainPhoto.url : "",
-                    "body": news.MainPhoto ? news.MainPhoto.desc : ""
-                },
-                "category": categories
-            }
-
-
-        });
-    }
+//         }
+//     }
