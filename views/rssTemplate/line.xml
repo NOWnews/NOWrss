@@ -14,12 +14,37 @@
             </excludedCountries>
             <title>{{ item.title }}</title>
             <category>{{ item.subcategory }}</category>
-            <startYmdtUnix>1494324000000</startYmdtUnix>
-            <endYmdtUnix>1652090400000</endYmdtUnix>
-            <publishTimeUnix>1494324000000</publishTimeUnix>
-            <publishTime>2017/05/09 18:00</publishTime>
-            <contents>{{ item.mainPhotoBody | safe }}{{ item.description | safe }}</contents>
-            <author>NOWnews 今日新聞</author>
+            <startYmdtUnix>{{ item.dateTime }}</startYmdtUnix>
+            <endYmdtUnix>{{ item.dateTime + 50000000000 }}</endYmdtUnix>
+            <publishTimeUnix>{{ item.dateTime }}</publishTimeUnix>
+            <publishTime>{{ item.date }}</publishTime>
+            <contents>
+                {% if item.mainPhotoUrl %}
+                    <image>
+                        <title>{{ item.mainPhotoDesc }}</title> //Optional
+                        <url>{{ item.mainPhotoUrl }}</url>
+                    </image>
+                {% endif %}
+                {# VIDEO 舊系統沒有支援 <video>
+                    <title>String // video title</title> //Optional
+                    <description>String // video caption</description> //Optional
+                    <url>String // relative file path of video file</url> //Mandatory
+                    <thumbnail>String // relative file path of thumbnail file</thumbnail> //Optional
+                    <restrictedCountries> //Optional
+                        <country>String // ISO 3166­1 alpha­2</country>
+                        <country>String // ISO 3166­1 alpha­2</country>
+                        <country>... // others</country>
+                    </restrictedCountries>
+                </video>#}
+                <text>
+                    <content>
+                        <![CDATA[
+                            {{ item.description | safe }}
+                        ]]>
+                    </content>
+                </text>
+            </contents>
+            <author>{{ item.author }}</author>
             <sourceUrl>{{ item.url }}</sourceUrl>
         </article>
     {% endfor %}

@@ -6,6 +6,7 @@ let router = express.Router();
 
 const moment = require('moment-timezone');
 const libs = require('../../libs');
+const uuid = require('node-uuid');
 
 let models = require('../../models');
 let redis = require('../../redis');
@@ -25,6 +26,8 @@ router.route('/rss/:channelId')
             let dateTime = moment().tz('Asia/Taipei').format('ddd DD MMM YYYY HH:mm:ss ZZ');
             let TaiwanMobileDate = moment().tz('Asia/Taipei').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
             let UTCTime = moment().tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z');
+            let milliseconds = moment().tz('Asia/Taipei').valueOf();
+            let UUID = uuid.v4();
 
             let rssData = yield models.rss.findOne()
             .where('channelId').equals(channelId)
@@ -53,10 +56,20 @@ router.route('/rss/:channelId')
 
             let rssXml = yield libs.buildRssFromNews(news, simplifiedChinese, rssData.template);
 
+            let xmlData = {
+                items: rssXml.items,
+                dateTime,
+                TaiwanMobileDate,
+                ISOTime,
+                UTCTime,
+                milliseconds,
+                UUID
+            }
+
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml');
-            res.render(rssXml.xml, {items: rssXml.items, dateTime: dateTime, TaiwanMobileDate: TaiwanMobileDate, ISOTime: ISOTime, UTCTime: UTCTime});
-            // res.json(mainCategories);
+            res.render(rssXml.xml, xmlData);
+            // res.json(xmlData);
         }).catch(next);
 
     });
