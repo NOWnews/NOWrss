@@ -32,7 +32,7 @@ router.route('/rssFacebookGet')
             // debug('categoryOption = %s', categoryOption);
             // debug('simplifiedChinese = %s', simplifiedChinese);
 
-            let news = yield libs.getNeedNewsFromMongo(startTime, endTime, categoryOption, channelId, isFacebookInstantArticle);
+            let news = yield libs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId,isFacebookInstantArticle);
 
             let rssXml = yield libs.rssFacebookInstantArticleTp(news);
 
