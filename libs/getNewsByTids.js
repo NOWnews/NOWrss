@@ -54,7 +54,7 @@ module.exports = co.wrap(function*(tids, start, end, isFacebookInstantArticle) {
             field_free_body: true,
             field_news_ref: true,
             field_newsby: true
-        }).sort({'field_release_date.value': -1}).toArray();
+        }).sort({'field_release_date.value': -1}).limit(60).toArray();
 
     let setNewsPhotoByNews = yield Promise.map(news, function(n) {
         return getNewsImageFromNodeId(n);
