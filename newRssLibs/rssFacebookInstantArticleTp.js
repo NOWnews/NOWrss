@@ -13,11 +13,11 @@ module.exports = co.wrap(function*(newsArray) {
             return true;
         }
 
-        let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
+        let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYYMMDD');
 
         items.push({
             title: news.title,
-            link: `http://www.nownews.com/n/${dateFormat}/${news._id}`,
+            link: `http://www.nownews.com/news/${dateFormat}/${news._id}`,
             guid: news._id,
             date: moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD HH:mm:ss'),
             isoDate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format(),
