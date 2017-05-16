@@ -13,11 +13,11 @@ module.exports = async(allNews) => {
             "title": news.title,
             "body": {
                 "summary": news.summary,
-                "value": "",
+                "value": news.content,
                 "format": "full_html"
             },
             "field_free_body": {
-                "value": news.content,
+                "value": "",
                 "format": "free_style"
             },
             "field_news_ref": [],
@@ -39,7 +39,7 @@ module.exports = async(allNews) => {
                 "uri": news.MainPhoto ? news.MainPhoto.url : "",
                 "url": news.MainPhoto ? news.MainPhoto.url : "",
                 "originalUrl": news.MainPhoto ? news.MainPhoto.url : "",
-                "body": news.MainPhoto ? news.MainPhoto.desc : ""
+                "body": news.MainPhoto ? `<div class="main-photo"><img src="${news.MainPhoto.url}" width="320px;" class="editorial"><cite>${news.MainPhoto.title}</cite></div>`: ""
             },
             "category": categories
         }
