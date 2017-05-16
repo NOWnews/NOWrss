@@ -30,7 +30,7 @@ module.exports = async(startEpoch, endEpoch, categories, channelId,isFacebookIns
     }
    
     let limit = 60;
-    let queryCategories = querystring.stringify({"categories": JSON.stringify(categories)});
+    let queryCategories = querystring.stringify({"categories": categories.join(',')});
     let url = `/rss?start=${startEpoch}&end=${endEpoch}&limit=${limit}&${queryCategories}`;
 
     let { data: allNews } = await axios.get(url);

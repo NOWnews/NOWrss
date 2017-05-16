@@ -17,6 +17,7 @@ const actionUserUpdate = require('./user/action.update');
 const pageRssList = require('./rss/page.list');
 const pageRssCreate = require('./rss/page.create');
 const actionRssCreate = require('./rss/action.create');
+
 const pageRssUpdate = require('./rss/page.update');
 const actionRssUpdate = require('./rss/action.update');
 const actionRssRemove = require('./rss/action.remove');
@@ -24,6 +25,10 @@ const actionRssRemove = require('./rss/action.remove');
 const isLogin = require('../../middlewares/isLogin');
 const saveUrlType = require('../../middlewares/saveUrlType');
 
+
+const pageNewRssCreate = require('./rss/new.page.create');
+const actionNewRssCreate = require('./rss/new.action.create');
+const pageNewRssUpdate = require('./rss/new.page.update');
 
 /*
  * ############## User 設定 ##############
@@ -60,6 +65,14 @@ router.route('/admin/rss')
 router.route('/admin/rss/create')
     .get(isLogin, saveUrlType, pageRssCreate)
     .post(isLogin, actionRssCreate);
+
+router.route('/admin/new/rss/create')
+    .get(isLogin, saveUrlType, pageNewRssCreate)
+    .post(isLogin, actionNewRssCreate);
+
+router.route('/admin/new/rss/update/:sn')
+    .get(isLogin, saveUrlType, pageNewRssUpdate)
+    .put(isLogin, actionRssUpdate);
 
 router.route('/admin/rss/update/:sn')
     .get(isLogin, saveUrlType, pageRssUpdate)
