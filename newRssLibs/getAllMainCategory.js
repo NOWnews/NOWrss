@@ -1,7 +1,5 @@
 
-const debug = require('debug')('NOWrss:libs:getAllMainCategory');
-const co = require('co');
-const Promise = require('bluebird');
+const debug = require('debug')('NOWrss:newRssLibs:getAllMainCategory');
 const _ = require('lodash');
 
 module.exports = async ()=> {
@@ -18,5 +16,5 @@ module.exports = async ()=> {
     
 
 
-    return await Promise.resolve(mainCategory);
+    return mainCategory;
 };

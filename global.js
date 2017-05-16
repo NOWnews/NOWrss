@@ -1,5 +1,5 @@
-var config = require('./config.js');
-var axiosLib = require('axios');
+let config = require('./config.js');
+let axiosLib = require('axios');
 
 global._ = require('lodash');
 

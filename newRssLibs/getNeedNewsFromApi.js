@@ -2,7 +2,7 @@
  * 帶入時間區間及塞選條件(陣列)，去跟 NOWnews-api 要新聞資料
  */
 
-const debug = require('debug')('NOWrss:libs:getNeedNewsFromAPI');
+const debug = require('debug')('NOWrss:newRssLibs:getNeedNewsFromAPI');
 const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');

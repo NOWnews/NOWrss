@@ -1,4 +1,4 @@
-const debug = require('debug')('NOWrss:libs:checkDateRange');
+const debug = require('debug')('NOWrss:newRssLibs:checkDateRange');
 const moment = require('moment-timezone');
 
 module.exports = (startDate, endDate) => {

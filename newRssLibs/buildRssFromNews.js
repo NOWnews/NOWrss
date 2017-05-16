@@ -1,10 +1,8 @@
 
-const debug = require('debug')('NOWrss:libs:buildRssFromNews');
+const debug = require('debug')('NOWrss:newRssLibs:buildRssFromNews');
 const co = require('co');
 const Promise = require('bluebird');
-const uuid = require('node-uuid');
 const moment = require('moment-timezone');
-const js2xmlparser = require('js2xmlparser');
 const _ = require('lodash');
 const chineseConv = require('chinese-conv');
 

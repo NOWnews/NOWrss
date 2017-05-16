@@ -1,6 +1,9 @@
+const debug = require('debug')('NOWrss:newRssLibs:newsToOldFormat');
+const _ = require('lodash');
+
 module.exports = async(allNews) => {
 
-    return allNews.map((news, i) => {
+    return _.map(allNews,(news, i) => {
         //主分類+所有子分類都放進categories
         let categories = (news.Menus.map(menu => menu['name']));
         categories.unshift(news.MainMenu.name);

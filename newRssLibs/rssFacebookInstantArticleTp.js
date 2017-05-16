@@ -3,7 +3,7 @@ const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
 const moment = require('moment-timezone');
-const debug = require('debug')('NOWrss:libs:buildRssFromNews');
+const debug = require('debug')('NOWrss:newRssLibs:buildRssFromNews');
 
 module.exports = co.wrap(function*(newsArray) {
 
