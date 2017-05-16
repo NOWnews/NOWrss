@@ -40,7 +40,7 @@ module.exports = async (req, res, next) => {
 
         let formData = {
             title: '更新廠商 RSS',
-            action: `/admin/rss/update/${sn}`,
+            action: `/admin/new/rss/update/${sn}`,
             method: 'put',
             formColumn: [{
                 title: '名稱',
@@ -122,7 +122,7 @@ module.exports = async (req, res, next) => {
             }]
         };
 
-        return res.render('admin/rss/update', {
+        return res.render('admin/rss/new-update', {
             formData
         });
     }catch(err){

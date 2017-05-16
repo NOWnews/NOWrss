@@ -77,7 +77,7 @@ module.exports = async (req, res, next) => {
             }]
         };
 
-        return res.render('admin/rss/create', {
+        return res.render('admin/rss/new-create', {
             formData
         });
 };

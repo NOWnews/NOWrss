@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
 
          models.rss.createAsync(rssObj);
 
-        return res.redirect('/admin/rss');
+        return res.redirect('/admin/new/rss');
     }
     catch(err){
         next(err);

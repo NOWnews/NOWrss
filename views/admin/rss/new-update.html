@@ -1,0 +1,73 @@
+{% extends "./../blocks/layout.html" %}
+
+{% block container %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+              {{ formData.title }}介面
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 廠商RSS</a></li>
+                <li class="active">{{ formData.title }}</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">{{ formData.title }}</h3>
+                        </div>
+
+                        {% include "../blocks/default-form.html" %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}
+
+{% block jsBlock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.20/daterangepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.20/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.20/daterangepicker.min.js"></script>
+<script>
+//Date range picker
+$('#dateRange4').daterangepicker({
+    opens: "right",
+    locale:{
+        format: 'YYYY/MM/DD',
+        applyLabel: "確認",
+        cancelLabel: "取消",
+        daysOfWeek: [
+            "日",
+            "一",
+            "二",
+            "三",
+            "四",
+            "五",
+            "六"
+        ],
+        monthNames: [
+            "一月",
+            "二月",
+            "三月",
+            "四月",
+            "五月",
+            "六月",
+            "七月",
+            "八月",
+            "九月",
+            "十月",
+            "十一月",
+            "十二月"
+        ]
+    }
+});
+</script>
+{% endblock %}
