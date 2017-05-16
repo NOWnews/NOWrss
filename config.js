@@ -16,21 +16,19 @@ module.exports = {
     /*
      * redis 資料
      */
-     redis: {
+    redis: {
         host: process.env.NODE_ENV === 'production' ? 'localhost' : 'localhost',
         expireSeconds: 3600
-     },
+    },
 
     /*
-     * api server
+     * api-admin server
      */
-    apiServer:process.env.NODE_ENV === 'production'?'http://35.185.146.211:10000':'http://localhost:10000',
-
-    /*
-     *  api header 
-     */
-     headers: {
-        "X-NOWnews-API": ["NOWnewsIsFeature"]
+    apiServer: {
+        host: process.env.NODE_ENV === 'production' ? 'http://35.185.146.211:10000' : 'http://localhost:10000',
+        headers: {
+            "X-NOWnews-API": ["NOWnewsIsFeature"]
+        }
     }
 
 };

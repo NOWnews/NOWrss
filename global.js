@@ -4,9 +4,9 @@ let axiosLib = require('axios');
 global._ = require('lodash');
 
 global.axios = axiosLib.create({
-    baseURL: config.apiServer,
+    baseURL: config.apiServer.host,
     timeout: 5000,
-    headers: config.headers
+    headers: config.apiServer.headers
 });
 
 global.NODE_ENV = process.env.NODE_ENV || 'staging';
