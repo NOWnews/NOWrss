@@ -35,13 +35,13 @@ module.exports = async(startEpoch, endEpoch, categories, channelId,isFacebookIns
 
     let { data: allNews } = await axios.get(url);
 
-    // if(!isFacebookInstantArticle){
-    //     allNews = await imagesIsDeliveryFilter(allNews);
-    // }
+    debug('共撈了 %s  則新聞', allNews.length);
     
-    debug('before format allNews %j' , allNews);
+    if(!isFacebookInstantArticle){
+        allNews = await imagesIsDeliveryFilter(allNews);
+    }
+    
     allNews = await newsToOldFormat(allNews,isFacebookInstantArticle);
-    debug('after format allNews = %j', allNews);
 
     //update redis data
     let updateRedisAllNews = await redis.setValue(channelId, allNews, 360);
