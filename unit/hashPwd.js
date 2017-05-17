@@ -1,4 +1,4 @@
-const debug = require('debug')('NOWrss:newRssLibs:hasPwd');
+const debug = require('debug')('NOWrss:libs:hasPwd');
 
 const crypto = require('crypto');
 const constString = '$nownews@rss.';
