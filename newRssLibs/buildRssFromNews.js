@@ -3,6 +3,7 @@ const debug = require('debug')('NOWrss:newRssLibs:buildRssFromNews');
 const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');
+const utils = require('./../utils');
 const _ = require('lodash');
 const chineseConv = require('chinese-conv');
 
@@ -16,7 +17,11 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
     let templateFile = '';
     let ISOTime = moment().tz('Asia/Taipei').format();
 
+    // 選擇版型
     switch(template) {
+        case 'LINE':
+            templateFile = 'line';
+            break;
         case 'YAHOO':
             templateFile = 'yahoo';
             break;
@@ -33,23 +38,31 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             templateFile = 'default';
     }
 
+
     /* loop over data and add to feed */
     _.forEach(newsArray, (news) => {
         // 沒有新聞的話，就離開
         if(!news){ return true; }
-        if(!news.field_short_title){ console.error('id: ' + news._id + ' 沒有下短標。'); }
+        if(!news.shortTitle){ console.error('id: ' + news._id + ' 沒有下短標。'); }
 
-        let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYYMMDD');
-        let mainPhotoBody = news.image.body || '';
-        let mainPhotoUrl = news.image.originalUrl || '';
+        let mainPhotoBody = '';
+        let mainPhotoDesc = ''
+        let mainPhotoUrl = '';
+
+        // 圖片
+        if (news.MainPhoto.isDeliver) {
+            mainPhotoDesc = news.MainPhoto.desc || '';
+            mainPhotoUrl = news.MainPhoto.url || '';
+            mainPhotoBody = `<div class="main-photo"><img src="${mainPhotoUrl}" alt="${mainPhotoDesc}" width="320px;"><cite>${mainPhotoDesc}</cite></div>`;
+        }
 
         // 最後傳進去的變數
-        let description = news.body.value.replace(/src="http:\/\/e.nownews.com\/sites\/default\/files/g, 'src="http://imgapi.nownews.com/?w=600&q=80&src=http://s.nownews.com');
+        let description = news.content;
         let title = news.title;
-        let shortTitle = news.field_short_title ? news.field_short_title.value : title;
-        let author = news.field_newsby.value;
-        let summary = news.body.summary;
-        let subcategory = news.category;
+        let shortTitle = news.shortTitle ? news.shortTitle : title;
+        let author = news.newsBy;
+        let summary = news.summary;
+        let subcategory = news.MainMenu.name;
 
         // 確認語系
         if (simplifiedChinese) {
@@ -65,15 +78,15 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             id: news._id,
             title:  title,
             shortTitle: shortTitle,
-            url: 'http://www.nownews.com/news/' + dateFormat + '/' + news._id,
+            url: 'http://www.nownews.com' + news.parseUrl,
             mainPhotoUrl: mainPhotoUrl,
             mainPhotoBody: mainPhotoBody,
             description: description,
             author: author,
             summary: summary,
-            date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd DD MMM YYYY HH:mm:ss ZZ'),
-            TaiwanMobileDate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
-            UTCdate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
+            date: utils.dateFormat(news.startedAt, 'ddd DD MMM YYYY HH:mm:ss ZZ'),
+            TaiwanMobileDate: utils.dateFormat(news.startedAt, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
+            UTCdate: utils.dateFormat(news.startedAt, 'ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory
         });
     });

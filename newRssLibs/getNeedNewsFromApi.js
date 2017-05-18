@@ -10,11 +10,10 @@ const cheerio = require('cheerio');
 const _ = require('lodash');
 const is = require('is_js');
 const querystring = require('querystring');
-const newsToOldFormat = require('./newsToOldFormat')
-// const imagesIsDeliveryFilter = require('./imagesIsDeliveryFilter')
 const redis = require('../redis');
 
 module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookInstantArticle) => {
+
     debug('categories',categories)
 
     if (!startEpoch) {
@@ -32,8 +31,8 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
     }
 
     let limit = 60;
-    let queryCategories = querystring.stringify({"categories": categories.join(',')});
-    let url = `/rss?start=${startEpoch}&end=${endEpoch}&limit=${limit}&${queryCategories}`;
+    let formatCategories = querystring.stringify({"categories": categories});
+    let url = `/rss?start=${startEpoch}&end=${endEpoch}&limit=${limit}&${formatCategories}`;
 
     let { data: allNews } = await axios.get(url);
 
@@ -57,13 +56,11 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
             });
 
             news.content = $.html();
-
             debug('new.content',news.content)
             return news;
         });
     }
-
-    allNews = await newsToOldFormat(allNews,isFacebookInstantArticle);
+    debug('allNews = %j ', allNews);
 
     //update redis data
     let updateRedisAllNews = await redis.setValue(channelId, allNews, 360);

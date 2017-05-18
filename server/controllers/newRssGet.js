@@ -6,6 +6,7 @@ let router = express.Router();
 
 const moment = require('moment-timezone');
 const newRssLibs = require('../../newRssLibs');
+const utils = require('../../utils');
 
 let models = require('../../models');
 let redis = require('../../redis');
@@ -25,6 +26,7 @@ router.route('/new/rss/:channelId')
             let TaiwanMobileDate = moment().tz('Asia/Taipei').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
             let UTCTime = moment().tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z');
 
+            // 這裡是確認 rssData 有沒有這筆資料
             let rssData = await models.rss.findOne()
                 .where('channelId').equals(channelId)
                 .execAsync();
@@ -35,20 +37,21 @@ router.route('/new/rss/:channelId')
             }
 
             // 如果過期
-            let isExpired = newRssLibs.checkDateRange(rssData.startDate, rssData.endDate);
+            let isExpired = utils.checkDateRange(rssData.startDate, rssData.endDate);
             if (isExpired) {
                 console.error(`/rss/${req.params.channelId} 此頁面已過期`)
                 res.status(404);
                 return res.render('404');
             }
 
-            let categoryOption = rssData.catogry.split(',');
             let simplifiedChinese = rssData.simplifiedChinese;
 
-            debug('categoryOption = %s', categoryOption);
             debug('simplifiedChinese = %s', simplifiedChinese);
+            // ---------------
 
-            let news = await newRssLibs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId);
+            let news = await newRssLibs.getNeedNewsFromApi(startTime, endTime, rssData.catogry, channelId);
+
+            // return res.json(news);
 
             let rssXml = await newRssLibs.buildRssFromNews(news, simplifiedChinese, rssData.template);
 
