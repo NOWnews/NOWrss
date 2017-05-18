@@ -5,7 +5,7 @@ let express = require('express');
 let router = express.Router();
 
 const moment = require('moment-timezone');
-const libs = require('../../newRssLibs');
+const newRssLibs = require('../../newRssLibs');
 
 let models = require('../../models');
 let redis = require('../../redis');
@@ -35,7 +35,7 @@ router.route('/new/rss/:channelId')
             }
 
             // 如果過期
-            let isExpired = libs.checkDateRange(rssData.startDate, rssData.endDate);
+            let isExpired = newRssLibs.checkDateRange(rssData.startDate, rssData.endDate);
             if (isExpired) {
                 console.error(`/rss/${req.params.channelId} 此頁面已過期`)
                 res.status(404);
@@ -48,9 +48,9 @@ router.route('/new/rss/:channelId')
             debug('categoryOption = %s', categoryOption);
             debug('simplifiedChinese = %s', simplifiedChinese);
 
-            let news = await libs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId);
+            let news = await newRssLibs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId);
 
-            let rssXml = await libs.buildRssFromNews(news, simplifiedChinese, rssData.template);
+            let rssXml = await newRssLibs.buildRssFromNews(news, simplifiedChinese, rssData.template);
 
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml');

@@ -6,15 +6,17 @@ const debug = require('debug')('NOWrss:newRssLibs:getNeedNewsFromAPI');
 const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');
+const cheerio = require('cheerio');
 const _ = require('lodash');
 const is = require('is_js');
 const querystring = require('querystring');
 const newsToOldFormat = require('./newsToOldFormat')
-const imagesIsDeliveryFilter = require('./imagesIsDeliveryFilter')
+// const imagesIsDeliveryFilter = require('./imagesIsDeliveryFilter')
 const redis = require('../redis');
 
-module.exports = async(startEpoch, endEpoch, categories, channelId,isFacebookInstantArticle) => {
+module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookInstantArticle) => {
     debug('categories',categories)
+
     if (!startEpoch) {
         return Promise.reject(new Error('要帶入 start 的 epoch 時間'));
     }
@@ -26,9 +28,9 @@ module.exports = async(startEpoch, endEpoch, categories, channelId,isFacebookIns
     // get data from redis
     let allNewsRedis = await redis.getValue(channelId);
     if (is.array(allNewsRedis) && allNewsRedis.length !== 0) {
-            return allNewsRedis;
+        return allNewsRedis;
     }
-   
+
     let limit = 60;
     let queryCategories = querystring.stringify({"categories": categories.join(',')});
     let url = `/rss?start=${startEpoch}&end=${endEpoch}&limit=${limit}&${queryCategories}`;
@@ -36,11 +38,31 @@ module.exports = async(startEpoch, endEpoch, categories, channelId,isFacebookIns
     let { data: allNews } = await axios.get(url);
 
     debug('共撈了 %s  則新聞', allNews.length);
-    
+
     if(!isFacebookInstantArticle){
-        allNews = await imagesIsDeliveryFilter(allNews);
+        allNews = _.map(allNews,(news) => {
+
+            //主圖
+            if(news.MainPhoto && news.MainPhoto.isDeliver===false){
+                delete news.MainPhoto;
+            }
+
+            //內容圖
+            let $ = cheerio.load( news.content , { decodeEntities: false });
+
+            $('img').filter(function(i, el) {
+                if($(el).data('isdeliver')===false){
+                    $(el).closest('p').remove();
+                }
+            });
+
+            news.content = $.html();
+
+            debug('new.content',news.content)
+            return news;
+        });
     }
-    
+
     allNews = await newsToOldFormat(allNews,isFacebookInstantArticle);
 
     //update redis data
