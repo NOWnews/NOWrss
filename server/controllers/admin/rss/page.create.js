@@ -52,6 +52,9 @@ module.exports = (req, res, next) => {
                     value: 'DEFAULT',
                     attr: 'selected'
                 },{
+                    title: 'Line 版型',
+                    value: 'LINE'
+                },{
                     title: 'Yahoo 版型',
                     value: 'YAHOO'
                 },{

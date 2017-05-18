@@ -19,6 +19,9 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
     let ISOTime = moment().tz('Asia/Taipei').format();
 
     switch(template) {
+        case 'LINE':
+            templateFile = 'line';
+            break;
         case 'YAHOO':
             templateFile = 'yahoo';
             break;
@@ -43,6 +46,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
         let mainPhotoBody = news.image.body || '';
+        let mainPhotoDesc = news.image.description || news.title;
         let mainPhotoUrl = news.image.originalUrl || '';
 
         // 最後傳進去的變數
@@ -74,6 +78,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             author: author,
             summary: summary,
             date: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd DD MMM YYYY HH:mm:ss ZZ'),
+            dateTime: news.field_release_date.value * 1000,
             TaiwanMobileDate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
             UTCdate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory
