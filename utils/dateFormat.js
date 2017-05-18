@@ -1,7 +1,8 @@
-const debug = require('debug')('NOWrss:libs:dateFormat');
+const debug = require('debug')('NOWrss:utils:dateFormat');
 const moment = require('moment-timezone');
 
-module.exports = (dateTime) => {
+module.exports = (dateTime, formatString) => {
 
-    return moment(dateTime).tz('Asia/Taipei').format('YYYY/MM/DD');
+	formatString = formatString ? formatString : 'YYYY/MM/DD';
+    return moment(dateTime).tz('Asia/Taipei').format(formatString);
 };
