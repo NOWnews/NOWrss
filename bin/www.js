@@ -1,3 +1,5 @@
+require('babel-core/register');
+require('babel-polyfill');
 require('../global.js');
 
 let fs = require('fs');
