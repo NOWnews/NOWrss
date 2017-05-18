@@ -3,7 +3,7 @@ const co = require('co');
 
 const debug = require('debug')('NOWrss:admin:middlewares:defaultUser');
 const models = require('../../models');
-const libs = require('../../libs');
+const utils = require('../../utils');
 
 const defaultName = 'DEVELOP';
 const defaultEmail = 'admin@nownews.com';
@@ -18,7 +18,7 @@ module.exports = function() {
 
         adminUser = yield models.user.findOne()
             .where('email').equals(defaultEmail)
-            .where('password').equals(libs.hashPwd(defaultPassword))
+            .where('password').equals(utils.hashPwd(defaultPassword))
             .where('name').equals(defaultName)
             .where('trashed').equals(false)
             .execAsync();
@@ -27,7 +27,7 @@ module.exports = function() {
             adminUser = yield models.user.createAsync({
                 _id: '500000000000000000000001',
                 email: defaultEmail,
-                password: libs.hashPwd(defaultPassword),
+                password: utils.hashPwd(defaultPassword),
                 name: defaultName,
                 createdBy: '500000000000000000000001'
             });

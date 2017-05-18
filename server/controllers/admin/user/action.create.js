@@ -1,7 +1,7 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:user:action.create');
 const models = require('../../../../models');
-const libs = require('../../../../libs');
+const utils = require('../../../../utils');
 
 const co = require('co');
 
@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
         let newUser = yield models.user.createAsync({
             name: data.name,
             email: data.email,
-            password: libs.hashPwd(data.password),
+            password: utils.hashPwd(data.password),
             createdBy: data.createdBy || '500000000000000000000001'
         });
 

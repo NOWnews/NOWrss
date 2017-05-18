@@ -4,7 +4,7 @@ const co = require('co');
 const debug = require('debug')('NOWrss:controllers:admin:action.login');
 
 const models = require('../../../../models');
-const libs = require('../../../../libs');
+const utils = require('../../../../utils');
 
 module.exports = function(req, res, next) {
 
@@ -15,7 +15,7 @@ module.exports = function(req, res, next) {
 
         let loginUser = yield models.user.findOne()
             .where('email').equals(data.email)
-            .where('password').equals(libs.hashPwd(data.password))
+            .where('password').equals(utils.hashPwd(data.password))
             .execAsync();
 
         if(!loginUser){
