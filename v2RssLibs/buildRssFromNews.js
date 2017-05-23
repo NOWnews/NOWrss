@@ -81,6 +81,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             url: 'http://www.nownews.com' + news.parseUrl,
             mainPhotoUrl: mainPhotoUrl,
             mainPhotoBody: mainPhotoBody,
+            mainPhotoDesc: mainPhotoDesc,
             description: description,
             author: author,
             summary: summary,
