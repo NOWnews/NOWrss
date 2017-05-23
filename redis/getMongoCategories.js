@@ -2,7 +2,7 @@
 const co = require('co');
 const is = require('is_js');
 
-const debug = require('debug')('NOWrss:redis:getMainCategoriesRedis');
+const debug = require('debug')('NOWrss:redis:getMongoCategories');
 const client = require('./client');
 const getRedisValue = require('./getValue');
 const setRedisValue = require('./setValue');

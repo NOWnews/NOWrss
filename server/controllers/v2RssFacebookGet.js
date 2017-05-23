@@ -6,14 +6,12 @@ let router = express.Router();
 
 const moment = require('moment-timezone');
 const v2RssLibs = require('../../v2RssLibs');
+const redis = require('../../redis');
 
-let models = require('../../models');
 
-let co = require('co');
-let mongoose = require('mongoose');
 const isFacebookInstantArticle = true;
 
-router.route('/v2/rssFacebookGet')
+router.route('/rssFacebookGet')
     .get( async(req, res, next) => {
 
         try {
@@ -22,7 +20,12 @@ router.route('/v2/rssFacebookGet')
             let endTime = moment().tz('Asia/Taipei');
             let ISOTime = moment().tz('Asia/Taipei').format();
 
-            let categoryOption = ['政治', '財經', '生活', '地方', '社會', '運動', '娛樂', '國際', '大陸', '新奇', '消費', '旅遊', '科技', '健康', '影音'];
+            let categoryOption = await redis.getApiCategories();
+
+            categoryOption = _.map(categoryOption, (c) => { return c.name; });
+            categoryOption = categoryOption.toString();
+
+            // let categoryOption = ['政治', '財經', '生活', '地方', '社會', '運動', '娛樂', '國際', '大陸', '新奇', '消費', '旅遊', '科技', '健康', '影音'];
 
             let news = await v2RssLibs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId, isFacebookInstantArticle);
             let rssXml = await v2RssLibs.rssFacebookInstantArticleTp(news);

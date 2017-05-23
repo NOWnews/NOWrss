@@ -1,31 +1,27 @@
+const debug = require('debug')('NOWrss:v2RssLibs:buildRssFromNews');
 
 const co = require('co');
 const Promise = require('bluebird');
 const _ = require('lodash');
-const moment = require('moment-timezone');
-const debug = require('debug')('NOWrss:v2RssLibs:buildRssFromNews');
+const utils = require('./../utils');
 
 module.exports = co.wrap(function*(newsArray) {
 
     let items = [];
+    console.log(newsArray, 'L11')
     _.forEach(newsArray, function(news) {
-        if(!news.image.url){
-            return true;
-        }
-
-        let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYYMMDD');
 
         items.push({
             title: news.title,
-            link: `http://www.nownews.com/news/${dateFormat}/${news._id}`,
+            link: 'http://www.nownews.com' + news.parseUrl,
             guid: news._id,
-            date: moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD HH:mm:ss'),
-            isoDate: moment(news.field_release_date.value * 1000 ).tz('Asia/Taipei').format(),
-            author: news.field_newsby.value,
-            description: news.body.summary,
-            imgUrl: news.image.url,
-            imgTitle: news.image.title,
-            body: news.body.value
+            date: utils.dateFormat(news.startedAt, 'YYYY/MM/DD HH:mm:ss'),
+            isoDate: utils.dateFormat(news.startedAt),
+            author: news.newsBy,
+            description: news.summary,
+            imgUrl: news.MainPhoto.url || '',
+            imgTitle: news.MainPhoto.desc || news.title,
+            body: news.content
         });
     });
 
