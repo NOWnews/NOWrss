@@ -24,6 +24,7 @@ module.exports = (req, res, next) => {
 
             //確認是否過期
             rss.isExpired = utils.checkDateRange(rss.startDate, rss.endDate);
+            rss.createdAt = utils.dateFormat(rss.createdAt, 'YYYY/MM/DD HH:mm');
         });
         return res.render('admin/rss/list', {
             rssList

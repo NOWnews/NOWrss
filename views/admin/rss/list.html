@@ -29,6 +29,7 @@
                                     <thead>
                                         <th>編號</th>
                                         <th>狀態</th>
+                                        <th>建立時間</th>
                                         <th>名稱</th>
                                         <th>語系</th>
                                         <th>頻道ID</th>
@@ -42,6 +43,7 @@
                                             <tr>
                                                 <td>{{ rss.sn }}</td>
                                                 <td class="{{ 'danger' if rss.isExpired else 'success' }}">{{ rss.dateRange }}</td>
+                                                <td>{{ rss.createdAt }}</td>
                                                 <td>{{ rss.name }}</td>
                                                 <td>
                                                     {% if rss.simplifiedChinese %}
@@ -58,10 +60,10 @@
                                                 </td>
                                                 <td>
                                                     <a href="/admin/rss/update/{{ rss.sn }}" class="btn btn-flat btn-primary">
-                                                        <i class="fa fa-edit"></i> Edit
+                                                        <i class="fa fa-edit"></i> 編輯
                                                     </a>
                                                     <a href="/admin/rss/v2/update/{{ rss.sn }}" class="btn btn-flat btn-info">
-                                                        <i class="fa fa-edit"></i> V1 Edit
+                                                        <i class="fa fa-edit"></i> V2編輯
                                                     </a>
                                                 </td>
                                                 <td>
@@ -78,7 +80,7 @@
                                         <i class="fa fa-plus"></i> 新增
                                     </a>
                                     <a href='/admin/rss/v2/create' class="btn btn-info btn-sn">
-                                        <i class="fa fa-plus"></i> 新增 V2
+                                        <i class="fa fa-plus"></i> V2新增
                                     </a>
                                 </div>
                             </div>
