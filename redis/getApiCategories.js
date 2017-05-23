@@ -12,14 +12,14 @@ const setRedisValue = require('./setValue');
  */
 module.exports = async()=> {
 
-    // let mainCategoriesRedis = await getRedisValue('mainCategoriesRedis');
+    let mainCategoriesRedis = await getRedisValue('v2MainCategoriesRedis');
 
     // debug('mainCategoriesRedis = %j', mainCategoriesRedis);
 
-    // if(is.array(mainCategoriesRedis) && mainCategoriesRedis.length !== 0) {
+    if(is.array(mainCategoriesRedis) && mainCategoriesRedis.length !== 0) {
         // debug('redis mainCategories data = %j', mainCategoriesRedis);
-        // return await Promise.resolve(mainCategoriesRedis);
-    // }
+        return await Promise.resolve(mainCategoriesRedis);
+    }
 
     // 如果 Redis 裡面沒有資料就去 API 撈
     let { data : menus }  = await axios.get('/menus');
