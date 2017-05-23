@@ -25,14 +25,6 @@ const actionRssRemove = require('./rss/action.remove');
 const isLogin = require('../../middlewares/isLogin');
 const saveUrlType = require('../../middlewares/saveUrlType');
 
-// new RSS 
-const pageNewRssList = require('./rss/new.page.list');
-const pageNewRssCreate = require('./rss/new.page.create');
-const actionNewRssCreate = require('./rss/new.action.create');
-const pageNewRssUpdate = require('./rss/new.page.update');
-const actionNewRssUpdate = require('./rss/new.action.update');
-const actionNewRssRemove = require('./rss/new.action.remove');
-
 /*
  * ############## User 設定 ##############
  */
@@ -69,6 +61,14 @@ router.route('/admin/rss/create')
     .get(isLogin, saveUrlType, pageRssCreate)
     .post(isLogin, actionRssCreate);
 
+router.route('/admin/rss/v2/create')
+    //TODO 加上 V2 的設定
+    .get(isLogin, saveUrlType, pageRssCreate);
+
+router.route('/admin/rss/v2/update/:sn')
+    //TODO 加上 V2 的設定
+    .get(isLogin, saveUrlType, pageRssUpdate);
+
 router.route('/admin/rss/update/:sn')
     .get(isLogin, saveUrlType, pageRssUpdate)
     .put(isLogin, actionRssUpdate);
@@ -78,24 +78,6 @@ router.route('/admin/rss/delete/:sn')
 
 router.route('/admin')
     .get(isLogin, pageRssList);
-
-/*
- * ############## new Rss 設定 ##############
- */
-
-router.route('/admin/new/rss')
-    .get(isLogin, saveUrlType, pageNewRssList);
-
-router.route('/admin/new/rss/create')
-    .get(isLogin, saveUrlType, pageNewRssCreate)
-    .post(isLogin, actionNewRssCreate);
-
-router.route('/admin/new/rss/update/:sn')
-    .get(isLogin, saveUrlType, pageNewRssUpdate)
-    .put(isLogin, actionNewRssUpdate);
-
-router.route('/admin/new/rss/delete/:sn')
-    .delete(isLogin, actionNewRssRemove);
 
 // TODO 暫時用
 router.route('/')

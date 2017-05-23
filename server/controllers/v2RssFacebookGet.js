@@ -1,11 +1,11 @@
-const debug = require('debug')('NOWrss:controllers:newRssFacebookGet');
+const debug = require('debug')('NOWrss:controllers:v2RssFacebookGet');
 
 
 let express = require('express');
 let router = express.Router();
 
 const moment = require('moment-timezone');
-const libs = require('../../newRssLibs');
+const v2RssLibs = require('../../v2RssLibs');
 
 let models = require('../../models');
 
@@ -13,7 +13,7 @@ let co = require('co');
 let mongoose = require('mongoose');
 const isFacebookInstantArticle = true;
 
-router.route('/new/rssFacebookGet')
+router.route('/v2/rssFacebookGet')
     .get( async(req, res, next) => {
 
         try {
@@ -24,8 +24,8 @@ router.route('/new/rssFacebookGet')
 
             let categoryOption = ['政治', '財經', '生活', '地方', '社會', '運動', '娛樂', '國際', '大陸', '新奇', '消費', '旅遊', '科技', '健康', '影音'];
 
-            let news = await libs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId, isFacebookInstantArticle);
-            let rssXml = await libs.rssFacebookInstantArticleTp(news);
+            let news = await v2RssLibs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId, isFacebookInstantArticle);
+            let rssXml = await v2RssLibs.rssFacebookInstantArticleTp(news);
 
 
             res.charset = 'utf-8';

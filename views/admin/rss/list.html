@@ -53,12 +53,16 @@
                                                 <td>{{ rss.channelId }}</td>
                                                 <td>{{ rss.template }}</td>
                                                 <td>
-                                                    <a target="_blank" href="/rss/{{ rss.channelId }}">RSS端點</a>
+                                                    <a target="_blank" href="/rss/{{ rss.channelId }}">RSS端點</a>，
+                                                    <a target="_blank" href="/v2/rss/{{ rss.channelId }}">V2</a>
                                                 </td>
                                                 <td>
-                                                    <a href="/admin/rss/update/{{ rss.sn }}" class="btn btn-flat btn-info">
+                                                    <a href="/admin/rss/update/{{ rss.sn }}" class="btn btn-flat btn-primary">
                                                         <i class="fa fa-edit"></i> Edit
-                                                      </a>
+                                                    </a>
+                                                    <a href="/admin/rss/v2/update/{{ rss.sn }}" class="btn btn-flat btn-info">
+                                                        <i class="fa fa-edit"></i> V1 Edit
+                                                    </a>
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-flat btn-danger remove-btn" item-sn="{{ rss.sn }}" page-route="/admin/rss/delete/{{ rss.sn }}">
@@ -70,8 +74,11 @@
                                     </tbody>
                                 </table>
                                 <div class="text-right">
-                                    <a href='/admin/rss/create' class="btn btn-primary btn-lg">
-                                        <i class="fa fa-plus"></i> 新增一筆
+                                    <a href='/admin/rss/create' class="btn btn-primary btn-sn">
+                                        <i class="fa fa-plus"></i> 新增
+                                    </a>
+                                    <a href='/admin/rss/v2/create' class="btn btn-info btn-sn">
+                                        <i class="fa fa-plus"></i> 新增 V2
                                     </a>
                                 </div>
                             </div>

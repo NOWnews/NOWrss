@@ -1,6 +1,5 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.create');
-const models = require('../../../../models');
 const libs = require('../../../../libs');
 const redis = require('../../../../redis');
 
@@ -8,8 +7,11 @@ const co = require('co');
 
 module.exports = (req, res, next) => {
     co(function*() {
-        // 取得資料庫的分類
-        let mainCategories = yield redis.getMainCategoriesRedis();
+        // 取得資料庫或 API 的分類
+        let v2Router = '/admin/rss/v2';
+        let thisRouter = req.route.path;
+        let isV2Router = thisRouter.indexOf(v2Router) > -1;
+        let mainCategories = isV2Router ? yield redis.getApiCategories() : yield redis.getMongoCategories();
 
         let formData = {
             title: '建立廠商 RSS',

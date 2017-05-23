@@ -1,5 +1,5 @@
 
-const debug = require('debug')('NOWrss:newRssLibs:buildRssFromNews');
+const debug = require('debug')('NOWrss:v2RssLibs:buildRssFromNews');
 const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');
@@ -50,7 +50,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         let mainPhotoUrl = '';
 
         // 圖片
-        if (news.MainPhoto.isDeliver) {
+        if (news.MainPhoto && news.MainPhoto.isDeliver) {
             mainPhotoDesc = news.MainPhoto.desc || '';
             mainPhotoUrl = news.MainPhoto.url || '';
             mainPhotoBody = `<div class="main-photo"><img src="${mainPhotoUrl}" alt="${mainPhotoDesc}" width="320px;"><cite>${mainPhotoDesc}</cite></div>`;
@@ -85,6 +85,7 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             author: author,
             summary: summary,
             date: utils.dateFormat(news.startedAt, 'ddd DD MMM YYYY HH:mm:ss ZZ'),
+            dateTime: news.startedAt,
             TaiwanMobileDate: utils.dateFormat(news.startedAt, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
             UTCdate: utils.dateFormat(news.startedAt, 'ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory

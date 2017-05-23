@@ -7,6 +7,8 @@ module.exports = function(req, res, next) {
 
     let type = req.route.path.split('/')[2];
 
+    debug('res.locals.route = %j', {type: type});
+
     res.locals.route = {type: type};
 
     return next();

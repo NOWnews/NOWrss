@@ -6,6 +6,7 @@ let router = express.Router();
 
 const moment = require('moment-timezone');
 const libs = require('../../libs');
+const utils = require('../../utils');
 const uuid = require('node-uuid');
 
 let models = require('../../models');
@@ -39,7 +40,7 @@ router.route('/rss/:channelId')
             }
 
             // 如果過期
-            let isExpired = libs.checkDateRange(rssData.startDate, rssData.endDate);
+            let isExpired = utils.checkDateRange(rssData.startDate, rssData.endDate);
             if(isExpired){
                 console.error(`/rss/${req.params.channelId} 此頁面已過期`)
                 res.status(404);

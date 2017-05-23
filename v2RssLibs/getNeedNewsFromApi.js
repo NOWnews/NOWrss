@@ -2,7 +2,7 @@
  * 帶入時間區間及塞選條件(陣列)，去跟 NOWnews-api 要新聞資料
  */
 
-const debug = require('debug')('NOWrss:newRssLibs:getNeedNewsFromAPI');
+const debug = require('debug')('NOWrss:v2RssLibs:getNeedNewsFromAPI');
 const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');
@@ -14,7 +14,7 @@ const redis = require('../redis');
 
 module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookInstantArticle) => {
 
-    debug('categories',categories)
+    debug('categories = %j',categories)
 
     if (!startEpoch) {
         return Promise.reject(new Error('要帶入 start 的 epoch 時間'));
@@ -24,8 +24,9 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
         return Promise.reject(new Error('要帶入 end 的 epoch 時間'));
     }
 
-    // get data from redis
-    let allNewsRedis = await redis.getValue(channelId);
+    //取得 Redis News Data
+    //TODO v2 的部分加上前綴字
+    let allNewsRedis = await redis.getValue(`v2${channelId}`);
     if (is.array(allNewsRedis) && allNewsRedis.length !== 0) {
         return allNewsRedis;
     }
@@ -36,7 +37,7 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
 
     let { data: allNews } = await axios.get(url);
 
-    debug('共撈了 %s  則新聞', allNews.length);
+    debug('共撈了 %s 則新聞', allNews.length);
 
     if(!isFacebookInstantArticle){
         allNews = _.map(allNews,(news) => {
@@ -62,8 +63,9 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
     }
     debug('allNews = %j ', allNews);
 
-    //update redis data
-    let updateRedisAllNews = await redis.setValue(channelId, allNews, 360);
+    //更新 Redis News Data
+    //TODO v2 的部分加上前綴字
+    let updateRedisAllNews = await redis.setValue(`v2${channelId}`, allNews, 360);
 
     return updateRedisAllNews;
 };

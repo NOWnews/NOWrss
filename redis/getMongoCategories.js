@@ -13,14 +13,14 @@ const getAllMainCategory = require('./../libs/getAllMainCategory');
  */
 module.exports = co.wrap(function*() {
 
-    let mainCategoriesRedis = yield getRedisValue('mainCategoriesRedis');
+    // let mainCategoriesRedis = yield getRedisValue('mainCategoriesRedis');
 
     // debug('mainCategoriesRedis = %j', mainCategoriesRedis);
 
-    if(is.array(mainCategoriesRedis) && mainCategoriesRedis.length !== 0) {
+    // if(is.array(mainCategoriesRedis) && mainCategoriesRedis.length !== 0) {
         // debug('redis mainCategories data = %j', mainCategoriesRedis);
-        return yield Promise.resolve(mainCategoriesRedis);
-    }
+        // return yield Promise.resolve(mainCategoriesRedis);
+    // }
 
     let mainCategories = yield getAllMainCategory();
 
