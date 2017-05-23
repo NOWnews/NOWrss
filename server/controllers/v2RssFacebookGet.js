@@ -16,8 +16,8 @@ router.route('/rssFacebookGet')
 
         try {
             let channelId = 'rssFacebookGet';
-            let startTime = moment().tz('Asia/Taipei').add(-1, 'day');
-            let endTime = moment().tz('Asia/Taipei');
+            let startTime = moment().tz('Asia/Taipei').add(-1, 'day').format('YYYY-MM-DD');
+            let endTime = moment().tz('Asia/Taipei').format('YYYY-MM-DD');
             let ISOTime = moment().tz('Asia/Taipei').format();
 
             let categoryOption = await redis.getApiCategories();
