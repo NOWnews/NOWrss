@@ -21,7 +21,7 @@
             <contents>
                 {% if item.mainPhotoUrl %}
                     <image>
-                        <title>{{ item.mainPhotoDesc }}</title> //Optional
+                        <title>{{ item.mainPhotoDesc }}</title>
                         <url>{{ item.mainPhotoUrl }}</url>
                     </image>
                 {% endif %}
