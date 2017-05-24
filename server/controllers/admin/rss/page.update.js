@@ -1,7 +1,7 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.update');
 const models = require('../../../../models');
-const libs = require('../../../../libs');
+const utils = require('../../../../utils');
 const redis = require('../../../../redis');
 
 const co = require('co');
@@ -11,7 +11,10 @@ module.exports = (req, res, next) => {
 
     co(function*() {
         // 取得資料庫的分類
-        let mainCategories = yield redis.getMainCategoriesRedis();
+        let v2Router = '/admin/rss/v2';
+        let thisRouter = req.route.path;
+        let isV2Router = thisRouter.indexOf(v2Router) > -1;
+        let mainCategories = isV2Router ? yield redis.getApiCategories() : yield redis.getMongoCategories();
 
         let rssData = yield models.rss.findOne()
             .where('sn').equals(sn)
@@ -19,9 +22,11 @@ module.exports = (req, res, next) => {
             .lean()
             .execAsync();
 
+
         if (rssData.catogry === 'all'){
             let mainCategoriesString = _.map(mainCategories, (o) => o.value = true);
         } else {
+            console.log(456)
             let mainCategoriesString = _.map(mainCategories, (o) => {
                 if(rssData.catogry.indexOf(o.name) > -1) {
                     o.value = true;
@@ -30,8 +35,8 @@ module.exports = (req, res, next) => {
             });
         }
 
-        let startDate = libs.dateFormat(rssData.startDate);
-        let endDate = libs.dateFormat(rssData.endDate);
+        let startDate = utils.dateFormat(rssData.startDate);
+        let endDate = utils.dateFormat(rssData.endDate);
 
         // 更新時將 channelId 改成大寫
         rssData.channelId = rssData.channelId.toUpperCase();

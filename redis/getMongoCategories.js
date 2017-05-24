@@ -2,7 +2,7 @@
 const co = require('co');
 const is = require('is_js');
 
-const debug = require('debug')('NOWrss:redis:getMainCategoriesRedis');
+const debug = require('debug')('NOWrss:redis:getMongoCategories');
 const client = require('./client');
 const getRedisValue = require('./getValue');
 const setRedisValue = require('./setValue');
@@ -15,7 +15,7 @@ module.exports = co.wrap(function*() {
 
     let mainCategoriesRedis = yield getRedisValue('mainCategoriesRedis');
 
-    // debug('mainCategoriesRedis = %j', mainCategoriesRedis);
+    debug('mainCategoriesRedis = %j', mainCategoriesRedis);
 
     if(is.array(mainCategoriesRedis) && mainCategoriesRedis.length !== 0) {
         // debug('redis mainCategories data = %j', mainCategoriesRedis);

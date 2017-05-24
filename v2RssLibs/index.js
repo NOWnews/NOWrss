@@ -1,12 +1,10 @@
 
-const getNeedNewsFromMongo = require('./getNeedNewsFromMongo');
+const getNeedNewsFromApi = require('./getNeedNewsFromApi');
 const buildRssFromNews = require('./buildRssFromNews');
-const getAllMainCategory = require('./getAllMainCategory');
 const rssFacebookInstantArticleTp = require('./rssFacebookInstantArticleTp');
 
 module.exports = {
-    getNeedNewsFromMongo: getNeedNewsFromMongo,
+    getNeedNewsFromApi: getNeedNewsFromApi,
     buildRssFromNews: buildRssFromNews,
-    getAllMainCategory: getAllMainCategory,
     rssFacebookInstantArticleTp: rssFacebookInstantArticleTp
 };

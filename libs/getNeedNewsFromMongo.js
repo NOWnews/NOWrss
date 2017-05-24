@@ -29,7 +29,7 @@ module.exports = co.wrap(function*(start, end, searchCondition, channelId, isFac
 
     debug('step 0 = %s', '撈取所有 main category');
     // 去 db 撈取所有 main category(主要分類) 的資料
-    let mainCategories = yield redis.getMainCategoriesRedis();
+    let mainCategories = yield redis.getMongoCategories();
 
     // 塞選後的 main category(主要分類) 的 tid
     let mainTids = [];
