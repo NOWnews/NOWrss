@@ -18,7 +18,7 @@ module.exports = co.wrap(function*(newsArray) {
         // 即時文章的圖片拿掉外層 P
         let $ = cheerio.load(news.body.value, {decodeEntities: false});
         $('img').filter(function(i, el) {
-            $(el).parent('p').replaceWith('<div>' + $( this ).html() + '</div>').find('cite').replaceWith('<figcaption>' + $( this ).text() + '</figcaption>');
+            $(el).parent('p').replaceWith('<figure>' + $( this ).html() + '</figure>').find('cite').replaceWith('<figcaption>' + $( this ).text() + '</figcaption>');
         });
         // -----
 
