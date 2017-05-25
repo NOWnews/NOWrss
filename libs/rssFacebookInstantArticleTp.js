@@ -17,7 +17,9 @@ module.exports = co.wrap(function*(newsArray) {
 
         // 即時文章的圖片拿掉外層 P
         let $ = cheerio.load(news.body.value, {decodeEntities: false});
-        $('img').filter(function(i, el) { $(el).parent('p').replaceWith("<div>" + $( this ).html() + "</div>"); });
+        $('img').filter(function(i, el) {
+            $(el).parent('p').replaceWith('<div>' + $( this ).html() + '</div>').find('cite').replaceWith('<figcaption>' + $( this ).text() + '</figcaption>');
+        });
         // -----
 
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
