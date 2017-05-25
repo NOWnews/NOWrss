@@ -5,6 +5,8 @@ const _ = require('lodash');
 const moment = require('moment-timezone');
 const debug = require('debug')('NOWrss:libs:buildRssFromNews');
 
+const cheerio = require('cheerio');
+
 module.exports = co.wrap(function*(newsArray) {
 
     let items = [];
@@ -12,6 +14,11 @@ module.exports = co.wrap(function*(newsArray) {
         if(!news.image.url){
             return true;
         }
+
+        // 即時文章的圖片拿掉外層 P
+        let $ = cheerio.load(news.body.value, {decodeEntities: false});
+        $('img').filter(function(i, el) { $(el).parent('p').replaceWith("<div>" + $( this ).html() + "</div>"); });
+        // -----
 
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
 
