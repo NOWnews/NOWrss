@@ -15,11 +15,23 @@ module.exports = co.wrap(function*(newsArray) {
             return true;
         }
 
-        // 即時文章的圖片拿掉外層 P
+        // 即時文章 針對 img 跟 iframe
         let $ = cheerio.load(news.body.value, {decodeEntities: false});
         $('img').filter(function(i, el) {
-            $(el).parent('p').replaceWith('<figure>' + $( this ).html() + '</figure>').find('cite').replaceWith('<figcaption>' + $( this ).text() + '</figcaption>');
+            let src = el.attribs.src;
+            let desc = $(el).parent('p').find('cite').text();
+            $(el)
+                .parent('p')
+                .replaceWith(`<figure><img src="${src}" /><figcaption>${desc}</figcaption></figure>`);
         });
+        $('iframe').filter(function(i, el) {
+            let iframe = $(el).parent('p').html();
+            $(el)
+                .parent('p')
+                .replaceWith(`<figure class="op-interactive">${iframe}</figure>`);
+        });
+
+        news.body.value = $.html();
         // -----
 
         let dateFormat = moment(news.field_release_date.value * 1000).tz('Asia/Taipei').format('YYYY/MM/DD');
