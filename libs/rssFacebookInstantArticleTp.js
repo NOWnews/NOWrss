@@ -19,7 +19,7 @@ module.exports = co.wrap(function*(newsArray) {
         let $ = cheerio.load(news.body.value, {decodeEntities: false});
         $('img').filter(function(i, el) {
             let src = el.attribs.src;
-            let desc = $(el).parent('p').find('cite').text();
+            let desc = $(el).parent('p').find('cite').text() || $(el).parent('p').text() || news.title;
             $(el)
                 .parent('p')
                 .replaceWith(`<figure><img src="${src}" /><figcaption>${desc}</figcaption></figure>`);
