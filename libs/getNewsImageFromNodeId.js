@@ -12,7 +12,7 @@ const fs = require('fs');
 
 // const downloadImage = require('./downloadImage');
 
-module.exports = co.wrap(function*(news) {
+module.exports = co.wrap(function*(news, isFacebookInstantArticle) {
 
     if(!news) {
         return Promise.reject(new Error('Need News Data'));
@@ -40,16 +40,24 @@ module.exports = co.wrap(function*(news) {
         return Promise.resolve(news);
     }
 
-    let imageNode = yield mongodb14.collection('fields_current.node').findOne({
-            _bundle: 'media',
-            _type: 'node',
-            _id: imageNodeId,
-            'field_release_status.value': 1,
-            'field_auth.value': '1',
-            field_media_entity: {
-                $exists: true
-            }
-        });
+    var imageNodeOption = {
+        _bundle: 'media',
+        _type: 'node',
+        _id: imageNodeId,
+        'field_release_status.value': 1,
+        'field_auth.value': '1',
+        field_media_entity: {
+            $exists: true
+        }
+    };
+
+    if (isFacebookInstantArticle) {
+        delete imageNodeOption['field_release_status.value'];
+        delete imageNodeOption['field_auth.value'];
+        delete imageNodeOption['field_media_entity'];
+    }
+
+    let imageNode = yield mongodb14.collection('fields_current.node').findOne(imageNodeOption);
 
     if(!imageNode) {
         return Promise.resolve(news);
