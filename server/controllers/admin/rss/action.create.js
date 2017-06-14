@@ -4,7 +4,7 @@ const models = require('../../../../models');
 const libs = require('../../../../libs');
 
 const co = require('co');
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 
 module.exports = (req, res, next) => {
 

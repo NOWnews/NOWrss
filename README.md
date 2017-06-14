@@ -25,7 +25,7 @@
 
 ## 系統資訊
 
-Node.js v6.2.2
+Node.js v8.1.1
 
 ## Server 啟動方式
 

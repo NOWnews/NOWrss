@@ -5,7 +5,7 @@ let express = require('express');
 let router = express.Router();
 
 const moment = require('moment-timezone');
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 
 const v2RssLibs = require('../../v2RssLibs');
 const utils = require('../../utils');
