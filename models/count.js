@@ -18,9 +18,8 @@ const schema = new Schema({
     },
 
     news: [{
-        name: {
+        title: {
             type: String,
-            ref: 'User',
             required: true
         },
         id:{
@@ -28,8 +27,7 @@ const schema = new Schema({
             required: true
         },
         startedAt: {
-            type: Date,
-            default: Date.now
+            type: Date
         }
     }],
 

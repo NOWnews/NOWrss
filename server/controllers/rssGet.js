@@ -70,7 +70,26 @@ router.route('/rss/:channelId')
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml');
             res.render(rssXml.xml, xmlData);
-            // res.json(xmlData);
+
+            // 統計用資料
+            let newsList = [];
+            _.forEach(news, (n)=>{
+                return newsList.push({
+                    title: n.title,
+                    id: n._id,
+                    startedAt: n.field_release_date.value * 1000
+                });
+            });
+            let countObj = {
+                channelId: req.params.channelId,
+                ip: req.ip,
+                news: newsList,
+                userAgent: req.headers['user-agent'],
+                createdAt: req._startTime
+            };
+            yield models.count.createAsync(countObj);
+            return;
+
         }).catch(next);
 
     });
