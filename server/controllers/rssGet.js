@@ -77,7 +77,7 @@ router.route('/rss/:channelId')
                 return newsList.push({
                     title: n.title,
                     id: n._id,
-                    startedAt: n.field_release_date.value * 1000
+                    startedAt: utils.dateFormat(n.field_release_date.value * 1000, 'YYYY/MM/DD HH:mm')
                 });
             });
             let countObj = {

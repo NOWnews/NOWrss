@@ -27,7 +27,7 @@ const schema = new Schema({
             required: true
         },
         startedAt: {
-            type: Date
+            type: String
         }
     }],
 
@@ -35,7 +35,7 @@ const schema = new Schema({
         type: String
     },
 
-    createdAt: {
+    startDate: {
         type: Date,
         default: Date.now
     },

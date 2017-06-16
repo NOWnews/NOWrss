@@ -8,6 +8,8 @@ const pageLogin = require('./auth/page.login');
 const actionLogin = require('./auth/action.login');
 const actionLogout = require('./auth/action.logout');
 
+const pageCountList = require('./count/page.list');
+
 const pageUserList = require('./user/page.list');
 const pageUserCreate = require('./user/page.create');
 const actionUserCreate = require('./user/action.create');
@@ -78,6 +80,13 @@ router.route('/admin/rss/delete/:sn')
 
 router.route('/admin')
     .get(isLogin, pageRssList);
+
+/*
+ * ############## Rss 統計 ##############
+ */
+
+router.route('/admin/count')
+    .get(isLogin, saveUrlType, pageCountList);
 
 // TODO 暫時用
 router.route('/')
