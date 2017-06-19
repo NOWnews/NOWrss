@@ -34,6 +34,9 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
         case 'SOCIAL':
             templateFile = 'social';
             break;
+        case 'DEFAULTDESC':
+            templateFile = 'defaultdesc';
+            break;
         default:
             templateFile = 'default';
     }
