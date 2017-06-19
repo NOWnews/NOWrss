@@ -68,6 +68,9 @@ module.exports = (req, res, next) => {
                 },{
                     title: '社群用 版型',
                     value: 'SOCIAL'
+                },{
+                    title: '第三方工具 描述 版型',
+                    value: 'DEFAULTDESC'
                 }],
                 type: 'select'
             },

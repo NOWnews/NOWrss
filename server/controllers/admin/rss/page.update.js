@@ -107,6 +107,10 @@ module.exports = (req, res, next) => {
                     title: '社群用 版型',
                     value: 'SOCIAL',
                     selected: rssData.template === 'SOCIAL' ? 'selected' : ''
+                },{
+                    title: '第三方工具 描述 版型',
+                    value: 'DEFAULTDESC',
+                    selected: rssData.template === 'DEFAULTDESC' ? 'selected' : ''
                 }],
                 type: 'select'
             },
