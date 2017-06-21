@@ -1,6 +1,6 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:action.remove');
-const models = require('../../../../models');
+const models = require('../../../models');
 
 const co = require('co');
 

@@ -4,7 +4,7 @@ const Promise = require('bluebird');
 
 const debug = require('debug')('NOWvote:redis:setValue');
 const client = require('./client');
-const config = require('../config');
+const config = require('../../config');
 
 
 /*

@@ -1,7 +1,7 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:user:action.create');
-const models = require('../../../../models');
-const utils = require('../../../../utils');
+const models = require('../../../models');
+const utils = require('../../../utils');
 
 const co = require('co');
 

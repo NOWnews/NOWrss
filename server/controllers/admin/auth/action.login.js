@@ -3,8 +3,8 @@ const co = require('co');
 
 const debug = require('debug')('NOWrss:controllers:admin:action.login');
 
-const models = require('../../../../models');
-const utils = require('../../../../utils');
+const models = require('../../../models');
+const utils = require('../../../utils');
 
 module.exports = function(req, res, next) {
 

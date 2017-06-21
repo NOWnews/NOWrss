@@ -1,7 +1,7 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.create');
-const libs = require('../../../../libs');
-const redis = require('../../../../redis');
+const libs = require('../../../libs');
+const redis = require('../../../redis');
 
 const co = require('co');
 

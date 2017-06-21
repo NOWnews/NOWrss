@@ -1,8 +1,8 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.update');
-const models = require('../../../../models');
-const utils = require('../../../../utils');
-const redis = require('../../../../redis');
+const models = require('../../../models');
+const utils = require('../../../utils');
+const redis = require('../../../redis');
 
 const co = require('co');
 

@@ -1,7 +1,7 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:user:page.create');
-const models = require('../../../../models');
-const libs = require('../../../../libs');
+const models = require('../../../models');
+const libs = require('../../../libs');
 
 module.exports = (req, res, next) => {
     let formData = {

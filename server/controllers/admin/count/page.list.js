@@ -1,7 +1,7 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:count:page.list');
-const models = require('../../../../models');
-const utils = require('../../../../utils');
+const models = require('../../../models');
+const utils = require('../../../utils');
 
 const _ = require('lodash');
 const co = require('co');

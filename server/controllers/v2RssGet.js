@@ -7,9 +7,9 @@ let router = express.Router();
 const moment = require('moment-timezone');
 const uuid = require('uuid');
 
-const v2RssLibs = require('../../v2RssLibs');
-const utils = require('../../utils');
-const models = require('../../models');
+const libs = require('../libs');
+const utils = require('../utils');
+const models = require('../models');
 
 router.route('/rss/:channelId')
     .get(async(req, res, next) => {
@@ -45,8 +45,8 @@ router.route('/rss/:channelId')
             let simplifiedChinese = rssData.simplifiedChinese;
             debug('simplifiedChinese = %s', simplifiedChinese);
 
-            let news = await v2RssLibs.getNeedNewsFromApi(startTime, endTime, rssData.catogry, channelId);
-            let rssXml = await v2RssLibs.buildRssFromNews(news, simplifiedChinese, rssData.template);
+            let news = await libs.getNeedNewsFromApi(startTime, endTime, rssData.catogry, channelId);
+            let rssXml = await libs.buildRssFromNews(news, simplifiedChinese, rssData.template);
 
             let xmlData = {
                 items: rssXml.items,

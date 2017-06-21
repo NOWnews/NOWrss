@@ -2,8 +2,8 @@
 const co = require('co');
 
 const debug = require('debug')('NOWrss:admin:middlewares:defaultUser');
-const models = require('../../models');
-const utils = require('../../utils');
+const models = require('../models');
+const utils = require('../utils');
 
 const defaultName = 'DEVELOP';
 const defaultEmail = 'admin@nownews.com';
