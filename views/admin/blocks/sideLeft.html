@@ -34,16 +34,23 @@
             <li class="header">HEADER</li>
             {# user #}
             {% if route.type == 'user' %}
-                <li class="active"><a href="/admin/user"><i class="fa fa-users"></i> <span>會員管理</span></a></li>
+                <li class="active"><a href="/admin/user"><i class="fa fa-users"></i><span>會員管理</span></a></li>
             {% else %}
-                <li><a href="/admin/user"><i class="fa fa-users"></i> <span>會員管理</span></a></li>
+                <li><a href="/admin/user"><i class="fa fa-users"></i><span>會員管理</span></a></li>
             {% endif %}
 
             {# rss #}
             {% if route.type == 'rss' %}
-                <li class="active"><a href="/admin/rss"><i class="fa fa-rss"></i> <span>廠商 RSS</span></a></li>
+                <li class="active"><a href="/admin/rss"><i class="fa fa-rss"></i><span>廠商 RSS</span></a></li>
             {% else %}
-                <li><a href="/admin/rss"><i class="fa fa-rss"></i> <span>廠商 RSS</span></a></li>
+                <li><a href="/admin/rss"><i class="fa fa-rss"></i><span>廠商 RSS</span></a></li>
+            {% endif %}
+
+            {# count #}
+            {% if route.type == 'count' %}
+                <li class="active"><a href="/admin/count"><i class="fa fa-terminal"></i><span>RSS 統計</span></a></li>
+            {% else %}
+                <li><a href="/admin/count"><i class="fa fa-terminal"></i><span>RSS 統計</span></a></li>
             {% endif %}
         </ul>
         <!-- /.sidebar-menu -->
