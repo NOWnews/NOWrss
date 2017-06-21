@@ -2,22 +2,28 @@ require('../global.js');
 require('babel-core/register');
 require('babel-polyfill');
 
-let fs = require('fs');
-let app = require('../server');
-let http = require('http');
-let https = require('https');
-let port = process.env.PORT || '9453';
-let httpsPort = process.env.PORT || '9454';
+const chalk = require('chalk');
+const fs = require('fs');
+const app = require('../server.js');
+const http = require('http');
+const https = require('https');
+const port = process.env.PORT || '9453';
+const httpsPort = process.env.PORT || '9454';
 
-var httpsOptions = {
+let httpsOptions = {
     key: fs.readFileSync('./pems/server.key'),
     cert: fs.readFileSync('./pems/server.pem')
 };
 
-let server = http.createServer(app);
-let httpsServer = https.createServer(httpsOptions, app);
+const server = http.createServer(app);
+const httpsServer = https.createServer(httpsOptions, app);
 
 server.listen(port);
 httpsServer.listen(httpsPort);
-console.log(`Start Listen Port ${port} and ${NODE_ENV} mode`);
-console.log(`https Start Listen Port ${httpsPort} and ${NODE_ENV} mode`);
+
+console.log(chalk.cyan(`-------------------------------`));
+console.log(chalk.cyan(`Start NOWnews Web Rss`));
+console.log(chalk.cyan(`Listen Http Port ${port}`));
+console.log(chalk.cyan(`Listen Https Port ${port}`));
+console.log(chalk.cyan(`${NODE_ENV} mode`));
+console.log(chalk.cyan(`-------------------------------`));
