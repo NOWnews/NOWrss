@@ -1,7 +1,11 @@
+import client from './client';
+import getValue from './getValue';
+import setValue from './setValue';
+import removeValue from './removeValue';
 
 module.exports = {
-    client: require('./client'),
-    setValue: require('./setValue'),
-    getValue: require('./getValue'),
-    // 取得主要的新聞分類
-    getApiCategories: require('./getApiCategories')};
+    client,
+    getValue,
+    setValue,
+    removeValue,
+};

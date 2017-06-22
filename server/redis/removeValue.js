@@ -1,22 +1,22 @@
 
-const debug = require('debug')('NOWrss:redis:getValue');
+const debug = require('debug')('NOWnews-api:redis:removeValue');
 
 import Promise from 'bluebird';
 import client from './client';
 
-/*
- * 利用 key 把 redis 的資料拉出來
- */
 module.exports = async (key) => {
     try {
+
         let value = await client.getAsync(key);
+        debug('value = %s', value);
 
         if(!value) {
-            return Promise.resolve(null);
+            return Promise.resolve(true);
         }
 
-        let valueObject = JSON.parse(value);
-        return Promise.resolve(valueObject);
+        await client.delAsync(key);
+
+        return Promise.resolve(true);
     } catch (err) {
         return Promise.reject(err);
     }

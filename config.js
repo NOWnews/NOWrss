@@ -10,14 +10,17 @@ module.exports = {
      */
     redis: {
         host: process.env.NODE_ENV === 'production' ? 'localhost' : 'localhost',
-        expireSeconds: 3600
+        port: 6379,
+        db: 2,
+        password: null,
+        expireSeconds: 360
     },
 
     /*
      * api-admin server
      */
     apiServer: {
-        host: process.env.NODE_ENV === 'production' ? 'http://35.185.146.211:10000' : 'http://localhost:10000',
+        host: process.env.NODE_ENV === 'production' ? 'https://devapi.nownews.com' : 'http://localhost:10000',
         headers: {
             "X-NOWnews-API": ["NOWnewsIsFeature"]
         }
