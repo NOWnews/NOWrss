@@ -1,10 +1,12 @@
 
-const getNeedNewsFromApi = require('./getNeedNewsFromApi');
-const buildRssFromNews = require('./buildRssFromNews');
-const rssFacebookInstantArticleTp = require('./rssFacebookInstantArticleTp');
+import getNeedNewsFromApi from './getNeedNewsFromApi';
+import buildRssFromNews from './buildRssFromNews';
+import rssFacebookInstantArticleTp from './rssFacebookInstantArticleTp';
+import getApiCategories from './getApiCategories';
 
 module.exports = {
-    getNeedNewsFromApi: getNeedNewsFromApi,
-    buildRssFromNews: buildRssFromNews,
-    rssFacebookInstantArticleTp: rssFacebookInstantArticleTp
+    getNeedNewsFromApi,
+    buildRssFromNews,
+    rssFacebookInstantArticleTp,
+    getApiCategories,
 };
