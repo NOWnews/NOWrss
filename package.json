@@ -20,7 +20,6 @@
     "cheerio": "^0.20.0",
     "chinese-conv": "^1.0.1",
     "co": "^4.6.0",
-    "colors": "^1.1.2",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^1.2.0",
@@ -51,7 +50,6 @@
     "promise-ftp-common": "^1.1.5",
     "redis": "^2.7.1",
     "request-promise": "^3.0.0",
-    "sequelize": "^3.30.4",
     "serve-favicon": "^2.4.3",
     "uuid": "^3.0.1",
     "xml2json": "^0.9.2"

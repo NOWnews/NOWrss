@@ -28,7 +28,7 @@ const isLogin = require('../../middlewares/isLogin');
 const saveUrlType = require('../../middlewares/saveUrlType');
 
 /*
- * ############## User 設定 ##############
+ * ############## login 設定 ##############
  */
 router.route('/admin/auth/login')
     .post(actionLogin)
