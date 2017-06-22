@@ -1,15 +1,14 @@
-const debug = require('debug')('NOWrss:controllers:v2RssGet');
 
+const debug = require('debug')('NOWrss:controllers:RssGet');
 
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-const moment = require('moment-timezone');
-const uuid = require('uuid');
-
-const libs = require('../libs');
-const utils = require('../utils');
-const models = require('../models');
+import moment from 'moment-timezone';
+import uuid from 'uuid';
+import utils from '../utils';
+import libs from '../libs';
+import { Rss } from '../models';
 
 router.route('/rss/:channelId')
     .get(async(req, res, next) => {
@@ -26,7 +25,7 @@ router.route('/rss/:channelId')
             let milliseconds = today.valueOf();
 
             // 這裡是確認 rssData 有沒有這筆資料
-            let rssData = await models.rss.findOne()
+            let rssData = await Rss.findOne()
                 .where('channelId').equals(channelId)
                 .execAsync();
 
@@ -60,6 +59,7 @@ router.route('/rss/:channelId')
 
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml').render(rssXml.xml, xmlData);
+
             // res.json(xmlData);
         } catch (err) {
             next(err);
