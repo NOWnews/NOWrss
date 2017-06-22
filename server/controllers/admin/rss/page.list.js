@@ -9,7 +9,7 @@ const co = require('co');
 module.exports = (req, res, next) => {
     co(function*() {
 
-        let rssList = yield models.rss.find()
+        let rssList = yield models.Rss.find()
             .where('trashed').equals(false)
             .lean()
             .execAsync();

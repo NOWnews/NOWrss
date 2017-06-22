@@ -2,7 +2,7 @@
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.update');
 const models = require('../../../models');
 const utils = require('../../../utils');
-const redis = require('../../../redis');
+const libs = require('../../../libs');
 
 const co = require('co');
 
@@ -11,10 +11,7 @@ module.exports = (req, res, next) => {
 
     co(function*() {
         // 取得資料庫的分類
-        let v2Router = '/admin/rss/v2';
-        let thisRouter = req.route.path;
-        let isV2Router = thisRouter.indexOf(v2Router) > -1;
-        let mainCategories = isV2Router ? yield redis.getApiCategories() : yield redis.getMongoCategories();
+        let mainCategories = yield libs.getApiCategories();
 
         let rssData = yield models.rss.findOne()
             .where('sn').equals(sn)
@@ -26,7 +23,6 @@ module.exports = (req, res, next) => {
         if (rssData.catogry === 'all'){
             let mainCategoriesString = _.map(mainCategories, (o) => o.value = true);
         } else {
-            console.log(456)
             let mainCategoriesString = _.map(mainCategories, (o) => {
                 if(rssData.catogry.indexOf(o.name) > -1) {
                     o.value = true;

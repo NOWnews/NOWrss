@@ -1,15 +1,14 @@
-const express = require('express');
-const compression = require('compression');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const multer = require('multer');
-const cookieSession = require('cookie-session');
-const nunjucks = require('nunjucks');
-const methodOverride = require('method-override');
-
-const defaultUser = require('./defaultUser');
+import express from 'express';
+import compression from 'compression';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import multer from 'multer';
+import cookieSession from 'cookie-session';
+import nunjucks from 'nunjucks';
+import methodOverride from 'method-override';
+import defaultUser from './defaultUser';
 
 const upload = multer({
     dest: '/tmp'

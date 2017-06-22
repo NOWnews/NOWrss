@@ -1,5 +1,5 @@
 
-const debug = require('debug')('NOWrss:v2RssLibs:buildRssFromNews');
+const debug = require('debug')('NOWrss:libs:buildRssFromNews');
 const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');

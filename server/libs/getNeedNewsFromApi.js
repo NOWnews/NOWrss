@@ -2,7 +2,7 @@
  * 帶入時間區間及塞選條件(陣列)，去跟 NOWnews-api 要新聞資料
  */
 
-const debug = require('debug')('NOWrss:v2RssLibs:getNeedNewsFromAPI');
+const debug = require('debug')('NOWrss:libs:getNeedNewsFromAPI');
 const co = require('co');
 const Promise = require('bluebird');
 const moment = require('moment-timezone');
@@ -25,9 +25,9 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
     }
 
     //取得 Redis News Data
-    //TODO v2 的部分加上前綴字
-    let allNewsRedis = await redis.getValue(`v2${channelId}`);
+    let allNewsRedis = await redis.getValue(`${channelId}`);
     if (is.array(allNewsRedis) && allNewsRedis.length !== 0) {
+        debug(' Redis 共撈了 %s 則新聞', allNewsRedis.length);
         return allNewsRedis;
     }
 
@@ -50,22 +50,21 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
             //內容圖
             let $ = cheerio.load( news.content , { decodeEntities: false });
 
-            $('img').filter(function(i, el) {
-                if($(el).data('isdeliver')===false){
+            $('img').filter((i, el) => {
+                if($(el).data('isdeliver') === false){
                     $(el).closest('p').remove();
                 }
             });
 
             news.content = $.html();
-            debug('new.content',news.content)
+
             return news;
         });
     }
-    debug('allNews = %j ', allNews);
+    // debug('allNews = %j ', allNews);
 
     //更新 Redis News Data
-    //TODO v2 的部分加上前綴字
-    let updateRedisAllNews = await redis.setValue(`v2${channelId}`, allNews, 360);
+    let updateRedisAllNews = await redis.setValue(`${channelId}`, allNews, 360);
 
     return updateRedisAllNews;
 };

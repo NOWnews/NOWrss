@@ -8,7 +8,7 @@ import moment from 'moment-timezone';
 import uuid from 'uuid';
 import utils from '../utils';
 import libs from '../libs';
-import { Rss } from '../models';
+import { Rss, Count } from '../models';
 
 router.route('/rss/:channelId')
     .get(async(req, res, next) => {
@@ -60,7 +60,25 @@ router.route('/rss/:channelId')
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml').render(rssXml.xml, xmlData);
 
-            // res.json(xmlData);
+            // 統計用資料
+            let newsList = [];
+            _.forEach(news, (n)=>{
+                return newsList.push({
+                    title: n.title,
+                    id: n.sn,
+                    startedAt: n.formatStartedAt
+                });
+            });
+            let countObj = {
+                channelId: req.params.channelId,
+                ip: req.ip,
+                news: newsList,
+                userAgent: req.headers['user-agent'],
+                createdAt: req._startTime
+              };
+            await Count.createAsync(countObj);
+
+            return;
         } catch (err) {
             next(err);
         }

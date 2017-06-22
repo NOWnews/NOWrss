@@ -22,7 +22,7 @@ const rss = require('./rss');
 const count = require('./count');
 
 module.exports = {
-    user: user,
-    rss: rss,
-    count: count
+    User: user,
+    Rss: rss,
+    Count: count
 };

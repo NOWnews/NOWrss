@@ -63,14 +63,6 @@ router.route('/admin/rss/create')
     .get(isLogin, saveUrlType, pageRssCreate)
     .post(isLogin, actionRssCreate);
 
-router.route('/admin/rss/v2/create')
-    //TODO 加上 V2 的設定
-    .get(isLogin, saveUrlType, pageRssCreate);
-
-router.route('/admin/rss/v2/update/:sn')
-    //TODO 加上 V2 的設定
-    .get(isLogin, saveUrlType, pageRssUpdate);
-
 router.route('/admin/rss/update/:sn')
     .get(isLogin, saveUrlType, pageRssUpdate)
     .put(isLogin, actionRssUpdate);

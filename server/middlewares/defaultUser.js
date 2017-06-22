@@ -1,45 +1,43 @@
 
-const co = require('co');
-
 const debug = require('debug')('NOWrss:admin:middlewares:defaultUser');
-const models = require('../models');
-const utils = require('../utils');
+import { User } from '../models';
+import { hashPwd } from '../utils';
+import Promise from 'bluebird';
 
 const defaultName = 'DEVELOP';
 const defaultEmail = 'admin@nownews.com';
 const defaultPassword = 'admin@nownews.com';
 
+module.exports = () => {
 
-module.exports = function() {
+    let adminUser = async () => {
+        try {
+            let adminUser;
 
-    co(function*() {
+            adminUser = await models.user.findOne()
+                .where('email').equals(defaultEmail)
+                .where('password').equals(utils.hashPwd(defaultPassword))
+                .where('name').equals(defaultName)
+                .where('trashed').equals(false)
+                .execAsync();
 
-        let adminUser;
+            if(!adminUser){
+                adminUser = await models.user.createAsync({
+                    _id: '500000000000000000000001',
+                    email: defaultEmail,
+                    password: utils.hashPwd(defaultPassword),
+                    name: defaultName,
+                    createdBy: '500000000000000000000001'
+                });
+            }
 
-        adminUser = yield models.user.findOne()
-            .where('email').equals(defaultEmail)
-            .where('password').equals(utils.hashPwd(defaultPassword))
-            .where('name').equals(defaultName)
-            .where('trashed').equals(false)
-            .execAsync();
-
-        if(!adminUser){
-            adminUser = yield models.user.createAsync({
-                _id: '500000000000000000000001',
-                email: defaultEmail,
-                password: utils.hashPwd(defaultPassword),
-                name: defaultName,
-                createdBy: '500000000000000000000001'
-            });
+            return Promise.resolve(adminUser);
+        } catch(err) {
+            return Promise.reject(err);
         }
+    };
 
-        // debug('init admin user = %j', adminUser);
-    })
-    .catch(function(err) {
-        console.error(err);
-    });
-
-    return function(req, res, next) {
+    return (req, res, next) => {
         return next();
     };
 };
