@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import is from 'is_js';
-import Promise from 'bluebird';
 
 const Schema = mongoose.Schema;
 const schema = new Schema({
@@ -51,7 +49,7 @@ schema.plugin(autoIncrement.plugin, {
     startAt: 1
 });
 
-schema.statics.findBySn = (sn) => {
+schema.statics.findBySn = function (sn) {
     return this.findOne().where('sn').equals(sn);
 };
 
