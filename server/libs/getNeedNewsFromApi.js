@@ -34,7 +34,7 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
 
         let limit = 60;
         let formatCategories = querystring.stringify({"categories": categories});
-        let url = `/rss?start=${startEpoch}&end=${endEpoch}&limit=${limit}&${formatCategories}`;
+        let url = `/rss?start=${startEpoch}&end=${endEpoch}&limit=${limit}&sort=-startedAt&${formatCategories}`;
 
         let { data: allNews } = await axios.get(url);
 
@@ -69,6 +69,6 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
 
         return updateRedisAllNews;
     } catch(err) {
-        return next(err);
+        return console.error(err);
     }
 };

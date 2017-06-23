@@ -5,11 +5,17 @@ import { Count, Rss } from '../../../models';
 import utils from '../../../utils';
 
 import _ from 'lodash';
+import moment from 'moment';
 import useragent from 'express-useragent';
 
 module.exports = async (req, res, next) => {
+
+    let time = req.query.time || utils.dateFormat(moment(), 'YYYY/MM/DD');
+    let pathname = req._parsedUrl.pathname;
     try {
         let countList = await Count.find()
+            .where('startDate').gte(moment(time).startOf('day'))
+            .where('startDate').lte(moment(time).endOf('day'))
             .where('trashed').equals(false)
             .lean()
             .execAsync();
@@ -18,29 +24,26 @@ module.exports = async (req, res, next) => {
             .where('trashed').equals(false)
             .lean()
             .execAsync();
-        let channel = {};
+        let channels = {};
 
         _.forEach(rssList, (rss) => {
-            channel[rss.channelId.toUpperCase()] = {
+            channels[rss.channelId.toUpperCase()] = {
                 name: rss.name,
-                sn: rss.sn
+                sn: rss.sn,
+                count: 0
             };
             return;
         });
 
-        _.forEach(countList, (count)=>{
-            count.startDate = utils.dateFormat(count.startDate, 'YYYY/MM/DD HH:mm');
-            count.channel = channel[count.channelId];
-
-            // 判斷 userAgent 的套件先暫時隱蔽
-            // count.userAgent = useragent.parse(count.userAgent);
+        _.forEach(countList, (count) => {
+            channels[count.channelId].count++;
         });
 
         return res.render('admin/count/list', {
-            countList
+            channels,
+            time,
+            pathname
         });
-
-        // return res.json(countList);
 
     } catch(err) {
         return next(err);

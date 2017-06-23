@@ -62,7 +62,7 @@ router.route('/rss/:channelId')
 
             // 統計用資料
             let newsList = [];
-            _.forEach(news, (n)=>{
+            _.forEach(news, (n) => {
                 return newsList.push({
                     title: n.title,
                     id: n.sn,

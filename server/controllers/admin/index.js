@@ -9,6 +9,7 @@ import actionLogin from './auth/action.login';
 import actionLogout from './auth/action.logout';
 
 import pageCountList from './count/page.list';
+import pageCountOne from './count/page.one';
 
 import pageUserList from './user/page.list';
 import pageUserCreate from './user/page.create';
@@ -79,6 +80,9 @@ router.route('/admin')
 
 router.route('/admin/count')
     .get(isLogin, saveUrlType, pageCountList);
+
+router.route('/admin/count/:channelId')
+    .get(isLogin, saveUrlType, pageCountOne);
 
 // TODO 暫時用
 router.route('/')

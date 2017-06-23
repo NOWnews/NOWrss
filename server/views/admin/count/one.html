@@ -1,0 +1,126 @@
+{% extends "./../blocks/layout.html" %}
+
+{% block container %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+              RSS 統計管理列表介面
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> RSS 統計</a></li>
+                <li class="active">RSS 統計管理列表</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            {% include "./block.top.html" %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">RSS 統計列表</h3>
+                        </div>
+                        <div class="box-body table-responsive">
+                            <table id="main-list" class="table table-bordered table-hover">
+                                <thead>
+                                    <th>時間</th>
+                                    <th>頻道 ID</th>
+                                    <th>新聞筆數</th>
+                                    <th>詳細資料</th>
+                                    <th>IP</th>
+                                </thead>
+                                <tbody>
+                                    {% for count in countList %}
+                                        <tr>
+                                            <td>{{ count.startDate }}</td>
+                                            <td><a target="block" href="/admin/rss/update/{{ count.channel.sn }}">{{ count.channel.name }}</a></td>
+                                            <td>
+                                            	新聞更新數量: {{ count.news.length }}<br>
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                                    詳細資料
+                                                </button>
+                                            </td>
+                                            <td>
+                                                {% include "./block.userAgent.html" %}
+                                            </td>
+                                            <td>{{ count.ip }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <a class="btn btn-success" href="/admin/count?time={{time}}">回到列表</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {# 彈跳視窗 #}
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">新聞資料</h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for count in countList %}
+                            <p>{{ count.startDate }}</p>
+                            <table class="table table-bordered table-hover">
+                            {% for news in count.news %}
+                                <tr>
+                                    <td>{{ news.title }}</td>
+                                    <td>{{ news.id }}</td>
+                                    <td>{{ news.startedAt }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% if count.news.length == 0 %}
+                                <p> 沒有更新的新聞... </p>
+                            {% endif %}
+                            </table>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# 彈跳視窗結束 #}
+    </div>
+{% endblock %}
+{% block jsBlock %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            $('#main-list').DataTable({
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: true,
+                language: {
+                    search: '搜尋: ',
+                    zeroRecords: '搜尋不到任何項目 :(',
+                    infoEmpty: '沒有任何項目',
+                    infoFiltered: '( 搜尋 _MAX_ 條項目 )',
+                    info: "顯示 _START_ 至 _END_ 項，總數為 _TOTAL_ 項",
+                    sLengthMenu: "顯示 _MENU_ 筆",
+                    paginate: {
+                        previous: '上一頁',
+                        next: '下一頁',
+                        last: '最後一頁',
+                        first: '第一頁'
+                    }
+                },
+                "order":  [[ 0, "asc" ]]
+            });
+        });
+    </script>
+{% endblock %}
