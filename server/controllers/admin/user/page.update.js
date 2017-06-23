@@ -1,16 +1,14 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:user:page.update');
-const models = require('../../../models');
-const libs = require('../../../libs');
 
-const co = require('co');
+import { User } from '../../../models';
+import libs from '../../../libs';
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     let sn = req.params.sn;
 
-    co(function*() {
-
-        let user = yield models.user.findOne()
+    try {
+        let user = await User.findOne()
             .where('sn').equals(sn)
             .where('trashed').equals(false)
             .execAsync();
@@ -51,6 +49,7 @@ module.exports = (req, res, next) => {
         return res.render('admin/user/update', {
             formData
         });
-    })
-    .catch(next);
+    } catch(err) {
+        return next(err);
+    }
 };

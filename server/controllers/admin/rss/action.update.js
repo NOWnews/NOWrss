@@ -1,11 +1,9 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:action.update');
-const models = require('../../../models');
-const libs = require('../../../libs');
+import { Rss } from '../../../models';
+import libs from '../../../libs';
 
-const co = require('co');
-
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     const updateFields = ['name', 'dateRange', 'contactPerson', 'catogry', 'template', 'channelId', 'simplifiedChinese'];
     let data = _.pick(req.body, updateFields);
     let sn = req.params.sn;
@@ -15,10 +13,8 @@ module.exports = (req, res, next) => {
     }
 
     // debug('req.body = %j', req.body);
-
-    co(function*() {
-
-        let rssModels = yield models.rss.findBySn(sn);
+    try {
+        let rssModels = await Rss.findBySn(sn);
 
         // 儲存時將 channelId 改成小寫
         if(data.channelId){
@@ -37,10 +33,10 @@ module.exports = (req, res, next) => {
             rssModels.set(field, data[field]);
         });
 
-        let updatedRssModels = yield rssModels.saveAsync();
+        let updatedRssModels = await rssModels.saveAsync();
 
         return res.redirect(`/admin/rss`);
-    })
-    .catch(next);
-
+    } catch(err) {
+        return next(err);
+    }
 };

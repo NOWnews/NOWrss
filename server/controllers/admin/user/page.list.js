@@ -1,21 +1,20 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:user:page.list');
-const models = require('../../../models');
-const libs = require('../../../libs');
 
-const co = require('co');
+import { User } from '../../../models';
+import libs from '../../../libs';
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
 
-    co(function*() {
-
-        let users = yield models.user.find()
+	try {
+		let users = await User.find()
             .where('trashed').equals(false)
             .execAsync();
 
         return res.render('admin/user/list', {
             users
         });
-    })
-    .catch(next);
+	} catch(err) {
+		return next(err);
+	}
 };

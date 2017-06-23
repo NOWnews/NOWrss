@@ -1,13 +1,13 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.create');
-const libs = require('../../../libs');
 
-const co = require('co');
+import libs from '../../../libs';
 
-module.exports = (req, res, next) => {
-    co(function*() {
+module.exports = async (req, res, next) => {
+
+    try {
         // 取得資料庫或 API 的分類
-        let mainCategories = yield libs.getApiCategories();
+        let mainCategories = await libs.getApiCategories();
 
         let formData = {
             title: '建立廠商 RSS',
@@ -85,5 +85,7 @@ module.exports = (req, res, next) => {
         return res.render('admin/rss/create', {
             formData
         });
-    });
+    } catch(err) {
+        return next(err);
+    }
 };

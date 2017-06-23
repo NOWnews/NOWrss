@@ -1,21 +1,20 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:count:page.list');
-const models = require('../../../models');
-const utils = require('../../../utils');
 
-const _ = require('lodash');
-const co = require('co');
-const useragent = require('express-useragent');
+import { Count, Rss } from '../../../models';
+import utils from '../../../utils';
 
-module.exports = (req, res, next) => {
-    co(function*() {
+import _ from 'lodash';
+import useragent from 'express-useragent';
 
-        let countList = yield models.count.find()
+module.exports = async (req, res, next) => {
+    try {
+        let countList = await Count.find()
             .where('trashed').equals(false)
             .lean()
             .execAsync();
 
-        let rssList = yield models.rss.find()
+        let rssList = await Rss.find()
             .where('trashed').equals(false)
             .lean()
             .execAsync();
@@ -42,6 +41,8 @@ module.exports = (req, res, next) => {
         });
 
         // return res.json(countList);
-    })
-    .catch(next);
+
+    } catch(err) {
+        return next(err);
+    }
 };

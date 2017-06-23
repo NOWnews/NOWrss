@@ -1,11 +1,10 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:user:action.create');
-const models = require('../../../models');
-const utils = require('../../../utils');
 
-const co = require('co');
+import { User } from '../../../models';
+import utils from '../../../utils';
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
 
     let data = req.body;
 
@@ -13,9 +12,8 @@ module.exports = (req, res, next) => {
         return next(new Error('輸入密碼不一致'));
     }
 
-    co(function*() {
-
-        let newUser = yield models.user.createAsync({
+    try {
+        let newUser = await User.createAsync({
             name: data.name,
             email: data.email,
             password: utils.hashPwd(data.password),
@@ -23,6 +21,7 @@ module.exports = (req, res, next) => {
         });
 
         return res.redirect('/admin/user');
-    })
-    .catch(next);
+    } catch(err) {
+        return next(err);
+    }
 };

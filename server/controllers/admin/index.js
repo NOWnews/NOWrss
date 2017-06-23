@@ -2,30 +2,30 @@
 let express = require('express');
 let router = express.Router();
 
-const pageHome = require('./page.home');
+import pageHome from './page.home';
 
-const pageLogin = require('./auth/page.login');
-const actionLogin = require('./auth/action.login');
-const actionLogout = require('./auth/action.logout');
+import pageLogin from './auth/page.login';
+import actionLogin from './auth/action.login';
+import actionLogout from './auth/action.logout';
 
-const pageCountList = require('./count/page.list');
+import pageCountList from './count/page.list';
 
-const pageUserList = require('./user/page.list');
-const pageUserCreate = require('./user/page.create');
-const actionUserCreate = require('./user/action.create');
-const pageUserUpdate = require('./user/page.update');
-const actionUserUpdate = require('./user/action.update');
+import pageUserList from './user/page.list';
+import pageUserCreate from './user/page.create';
+import actionUserCreate from './user/action.create';
+import pageUserUpdate from './user/page.update';
+import actionUserUpdate from './user/action.update';
 
-const pageRssList = require('./rss/page.list');
-const pageRssCreate = require('./rss/page.create');
-const actionRssCreate = require('./rss/action.create');
+import pageRssList from './rss/page.list';
+import pageRssCreate from './rss/page.create';
+import actionRssCreate from './rss/action.create';
 
-const pageRssUpdate = require('./rss/page.update');
-const actionRssUpdate = require('./rss/action.update');
-const actionRssRemove = require('./rss/action.remove');
+import pageRssUpdate from './rss/page.update';
+import actionRssUpdate from './rss/action.update';
+import actionRssRemove from './rss/action.remove';
 
-const isLogin = require('../../middlewares/isLogin');
-const saveUrlType = require('../../middlewares/saveUrlType');
+import isLogin from '../../middlewares/isLogin';
+import saveUrlType from '../../middlewares/saveUrlType';
 
 /*
  * ############## login 設定 ##############

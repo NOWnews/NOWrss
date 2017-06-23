@@ -1,15 +1,14 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.list');
-const models = require('../../../models');
-const utils = require('../../../utils');
 
-const _ = require('lodash');
-const co = require('co');
+import { Rss } from '../../../models';
+import utils from '../../../utils';
 
-module.exports = (req, res, next) => {
-    co(function*() {
+import _ from 'lodash';
 
-        let rssList = yield models.Rss.find()
+module.exports = async (req, res, next) => {
+    try {
+        let rssList = await Rss.find()
             .where('trashed').equals(false)
             .lean()
             .execAsync();
@@ -29,6 +28,7 @@ module.exports = (req, res, next) => {
         return res.render('admin/rss/list', {
             rssList
         });
-    })
-    .catch(next);
+    } catch(err) {
+        return next(err);
+    }
 };

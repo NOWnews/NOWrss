@@ -1,12 +1,11 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:action.create');
-const models = require('../../../models');
-const libs = require('../../../libs');
 
-const co = require('co');
-const uuid = require('uuid');
+import { Rss } from '../../../models';
+import libs from '../../../libs';
+import uuid from 'uuid';
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
 
     let data = req.body;
 
@@ -15,8 +14,8 @@ module.exports = (req, res, next) => {
 
     // debug('data = %j', data);
 
-    co(function*() {
-        var rssObj = {
+    try {
+        let rssObj = {
             name: data.name,
             simplifiedChinese: data.simplifiedChinese,
             catogry: data.catogry,
@@ -27,10 +26,11 @@ module.exports = (req, res, next) => {
             contactPerson: data.contactPerson,
             channelId: uuid()
         };
-
-        yield models.rss.createAsync(rssObj);
+        await Rss.createAsync(rssObj);
 
         return res.redirect('/admin/rss');
-    })
-    .catch(next);
+    } catch(err) {
+        return next(err);
+    }
+
 };

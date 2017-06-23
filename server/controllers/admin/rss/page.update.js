@@ -1,19 +1,18 @@
 
 const debug = require('debug')('NOWrss:controllers:admin:rss:page.update');
-const models = require('../../../models');
-const utils = require('../../../utils');
-const libs = require('../../../libs');
 
-const co = require('co');
+import { Rss } from '../../../models';
+import utils from '../../../utils';
+import libs from '../../../libs';
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     let sn = req.params.sn;
 
-    co(function*() {
+    try {
         // 取得資料庫的分類
-        let mainCategories = yield libs.getApiCategories();
+        let mainCategories = await libs.getApiCategories();
 
-        let rssData = yield models.rss.findOne()
+        let rssData = await Rss.findOne()
             .where('sn').equals(sn)
             .where('trashed').equals(false)
             .lean()
@@ -134,6 +133,7 @@ module.exports = (req, res, next) => {
         return res.render('admin/rss/update', {
             formData
         });
-    })
-    .catch(next);
+    } catch(err) {
+        return next(err);
+    }
 };

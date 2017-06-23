@@ -1,13 +1,13 @@
 
 const debug = require('debug')('NOWrss:libs:buildRssFromNews');
-const co = require('co');
-const Promise = require('bluebird');
-const moment = require('moment-timezone');
-const utils = require('./../utils');
-const _ = require('lodash');
-const chineseConv = require('chinese-conv');
 
-module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
+import Promise from 'bluebird';
+import moment from 'moment-timezone';
+import { dateFormat } from './../utils';
+import _ from 'lodash';
+import { sify } from 'chinese-conv';
+
+module.exports = async (newsArray, simplifiedChinese, template) => {
 
     // debug('newsArray = %j', newsArray);
     debug('simplifiedChinese = %j', simplifiedChinese);
@@ -69,12 +69,12 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
 
         // 確認語系
         if (simplifiedChinese) {
-            description = chineseConv.sify(description);
-            mainPhotoBody = chineseConv.sify(mainPhotoBody);
-            title = chineseConv.sify(title);
-            author = chineseConv.sify(author);
-            summary = chineseConv.sify(summary);
-            subcategory = chineseConv.sify(subcategory);
+            description = sify(description);
+            mainPhotoBody = sify(mainPhotoBody);
+            title = sify(title);
+            author = sify(author);
+            summary = sify(summary);
+            subcategory = sify(subcategory);
         }
 
         items.push({
@@ -88,17 +88,17 @@ module.exports = co.wrap(function*(newsArray, simplifiedChinese, template) {
             description: description,
             author: author,
             summary: summary,
-            date: utils.dateFormat(news.startedAt, 'ddd DD MMM YYYY HH:mm:ss ZZ'),
+            date: dateFormat(news.startedAt, 'ddd DD MMM YYYY HH:mm:ss ZZ'),
             dateTime: news.startedAt,
-            TaiwanMobileDate: utils.dateFormat(news.startedAt, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
-            UTCdate: utils.dateFormat(news.startedAt, 'ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
+            TaiwanMobileDate: dateFormat(news.startedAt, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
+            UTCdate: dateFormat(news.startedAt, 'ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory
         });
     });
 
-    return yield Promise.resolve({
+    return await Promise.resolve({
         items: items,
         ISOTime: ISOTime,
         xml: `rssTemplate/${templateFile}.xml`
     });
-});
+};
