@@ -14,6 +14,10 @@ $(function() {
     // remove rss
     $('.remove-btn').on('click', function() {
         event.preventDefault();
+        var confirmed = confirm('您確定要刪除嗎？');
+        if (!confirmed) {
+            return;
+        }
         var sn = $(this).attr('item-sn');
         var url = $(this).attr('page-route');
         $.ajax({
