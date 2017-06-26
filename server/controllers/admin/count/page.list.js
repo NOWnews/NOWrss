@@ -36,6 +36,10 @@ module.exports = async (req, res, next) => {
         });
 
         _.forEach(countList, (count) => {
+            if (!count){
+                return;
+            }
+
             channels[count.channelId].count++;
         });
 
