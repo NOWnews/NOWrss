@@ -75,6 +75,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             author = sify(author);
             summary = sify(summary);
             subcategory = sify(subcategory);
+            shortTitle = sify(shortTitle);
         }
 
         items.push({
