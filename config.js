@@ -20,9 +20,9 @@ module.exports = {
      * api-admin server
      */
     apiServer: {
-        host: process.env.NODE_ENV === 'production' ? 'https://devapi.nownews.com' : 'http://localhost:10001',
+        host: process.env.NODE_ENV === 'production' ? 'https://v4api.nownews.com/' : 'https://v4api.nownews.com/',
         headers: {
-            "X-NOWnews-API": ["NOWnewsIsFeature"]
+            "X-NOWnews-API": ["YouCanSeeMeJohnCena"]
         }
     }
 
