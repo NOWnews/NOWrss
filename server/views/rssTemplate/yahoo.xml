@@ -1,7 +1,7 @@
 {% extends "./base/yahooBase.xml" %}
 
 {% block item %}
-    {% for item in items %}{% if item.id != 2269796 %}
+    {% for item in items %}{% if item.id != 2582267 %}
         <item>
             <title>{{ item.title }}</title>
             <link>{{ item.url }}</link>
