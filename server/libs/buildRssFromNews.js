@@ -79,7 +79,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         }
 
         items.push({
-            id: news._id,
+            id: news.sn,
             title:  title,
             shortTitle: shortTitle,
             url: 'http://www.nownews.com' + news.parseUrl,
