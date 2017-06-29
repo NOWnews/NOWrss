@@ -5,7 +5,7 @@ global._ = require('lodash');
 
 global.axios = axiosLib.create({
     baseURL: config.apiServer.host,
-    timeout: 5000,
+    timeout: 100000,
     headers: config.apiServer.headers
 });
 
