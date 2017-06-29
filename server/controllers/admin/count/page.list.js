@@ -36,7 +36,7 @@ module.exports = async (req, res, next) => {
         });
 
         _.forEach(countList, (count) => {
-            if (!count){
+            if (!count || !channels[count.channelId]){
                 return;
             }
 

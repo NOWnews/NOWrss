@@ -23,6 +23,7 @@ router.route('/rss/:channelId')
             let TaiwanMobileDate = today.format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
             let UTCTime = today.format('ddd, DD MMM YYYY HH:mm:ss [GMT]Z');
             let milliseconds = today.valueOf();
+            let unixTimestamp = today.unix();
 
             // 這裡是確認 rssData 有沒有這筆資料
             let rssData = await Rss.findOne()
@@ -54,7 +55,8 @@ router.route('/rss/:channelId')
                 ISOTime,
                 UTCTime,
                 milliseconds,
-                UUID
+                UUID,
+                unixTimestamp
             };
 
             res.charset = 'utf-8';
