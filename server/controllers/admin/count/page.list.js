@@ -5,17 +5,17 @@ import { Count, Rss } from '../../../models';
 import utils from '../../../utils';
 
 import _ from 'lodash';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import useragent from 'express-useragent';
 
 module.exports = async (req, res, next) => {
 
-    let time = req.query.time || utils.dateFormat(moment(), 'YYYY/MM/DD');
+    let time = req.query.time || moment.tz('Asia/Taipei').format('YYYY-MM-DD');
     let pathname = req._parsedUrl.pathname;
     try {
         let countList = await Count.find()
-            .where('startDate').gte(moment(time).startOf('day'))
-            .where('startDate').lte(moment(time).endOf('day'))
+            .where('startDate').gte(moment.tz(time, 'Asia/Taipei').startOf('day'))
+            .where('startDate').lte(moment.tz(time, 'Asia/Taipei').endOf('day'))
             .where('trashed').equals(false)
             .lean()
             .execAsync();
