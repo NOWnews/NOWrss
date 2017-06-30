@@ -11,8 +11,8 @@
             </publishCountries>
             <title>{{ item.title }}</title>
             <category>{{ item.subcategory }}</category>
-            <startYmdtUnix>{{ unixTimestamp }}</startYmdtUnix>
-            <endYmdtUnix>{{ unixTimestamp + 50000000 }}</endYmdtUnix>
+            <startYmdtUnix>{{ milliseconds }}</startYmdtUnix>
+            <endYmdtUnix>{{ milliseconds + 5000000000000 }}</endYmdtUnix>
             <publishTimeUnix>{{ unixTimestamp }}</publishTimeUnix>
             <publishTime>{{ item.date }}</publishTime>
             <contents>
