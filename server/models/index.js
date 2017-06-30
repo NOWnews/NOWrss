@@ -9,7 +9,7 @@ Promise.promisifyAll(mongoose);
 
 const dbUrl = `${config.adminMongodb}/rss_staging`;
 console.log(dbUrl);
-mongoose.connect(dbUrl, { useMongoClient: true });
+mongoose.connect(dbUrl);
 const connection = mongoose.connection;
 
 autoIncrement.initialize(connection);
