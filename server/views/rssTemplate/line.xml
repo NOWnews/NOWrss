@@ -12,8 +12,8 @@
             <title>{{ item.title }}</title>
             <category>{{ item.subcategory }}</category>
             <startYmdtUnix>{{ milliseconds }}</startYmdtUnix>
-            <endYmdtUnix>{{ milliseconds + 5000000000000 }}</endYmdtUnix>
-            <publishTimeUnix>{{ unixTimestamp }}</publishTimeUnix>
+            <endYmdtUnix>{{ milliseconds + 31536000000 }}</endYmdtUnix>
+            <publishTimeUnix>{{ milliseconds }}</publishTimeUnix>
             <publishTime>{{ item.date }}</publishTime>
             <contents>
                 {% if item.mainPhotoUrl %}
