@@ -4,6 +4,10 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 格式基於 [Keep a Changelog](http://keepachangelog.com/zh-TW/0.3.0/)
 而項目則基於 [Semantic Versioning](http://semver.org/lang/zh-TW/).
 
+## 1.1.1 - 2017-07-03
+### Change
+- 加入內文圖判斷機制，是 nownews 的圖才會加上 imgapi @Webber
+
 ## 1.0.14 - 2017-05-09
 ### Change
 - 加入 LINE 專屬的 HEAD `LineBase.xml` @Webber
