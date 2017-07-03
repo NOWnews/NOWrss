@@ -19,7 +19,7 @@ module.exports = async (newsArray) => {
                 let desc = $(el).parent('p').find('cite').text() || $(el).parent('p').text() || news.title;
                 $(el)
                     .parent('p')
-                    .replaceWith(`<figure><img src="${src}" /><figcaption>${desc}</figcaption></figure>`);
+                    .replaceWith(`<figure data-feedback="fb:likes, fb:comments"><img src="${src}" /><figcaption class="aspect-fit-only"><h1>${desc}</h1></figcaption></figure>`);
             });
             $('iframe').filter(function(i, el) {
                 let iframe = $(el).parent('p').html();
