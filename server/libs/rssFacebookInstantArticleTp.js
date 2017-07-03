@@ -3,6 +3,7 @@ const debug = require('debug')('NOWrss:libs:buildRssFromNews');
 
 import Promise from 'bluebird';
 import _ from 'lodash';
+import cheerio from 'cheerio';
 import utils from './../utils';
 
 module.exports = async (newsArray) => {
@@ -10,6 +11,24 @@ module.exports = async (newsArray) => {
     try {
         let items = [];
         _.forEach(newsArray, function(news) {
+
+            // 即時文章 針對 img 跟 iframe
+            let $ = cheerio.load(news.content, {decodeEntities: false});
+            $('img').filter(function(i, el) {
+                let src = el.attribs.src;
+                let desc = $(el).parent('p').find('cite').text() || $(el).parent('p').text() || news.title;
+                $(el)
+                    .parent('p')
+                    .replaceWith(`<figure data-feedback="fb:likes, fb:comments"><img src="${src}" /><figcaption class="aspect-fit-only"><h1>${desc}</h1></figcaption></figure>`);
+            });
+            $('iframe').filter(function(i, el) {
+                let iframe = $(el).parent('p').html();
+                $(el)
+                    .parent('p')
+                    .replaceWith(`<figure class="op-interactive">${iframe}</figure>`);
+            });
+            news.content = $.html();
+            // ---
 
             items.push({
                 title: news.title,
