@@ -82,7 +82,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             id: news.sn,
             title:  title,
             shortTitle: shortTitle,
-            url: 'http://www.nownews.com' + news.parseUrl,
+            url: 'https://www.nownews.com' + news.parseUrl,
             mainPhotoUrl: mainPhotoUrl,
             mainPhotoBody: mainPhotoBody,
             mainPhotoDesc: mainPhotoDesc,
