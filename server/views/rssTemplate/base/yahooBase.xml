@@ -5,11 +5,11 @@
             <![CDATA[NOWnews 今日新聞網]]>
         </title>
         <image>
-            <url>http://static.nownews.com/ad2004/141107-170318-3250p.png</url>
+            <url>https://legacy.nownews.com/NOWnews_static/nownews_logo.png</url>
             <title>NOWnews 今日新聞網</title>
-            <link>http://www.nownews.com</link>
+            <link>https://www.nownews.com</link>
         </image>
-        <link>http://www.nownews.com</link>
+        <link>https://www.nownews.com</link>
         <language>zh-tw</language>
         <pubDate>{{ UTCTime }}</pubDate>
         <lastBuildDate>{{ UTCTime }}</lastBuildDate>

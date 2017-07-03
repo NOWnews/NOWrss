@@ -32,7 +32,7 @@ module.exports = async (newsArray) => {
 
             items.push({
                 title: news.title,
-                link: 'http://www.nownews.com' + news.parseUrl,
+                link: 'https://www.nownews.com' + news.parseUrl,
                 guid: news._id,
                 date: utils.dateFormat(news.startedAt, 'YYYY/MM/DD HH:mm:ss'),
                 isoDate: utils.dateFormat(news.startedAt),
