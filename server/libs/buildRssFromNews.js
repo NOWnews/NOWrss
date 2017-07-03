@@ -55,7 +55,9 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         // 圖片
         if (news.MainPhoto && news.MainPhoto.isDeliver) {
             mainPhotoDesc = news.MainPhoto.desc || '';
-            mainPhotoUrl = `https://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}` || '';
+            mainPhotoUrl = news.MainPhoto.url || '';
+            // TODO
+            // mainPhotoUrl = `https://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}` || '';
             mainPhotoBody = `<div class="main-photo"><img src="${mainPhotoUrl}" alt="${mainPhotoDesc}" /><cite>${mainPhotoDesc}</cite></div>`;
         }
 
