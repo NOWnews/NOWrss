@@ -49,7 +49,7 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
                 }
 
                 //內容圖
-                let $ = cheerio.load( news.content , { decodeEntities: false });
+                let $ = cheerio.load( news.content , { decodeEntities: false, xmlMode: true });
 
                 $('img').filter((i, el) => {
                     if($(el).data('isdeliver') === false){
