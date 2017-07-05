@@ -5,7 +5,7 @@
         <item>
             <id>{{item.id}}</id>
             <title>{{ item.title }}</title>
-            <link>{{ item.url }}</link>
+            <link>{{ item.url }}?utm_source=feeds&amp;utm_medium=rss&amp;utm_campaign=wayne</link>
             <description>
                 <![CDATA[
                     {{ item.summary }}
