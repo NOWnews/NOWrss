@@ -8,7 +8,7 @@
             <link>{{ item.url }}</link>
             <description>
                 <![CDATA[
-                    {{ item.mainPhotoBody | safe }}%THISISAD%{{ item.description | safe }}
+                    {% if item.mainPhotoUrl %}<div class="main-photo"><img src="http://imgapiv2.nownews.com/?h=545&q=70&src={{ item.TaiwanMobileMainPhoto }}" width="320px;" /><cite>{{ item.mainPhotoDesc }}</cite></div>{% endif %}%THISISAD%{{ item.description | safe }}
                 ]]>
             </description>
             <summary>
