@@ -50,6 +50,7 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
 
                 //內容圖
                 let $ = cheerio.load( news.content , { decodeEntities: false, xmlMode: true });
+                let iframeSrc = '';
 
                 $('img').filter((i, el) => {
                     if($(el).data('isdeliver') === false){
@@ -61,7 +62,13 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
                     }
                 });
 
+                $('iframe').filter((i, el) => {
+                    iframeSrc = $(el).attr('src');
+                });
+
                 news.content = $.html();
+
+                news.content = news.content.replace(/<iframe(?:>|\s+([\s\S]*?)>)/g, `<iframe src="${iframeSrc}" allowfullscreen frameborder="0" width="560" height="315"></iframe>`);
 
                 return news;
             });
