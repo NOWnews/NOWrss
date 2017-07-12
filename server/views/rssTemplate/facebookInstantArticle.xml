@@ -71,19 +71,19 @@
 
               <figure class="op-tracker">
                   <iframe>
-                    <!-- Start Alexa Certify Javascript -->
+                    {# Start Alexa Certify Javascript #}
                     <script type="text/javascript">
                     _atrk_opts = { atrk_acct:"3yibi1aoZM00M2", domain:"nownews.com",dynamic: true};
                     (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
                     </script>
                     <noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=3yibi1aoZM00M2" style="display:none" height="1" width="1" alt="" /></noscript>
-                    <!-- End Alexa Certify Javascript -->
+                    {# End Alexa Certify Javascript #}
                   </iframe>
               </figure>
 
               <figure class="op-tracker">
                   <iframe>
-                    <!-- Begin comScore all site Tag -->
+                    {# Begin comScore all site Tag #}
                     <script>
                       var _comscore = _comscore || [];
                       _comscore.push({ c1: "2", c2: "11473067" });
@@ -96,7 +96,48 @@
                     <noscript>
                       <img src="http://b.scorecardresearch.com/p?c1=2&c2=11473067&cv=2.0&cj=1" />
                     </noscript>
-                    <!-- End comScore Tag -->
+                    {# End comScore Tag #}
+                  </iframe>
+              </figure>
+
+              <figure class="op-tracker">
+                  <iframe>
+                    <script type="text/javascript">
+                      function sendPageView () {
+                          var guidGenerator = function() {
+                              var S4 = function() {
+                                 return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+                              };
+                              return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+                          };
+
+                          var NOW_cookie = $.cookie('NOW_personalize');
+                          if (!NOW_cookie){
+                              NOW_cookie = guidGenerator();
+                          }
+                          $.cookie('NOW_personalize', NOW_cookie);
+
+                          var pageviews = $.ajax({
+                              url: 'https://v4api.nownews.com/pageviews',
+                              headers: {
+                                  'X-NOWnews-API': 'YouCanSeeMeJohnCena'
+                              },
+                              method: 'PUT',
+                              data: {
+                                  cookie: NOW_cookie,
+                                  menuId: '{{ item.menuId }}',
+                                  newsId: '{{ item.guid }}',
+                                  queryString: 'source=FacebookInstantArticle',
+                                  url: {{ item.parseUrl }}
+                              },
+                              dataType: 'json'
+                          });
+
+                          return;
+                      }
+
+                      sendPageView();
+                    </script>
                   </iframe>
               </figure>
 
