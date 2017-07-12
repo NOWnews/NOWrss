@@ -49,7 +49,7 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
                 }
 
                 //內容圖
-                let $ = cheerio.load( news.content , { decodeEntities: false, xmlMode: true });
+                let $ = cheerio.load( news.content , { decodeEntities: false });
                 let iframeSrc = '';
 
                 $('img').filter((i, el) => {
@@ -68,7 +68,13 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
 
                 news.content = $.html();
 
+                // iframe 處理
                 news.content = news.content.replace(/<iframe(?:>|\s+([\s\S]*?)>)/g, `<iframe src="${iframeSrc}" allowfullscreen frameborder="0" width="560" height="315"></iframe>`);
+
+                // 圖片處理
+                news.content = news.content.replace(/(<img.*?>)/mg, (item) => {
+                    return item.replace(/(?=.?)>$/, '/>');
+                });
 
                 return news;
             });
