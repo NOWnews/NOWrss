@@ -29,7 +29,6 @@ module.exports = async (newsArray) => {
             });
             news.content = $.html();
             // ---
-
             items.push({
                 title: news.title,
                 link: 'https://www.nownews.com' + news.parseUrl,
@@ -40,7 +39,9 @@ module.exports = async (newsArray) => {
                 description: news.summary,
                 imgUrl: news.MainPhoto.url || '',
                 imgTitle: news.MainPhoto.desc || news.title,
-                body: news.content
+                body: news.content,
+                menuId: news.MainMenu._id,
+                parseUrl: news.parseUrl
             });
         });
 
