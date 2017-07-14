@@ -151,7 +151,7 @@
                       document,'script','https://connect.facebook.net/en_US/fbevents.js');
                       fbq('init', '1768967316716713'); // Insert your pixel ID here.
                       fbq('track', 'PageView');
-                      fbq('track', 'ViewCnpmontent', {
+                      fbq('track', 'ViewContent', {
                         'title': ia_document.title,
                         'url': '{{ item.link }}',
                         'cate': '{{ item.cate }}',
