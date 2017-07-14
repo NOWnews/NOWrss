@@ -128,7 +128,7 @@
                                   menuId: '{{ item.menuId }}',
                                   newsId: '{{ item.guid }}',
                                   queryString: 'source=FacebookInstantArticle',
-                                  url: {{ item.parseUrl }}
+                                  url: '{{ item.parseUrl }}'
                               },
                               dataType: 'json'
                           });
@@ -153,10 +153,10 @@
                       fbq('track', 'PageView');
                       fbq('track', 'ViewCnpmontent', {
                         'title': ia_document.title,
-                        'url': {{ item.link }},
-                        'cate': {{ item.cate }},
-                        'newsId': {{ item.newsId }},
-                        'author': {{ item.author }}
+                        'url': '{{ item.link }}',
+                        'cate': '{{ item.cate }}',
+                        'newsId': '{{ item.newsId }}',
+                        'author': '{{ item.author }}'
                       });
                     </script>
                   </iframe>
