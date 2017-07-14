@@ -40,6 +40,8 @@ module.exports = async (newsArray) => {
                 imgUrl: news.MainPhoto.url || '',
                 imgTitle: news.MainPhoto.desc || news.title,
                 body: news.content,
+                cate: news.MainMenu.name,
+                newsId: news.sn,
                 menuId: news.MainMenu._id,
                 parseUrl: news.parseUrl
             });
