@@ -62,14 +62,7 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
                     }
                 });
 
-                $('iframe').filter((i, el) => {
-                    iframeSrc = $(el).attr('src');
-                });
-
                 news.content = $.html();
-
-                // iframe 處理
-                news.content = news.content.replace(/<iframe(?:>|\s+([\s\S]*?)>)/g, `<iframe src="${iframeSrc}" allowfullscreen frameborder="0" width="560" height="315"></iframe>`);
 
                 // 圖片處理
                 news.content = news.content.replace(/(<img.*?>)/mg, (item) => {

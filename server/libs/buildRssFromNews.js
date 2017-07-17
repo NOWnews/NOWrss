@@ -96,7 +96,8 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             TaiwanMobileDate: dateFormat(news.startedAt, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
             UTCdate: dateFormat(news.startedAt, 'ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory,
-            TaiwanMobileMainPhoto: TaiwanMobileMainPhoto
+            TaiwanMobileMainPhoto: TaiwanMobileMainPhoto,
+            updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf()
         });
     });
 

@@ -15,6 +15,7 @@
             <endYmdtUnix>{{ milliseconds + 31536000000 }}</endYmdtUnix>
             <publishTimeUnix>{{ milliseconds }}</publishTimeUnix>
             <publishTime>{{ item.date }}</publishTime>
+            <updateTimeUnix>{{ item.updateTimeUnix }}</updateTimeUnix>
             <contents>
                 {% if item.mainPhotoUrl %}
                     <image>
