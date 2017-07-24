@@ -43,23 +43,25 @@
                     <figcaption>{{ item.imgTitle }}</figcaption>
                   </figure>
                 {% endif %}
-
-                {# 圖片新聞 #}
-                {% if item.photos and item.photos.length > 0 %}
-                  <figure class="op-slideshow">
-                    {% for photo in item.photos %}
-                    <figure>
-                      <img src="{{ photo.thumbnail }}" />
-                    </figure>
-                    <figcaption>{{ photo.desc }}</figcaption>
-                    {% endfor %}
-                  </figure>
-                {% endif %}
-
-
               </header>
 
               {{ item.body | safe }}
+
+              {# 圖片新聞 #}
+              {% if item.photos and item.photos.length > 0 %}
+                <figure class="op-slideshow">
+                  {% for photo in item.photos %}
+                    <figure data-feedback="fb:likes,fb:comments">
+                      <img src="{{ photo.url }}"/>
+                      <figcaption class="op-vertical-bottom">
+                        <h1 class="op-vertical-bottom"> {{ loop.index }}/{{ item.photos.length }} </h1>
+                      <cite class="op-vertical-bottom">{{ photo.desc }}</cite>
+                      </figcaption>
+                    </figure>
+                  {% endfor %}
+                  <figcaption><h1>{{ item.title}}</h1></figcaption>
+                </figure>
+              {% endif %}
 
               <figure class="op-ad">
                 <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1789112951323406_1797144030520298&adtype=banner300x250"></iframe>
