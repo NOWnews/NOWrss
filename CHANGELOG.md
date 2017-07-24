@@ -4,6 +4,10 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 格式基於 [Keep a Changelog](http://keepachangelog.com/zh-TW/0.3.0/)
 而項目則基於 [Semantic Versioning](http://semver.org/lang/zh-TW/).
 
+## 1.1.2 - 2017-07-24
+### Change
+- rss fb ia 加上 投影片模式 @Webber
+
 ## 1.1.1 - 2017-07-03
 ### Change
 - 加入內文圖判斷機制，是 nownews 的圖才會加上 imgapi @Webber
