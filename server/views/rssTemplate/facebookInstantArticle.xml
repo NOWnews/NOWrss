@@ -36,12 +36,27 @@
                   <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1789112951323406_1797144030520298&adtype=banner300x250"></iframe>
                 </figure>
 
+                {# 主要圖片 #}
                 {% if item.imgUrl %}
                   <figure>
                     <img src="{{ item.imgUrl }}"/>
                     <figcaption>{{ item.imgTitle }}</figcaption>
                   </figure>
                 {% endif %}
+
+                {# 圖片新聞 #}
+                {% if item.photos and item.photos.length > 0 %}
+                  <figure class="op-slideshow">
+                    {% for photo in items.photos %}
+                    <figure>
+                      <img src="{{ photo.thumbnail }}" />
+                    </figure>
+                    <figcaption>{{ photo.desc }}</figcaption>
+                    {% endfor %}
+                  </figure>
+                {% endif %}
+
+
               </header>
 
               {{ item.body | safe }}

@@ -43,7 +43,8 @@ module.exports = async (newsArray) => {
                 cate: news.MainMenu.name,
                 newsId: news.sn,
                 menuId: news.MainMenu._id,
-                parseUrl: news.parseUrl
+                parseUrl: news.parseUrl,
+                photos: news.Photos
             });
         });
 
