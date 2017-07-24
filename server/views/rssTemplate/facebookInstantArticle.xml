@@ -47,7 +47,7 @@
                 {# 圖片新聞 #}
                 {% if item.photos and item.photos.length > 0 %}
                   <figure class="op-slideshow">
-                    {% for photo in items.photos %}
+                    {% for photo in item.photos %}
                     <figure>
                       <img src="{{ photo.thumbnail }}" />
                     </figure>
