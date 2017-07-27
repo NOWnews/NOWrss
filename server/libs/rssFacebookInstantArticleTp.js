@@ -28,7 +28,25 @@ module.exports = async (newsArray) => {
                     .replaceWith(`<figure class="op-interactive">${iframe}</figure>`);
             });
             news.content = $.html();
+
+            // 濾掉特殊字元 叫做 backspace 在正則中以 [\b] 表示
+            news.content = news.content.replace(/[\b]/g, '');
+            news.title = news.title.replace(/[\b]/g, '');
+            news.summary = news.summary.replace(/[\b]/g, '');
             // ---
+
+            if (news.MainVideo && news.MainVideo.videoFrom === 'EXTERNAL') {
+                let iframe;
+                if (news.MainVideo.url.indexOf('facebook') > -1) {
+                    let id = news.MainVideo.url.slice(-2,-1);
+                    iframe = '<figure class="op-interactive"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fsunnyhundalorg%2Fvideos%2F'+ id +'%2F&amp;show_text=0" height="400" width="480" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen=""></iframe></figure>';
+                } else {
+                    let id = news.MainVideo.url.split('/').pop();
+                    iframe = '<figure class="op-interactive"><iframe width="560" height="315" allowfullscreen frameborder="0" src="https://www.youtube.com/embed/'+ id +'"></iframe></figure>';
+                }
+                news.content = news.content + iframe;
+            }
+
             items.push({
                 title: news.title,
                 link: 'https://www.nownews.com' + news.parseUrl,
@@ -46,6 +64,7 @@ module.exports = async (newsArray) => {
                 parseUrl: news.parseUrl,
                 photos: news.Photos
             });
+
         });
 
         return await Promise.resolve({
