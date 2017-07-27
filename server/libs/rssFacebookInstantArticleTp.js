@@ -29,10 +29,10 @@ module.exports = async (newsArray) => {
             });
             news.content = $.html();
 
-            // 濾掉特殊字元, 目前已知 
-            news.content = news.content.replace(//g, '');
-            news.title = news.title.replace(//g, '');
-            news.summary = news.summary.replace(//g, '');
+            // 濾掉特殊字元 叫做 backspace 在正則中以 [\b] 表示
+            news.content = news.content.replace(/[\b]/g, '');
+            news.title = news.title.replace(/[\b]/g, '');
+            news.summary = news.summary.replace(/[\b]/g, '');
             // ---
 
             if (news.MainVideo && news.MainVideo.videoFrom === 'EXTERNAL') {
