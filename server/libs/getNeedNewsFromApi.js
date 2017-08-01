@@ -12,16 +12,16 @@ import is from 'is_js';
 import querystring from 'querystring';
 import redis from '../redis';
 
-module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookInstantArticle) => {
+module.exports = async(startTime, endTime, categories, channelId, isFacebookInstantArticle) => {
 
     debug('categories = %j',categories)
 
     try {
-        if (!startEpoch) {
+        if (!startTime) {
             return Promise.reject(new Error('要帶入 start 的 epoch 時間'));
         }
 
-        if (!endEpoch) {
+        if (!endTime) {
             return Promise.reject(new Error('要帶入 end 的 epoch 時間'));
         }
 
@@ -34,7 +34,7 @@ module.exports = async(startEpoch, endEpoch, categories, channelId, isFacebookIn
 
         let limit = 60;
         let formatCategories = querystring.stringify({"categories": categories});
-        let url = `/rss?start=${startEpoch}&end=${endEpoch}&limit=${limit}&sort=-startedAt&${formatCategories}`;
+        let url = `/rss?start=${startTime}&end=${endTime}&limit=${limit}&sort=-startedAt&${formatCategories}`;
 
         let { data: allNews } = await axios.get(url);
 

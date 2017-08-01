@@ -4,6 +4,10 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 格式基於 [Keep a Changelog](http://keepachangelog.com/zh-TW/0.3.0/)
 而項目則基於 [Semantic Versioning](http://semver.org/lang/zh-TW/).
 
+## 1.1.4 - 2017-07-27
+### Change
+- 調整RSS新聞時間晚3分鐘 @appleoxxo
+
 ## 1.1.3 - 2017-07-27
 ### Change
 - rss fb ia 影片新聞的影片拉到文中 @Webber
