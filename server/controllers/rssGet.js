@@ -17,7 +17,7 @@ router.route('/rss/:channelId')
             let UUID = uuid.v4();
             let startTime = moment().tz('Asia/Taipei').add(-100, 'day').format('YYYY-MM-DD');
             let today = moment().tz('Asia/Taipei');
-            let endTime = today.format('YYYY-MM-DD');
+            let endTime = today.add(-3, 'm').format('YYYY-MM-DDTHH:mm:ss');
             let ISOTime = today.format();
             let dateTime = today.format('ddd DD MMM YYYY HH:mm:ss ZZ');
             let TaiwanMobileDate = today.format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
