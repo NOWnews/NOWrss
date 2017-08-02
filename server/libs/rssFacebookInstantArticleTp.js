@@ -55,7 +55,7 @@ module.exports = async (newsArray) => {
                 isoDate: utils.dateFormat(news.startedAt),
                 author: news.newsBy,
                 description: news.summary,
-                imgUrl: news.MainPhoto.url || '',
+                imgUrl: news.MainPhoto.googleCDN || news.MainPhoto.url || '',
                 imgTitle: news.MainPhoto.desc || news.title,
                 body: news.content,
                 cate: news.MainMenu.name,
