@@ -12,7 +12,7 @@
         <lastBuildDate>{{ dateTime }}</lastBuildDate>
         <description>Latest news from www.nownews.com</description>
         <copyright>Copyright 2016, NOWnews Network Inc.</copyright>
-        <ttl>60</ttl>
+        <ttl>6</ttl>
         {% block item %}{% endblock %}
     </channel>
 </rss>
