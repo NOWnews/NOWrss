@@ -9,6 +9,9 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 ### Change
 - rss 濾掉已知特殊字元 @Webber
 
+## 1.1.4 - 2017-07-27
+### Change
+- 調整RSS新聞時間晚3分鐘 @appleoxxo
 
 ## 1.1.3 - 2017-07-27
 ### Change
