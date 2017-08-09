@@ -80,6 +80,16 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             shortTitle = sify(shortTitle);
         }
 
+        // 濾掉特殊字元 叫做 backspace 在正則中以 [\b] 表示
+        description = description.replace(/[\b]/g, '');
+        mainPhotoBody = mainPhotoBody.replace(/[\b]/g, '');
+        mainPhotoBody = mainPhotoBody.replace(/[\b]/g, '');
+        title = title.replace(/[\b]/g, '');
+        author = author.replace(/[\b]/g, '');
+        summary = summary.replace(/[\b]/g, '');
+        subcategory = subcategory.replace(/[\b]/g, '');
+        shortTitle = shortTitle.replace(/[\b]/g, '');
+
         items.push({
             id: news.sn,
             title:  title,
