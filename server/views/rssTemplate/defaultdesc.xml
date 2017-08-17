@@ -4,7 +4,7 @@
     {% for item in items %}{% if item.id != 2582267 %}
         <item>
             <id>{{item.id}}</id>
-            <title>{{ item.title }}</title>
+            <title><![CDATA[ {{ item.title }} ]]></title>
             <link>{{ item.url }}?utm_source=feeds&amp;utm_medium=rss&amp;utm_campaign=wayne</link>
             <description>
                 <![CDATA[

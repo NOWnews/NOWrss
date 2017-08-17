@@ -9,7 +9,7 @@
             <publishCountries>
                 <country>TW</country>
             </publishCountries>
-            <title>{{ item.title }}</title>
+            <title><![CDATA[ {{ item.title }} ]]></title>
             <category>{{ item.subcategory }}</category>
             <startYmdtUnix>{{ milliseconds }}</startYmdtUnix>
             <endYmdtUnix>{{ milliseconds + 31536000000 }}</endYmdtUnix>
