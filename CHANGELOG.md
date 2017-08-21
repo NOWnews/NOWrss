@@ -7,6 +7,7 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 ## [Unreleased]
 
 ### Change
+- 加上 crontab, 三天一次對 db.counts 的清理 @Webber
 - rss 濾掉已知特殊字元 @Webber
 
 ## 1.1.4 - 2017-07-27
