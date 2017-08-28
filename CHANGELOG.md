@@ -7,6 +7,10 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 ## [Unreleased]
 
 ### Change
+- db指令 remove 換成 drop @Webber
+
+## 1.1.5 - 2017-08-23
+### Change
 - 修正 yahoo 文章內首圖的格式 @Webber
 - 加上 crontab, 三天一次對 db.counts 的清理 @Webber
 - rss 濾掉已知特殊字元 @Webber
