@@ -12,7 +12,7 @@
             <author>{{ item.author }}</author>
             {% if item.mainPhotoUrl %}<media:content url="{{ item.mainPhotoUrl }}" type="image/jpeg"></media:content>{% endif %}
             <content:encoded>
-            {% if item.mainPhotoUrl %}<img src="{{ item.mainPhotoUrl }}" alt="{{ item.mainPhotoDesc }}" />{% endif %}{{ item.description }}
+            {% if item.mainPhotoUrl %}<div class="main-photo"><img src="{{ item.mainPhotoUrl }}" alt="{{ item.mainPhotoDesc }}" /></div>{% endif %}{{ item.description }}
             </content:encoded>
         </item>
     {% endif %}{% endfor %}
