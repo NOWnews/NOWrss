@@ -6,6 +6,7 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+## 1.1.6 - 2017-08-31
 ### Change
 - yahoo 文章內首圖改回之前的格式 @Webber
 - db指令 remove 換成 drop @Webber
