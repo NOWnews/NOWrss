@@ -7,6 +7,7 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 ## [Unreleased]
 
 ### Change
+- 內文圖判斷有無 imgapi，沒有才加入 imgapi
 - yahoo 內文圖改用 imgapi 測試
 
 ## 1.1.6 - 2017-08-31

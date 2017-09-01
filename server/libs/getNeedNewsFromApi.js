@@ -57,7 +57,11 @@ module.exports = async(startTime, endTime, categories, channelId, isFacebookInst
                         // 不外送的圖片從他外層的 P 整個刪掉
                         $(el).closest('p').remove();
                     } else {
-                        let imgUrl = $(el).attr('src').indexOf('nownews') < 0? $(el).attr('src'): 'https://imgapiv2.nownews.com/?h=545&q=70&src=' + $(el).attr('src');
+                        let imgUrl = $(el).attr('src');
+                        if ($(el).attr('src').indexOf('nownews') < 0 && $(el).attr('src').indexOf('https://imgapiv2.nownews.com/') < 0) {
+                            imgUrl = 'https://imgapiv2.nownews.com/?h=545&q=70&src=' + imgUrl;
+                        }
+                        // let imgUrl = $(el).attr('src').indexOf('nownews') < 0? $(el).attr('src'): 'https://imgapiv2.nownews.com/?h=545&q=70&src=' + $(el).attr('src');
                         $(el).attr('src', imgUrl);
                     }
                 });
