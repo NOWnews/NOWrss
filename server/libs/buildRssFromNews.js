@@ -52,12 +52,21 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         let mainPhotoDesc = ''
         let mainPhotoUrl = '';
         let TaiwanMobileMainPhoto = '';
+
+        // TODO 測試 yahoo 用
+        let originalPhotoUrl = '';
+        let imgApiOriginalPhotoUrl = '';
+
         // 圖片
         if (news.MainPhoto && news.MainPhoto.isDeliver) {
             mainPhotoDesc = news.MainPhoto.desc || '';
             mainPhotoUrl = news.MainPhoto.googleCDN || `https://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}` || '';
             mainPhotoBody = `<div class="main-photo"><img src="${mainPhotoUrl}" alt="${mainPhotoDesc}" /><cite>${mainPhotoDesc}</cite></div>`;
             TaiwanMobileMainPhoto = news.MainPhoto.url;
+
+            // TODO 測試 yahoo 用
+            originalPhotoUrl = news.MainPhoto.url;
+            imgApiOriginalPhotoUrl = `https://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}`;
         }
 
         // 最後傳進去的變數
@@ -106,7 +115,9 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             UTCdate: dateFormat(news.startedAt, 'ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory,
             TaiwanMobileMainPhoto: TaiwanMobileMainPhoto,
-            updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf()
+            updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf(),
+            originalPhotoUrl: originalPhotoUrl,
+            imgApiOriginalPhotoUrl: imgApiOriginalPhotoUrl
         });
     });
 
