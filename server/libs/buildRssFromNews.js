@@ -126,8 +126,8 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
     // TODO 測試 yahoo 用
     items = await Promise.map(items, async (news, index) => {
         if (news.mainPhotoUrl){
-            let is59a = news.mainPhotoUrl.indexOf('/59a') > 0;
-            if (is59a && template === 'YAHOO') {
+            let isNowImg = news.mainPhotoUrl.indexOf('img.nownews.com') > -1;
+            if (isNowImg && template === 'YAHOO') {
             // if (is59a) {
                 let imgId = news.mainPhotoUrl.split('/').pop()
                 let imageObj = {
