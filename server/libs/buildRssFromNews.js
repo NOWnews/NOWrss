@@ -6,6 +6,8 @@ import moment from 'moment-timezone';
 import { dateFormat } from './../utils';
 import _ from 'lodash';
 import { sify } from 'chinese-conv';
+import { Image } from '../models';
+
 
 module.exports = async (newsArray, simplifiedChinese, template) => {
 
@@ -66,7 +68,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
 
             // TODO 測試 yahoo 用
             originalPhotoUrl = news.MainPhoto.url;
-            imgApiOriginalPhotoUrl = `https://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}`;
+            imgApiOriginalPhotoUrl = `http://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}`;
         }
 
         // 最後傳進去的變數
@@ -117,8 +119,27 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             TaiwanMobileMainPhoto: TaiwanMobileMainPhoto,
             updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf(),
             originalPhotoUrl: originalPhotoUrl,
-            imgApiOriginalPhotoUrl: imgApiOriginalPhotoUrl
+            imgApiOriginalPhotoUrl: imgApiOriginalPhotoUrl,
         });
+    });
+
+    // TODO 測試 yahoo 用
+    items = await Promise.map(items, async (news, index) => {
+        if (news.mainPhotoUrl){
+            let is59a = news.mainPhotoUrl.indexOf('/59a') > 0;
+            // if (is59a && template === 'YAHOO') {
+            if (is59a) {
+                let imgId = news.mainPhotoUrl.split('/').pop()
+                let imageObj = {
+                    url: `/nownews_production/images/${imgId}`
+                }
+                let img = await Image.createAsync(imageObj);
+                let uri = 'http://feed.nownews.com:9453';
+                news.yahooProxyImg = `${uri}/images/${img.sn}`
+                console.log('------------', 'L62', news.yahooProxyImg)
+            }
+        }
+        return news;
     });
 
     return await Promise.resolve({
