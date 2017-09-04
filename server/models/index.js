@@ -20,9 +20,11 @@ autoIncrement.initialize(connection);
 const user = require('./user');
 const rss = require('./rss');
 const count = require('./count');
+const image = require('./image');
 
 module.exports = {
     User: user,
     Rss: rss,
-    Count: count
+    Count: count,
+    Image: image
 };
