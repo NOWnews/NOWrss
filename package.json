@@ -25,6 +25,7 @@
     "cors": "^2.8.3",
     "debug": "^2.6.8",
     "express": "^4.15.3",
+    "express-http-proxy": "^1.0.6",
     "express-useragent": "^1.0.7",
     "feed-validator": "^1.0.1",
     "fs-extra": "^0.30.0",
