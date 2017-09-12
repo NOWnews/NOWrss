@@ -28,7 +28,7 @@ router.route('/rssFacebookGet')
 
             res.charset = 'utf-8';
             res.set('Content-Type', 'text/xml');
-            res.render(rssXml.xml, {
+            return res.render(rssXml.xml, {
                 items: rssXml.items,
                 dateTime: ISOTime
             });
