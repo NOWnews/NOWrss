@@ -42,7 +42,7 @@ module.exports = async (newsArray) => {
                     let id = news.MainVideo.url.slice(-2,-1);
                     iframe = '<figure class="op-interactive"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fsunnyhundalorg%2Fvideos%2F'+ id +'%2F&amp;show_text=0" height="400" width="480" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen=""></iframe></figure>';
                 } else {
-                    let id = news.MainVideo.url.split('/').pop();
+                    let id = news.MainVideo.url.split('?v=').pop();
                     iframe = '<figure class="op-interactive"><iframe width="560" height="315" allowfullscreen frameborder="0" src="https://www.youtube.com/embed/'+ id +'"></iframe></figure>';
                 }
                 news.content = news.content + iframe;

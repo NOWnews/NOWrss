@@ -5,6 +5,7 @@ import Promise from 'bluebird';
 import moment from 'moment-timezone';
 import { dateFormat } from './../utils';
 import _ from 'lodash';
+import cheerio from 'cheerio';
 import { sify } from 'chinese-conv';
 
 module.exports = async (newsArray, simplifiedChinese, template) => {
@@ -58,6 +59,19 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             mainPhotoUrl = news.MainPhoto.googleCDN || `https://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}` || '';
             mainPhotoBody = `<div class="main-photo"><img src="${mainPhotoUrl}" alt="${mainPhotoDesc}" /><cite>${mainPhotoDesc}</cite></div>`;
             TaiwanMobileMainPhoto = news.MainPhoto.url;
+        }
+
+        // yahoo 濾掉 影片
+        if (template === 'YAHOO'){
+            let $ = cheerio.load( news.content , { decodeEntities: false });
+            $('iframe').filter(function(i, el) {
+                let iframe = $(el).parent('p').html();
+                console.log(iframe, 'L69')
+                if (iframe.indexOf('youtube') > -1){
+                    $(el).closest('p').remove();
+                }
+            });
+            news.content = $.html();
         }
 
         // 最後傳進去的變數
