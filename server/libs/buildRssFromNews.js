@@ -7,6 +7,8 @@ import { dateFormat } from './../utils';
 import _ from 'lodash';
 import cheerio from 'cheerio';
 import { sify } from 'chinese-conv';
+import { Image } from '../models';
+
 
 module.exports = async (newsArray, simplifiedChinese, template) => {
 
@@ -53,12 +55,21 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         let mainPhotoDesc = ''
         let mainPhotoUrl = '';
         let TaiwanMobileMainPhoto = '';
+
+        // TODO 測試 yahoo 用
+        let originalPhotoUrl = '';
+        let imgApiOriginalPhotoUrl = '';
+
         // 圖片
         if (news.MainPhoto && news.MainPhoto.isDeliver) {
             mainPhotoDesc = news.MainPhoto.desc || '';
             mainPhotoUrl = news.MainPhoto.googleCDN || `https://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}` || '';
             mainPhotoBody = `<div class="main-photo"><img src="${mainPhotoUrl}" alt="${mainPhotoDesc}" /><cite>${mainPhotoDesc}</cite></div>`;
             TaiwanMobileMainPhoto = news.MainPhoto.url;
+
+            // TODO 測試 yahoo 用
+            originalPhotoUrl = news.MainPhoto.url;
+            imgApiOriginalPhotoUrl = `http://imgapiv2.nownews.com/?h=545&q=70&src=${news.MainPhoto.url}`;
         }
 
         // yahoo 濾掉 影片
@@ -120,8 +131,29 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             UTCdate: dateFormat(news.startedAt, 'ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory,
             TaiwanMobileMainPhoto: TaiwanMobileMainPhoto,
-            updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf()
+            updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf(),
+            originalPhotoUrl: originalPhotoUrl,
+            imgApiOriginalPhotoUrl: imgApiOriginalPhotoUrl,
         });
+    });
+
+    // TODO 測試 yahoo 用
+    items = await Promise.map(items, async (news, index) => {
+        if (news.mainPhotoUrl){
+            let isNowImg = news.mainPhotoUrl.indexOf('img.nownews.com') > -1;
+            if (isNowImg && template === 'YAHOO') {
+            // if (is59a) {
+                let imgId = news.mainPhotoUrl.split('/').pop()
+                let imageObj = {
+                    url: `/nownews_production/images/${imgId}`
+                }
+                let img = await Image.createAsync(imageObj);
+                let uri = 'http://feed.nownews.com:9453';
+                news.yahooProxyImg = `${uri}/images/${img.sn}`
+                console.log('------------', 'L62', news.yahooProxyImg)
+            }
+        }
+        return news;
     });
 
     return await Promise.resolve({

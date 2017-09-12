@@ -10,9 +10,9 @@
             <guid isPermaLink="true">{{ item.url }}</guid>
             <category>{{ item.subcategory }}</category>
             <author>{{ item.author }}</author>
-            {% if item.mainPhotoUrl %}<media:content url="{{ item.mainPhotoUrl }}" type="image/jpeg"></media:content>{% endif %}
+            {% if item.mainPhotoUrl %}<media:content url="{{ item.yahooProxyImg if item.yahooProxyImg else item.imgApiOriginalPhotoUrl }}" type="image/jpeg"></media:content>{% endif %}
             <content:encoded>
-            {% if item.mainPhotoUrl %}<div class="main-photo"><img src="{{ item.mainPhotoUrl }}" alt="{{ item.mainPhotoDesc }}" /></div>{% endif %}{{ item.description }}
+            {% if item.mainPhotoUrl %}<div class="main-photo"><img src="{{ item.yahooProxyImg if item.yahooProxyImg else item.imgApiOriginalPhotoUrl }}" alt="{{ item.mainPhotoDesc }}" /></div>{% endif %}{{ item.description }}
             </content:encoded>
         </item>
     {% endif %}{% endfor %}
