@@ -6,6 +6,12 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+## 1.1.7 - 2017-09-13
+### Change
+- yahoo 濾掉 youtube 影片 @Webber
+## Fixed
+- 修正 fb rss 取得 youtube id 的方式 @Webber
+
 ## 1.1.6 - 2017-08-31
 ### Change
 - yahoo 濾掉 youtube 影片 @Webber
