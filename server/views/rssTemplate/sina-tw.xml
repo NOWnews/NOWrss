@@ -1,14 +1,13 @@
 {% extends "./base/base.xml" %}
-
 {% block item %}
     {% for item in items %}
         <item>
             <id>{{item.id}}</id>
             <title><![CDATA[ {{ item.title }} ]]></title>
-            <link>{{ item.url }}?utm_source=feeds&amp;utm_medium=rss&amp;utm_campaign=wayne</link>
+            <link>{{ item.url }}</link>
             <description>
                 <![CDATA[
-                    {{ item.summary }}
+                    {{ item.mainPhotoBody | safe }}{{ item.description | safe }}{{ item.sameCatNewsHtml | safe }}
                 ]]>
             </description>
             <summary>

@@ -38,13 +38,17 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         case 'DEFAULTDESC':
             templateFile = 'defaultdesc';
             break;
+        case 'SINATW':
+            templateFile = 'sina-tw';
+            break;
         default:
             templateFile = 'default';
     }
 
 
+
     /* loop over data and add to feed */
-    _.forEach(newsArray, (news) => {
+    items = await Promise.all(_.map(newsArray, async (news)=>{
         // 沒有新聞的話，就離開
         if(!news){ return true; }
         if(!news.shortTitle){ console.error('id: ' + news._id + ' 沒有下短標。'); }
@@ -72,6 +76,21 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
                 }
             });
             news.content = $.html();
+        }
+
+         // 新浪台灣 內文最後加兩篇同分類的最新新聞
+        if (template === 'SINATW'){
+            let needNewsNumber = 2;
+            let url = `/cat/${news.MainMenu.categoryName}?limit=${needNewsNumber}`;
+            let { data : { newsList : sameCatNews } } = await axios.get(url);
+            if(sameCatNews){
+                let sameCatNewsHtml = `<div><h2>相關新聞</h2>`;
+                _.forEach(sameCatNews, (n)=>{
+                    sameCatNewsHtml += `<h3><a href="${n.completeUrl}">${n.title}</a></h3>`;
+                })
+                sameCatNewsHtml += `</div>`;
+                news.sameCatNewsHtml = sameCatNewsHtml;
+            }
         }
 
         // 最後傳進去的變數
@@ -103,7 +122,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         subcategory = subcategory.replace(/[\b]/g, '');
         shortTitle = shortTitle.replace(/[\b]/g, '');
 
-        items.push({
+        return {
             id: news.sn,
             title:  title,
             shortTitle: shortTitle,
@@ -114,6 +133,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             description: description,
             author: author,
             summary: summary,
+            sameCatNewsHtml: news.sameCatNewsHtml || '',
             date: dateFormat(news.startedAt, 'ddd DD MMM YYYY HH:mm:ss ZZ'),
             dateTime: news.startedAt,
             TaiwanMobileDate: dateFormat(news.startedAt, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
@@ -121,8 +141,8 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             subcategory: subcategory,
             TaiwanMobileMainPhoto: TaiwanMobileMainPhoto,
             updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf()
-        });
-    });
+        };
+    }));
 
     return await Promise.resolve({
         items: items,
