@@ -108,7 +108,8 @@ module.exports = async (req, res, next) => {
                     selected: rssData.template === 'DEFAULTDESC' ? 'selected' : ''
                 },{
                     title: '新浪台灣(內文最後加上2篇相關新聞) 版型',
-                    value: 'SINATW'
+                    value: 'SINATW',
+                    selected: rssData.template === 'SINATW' ? 'selected' : ''
                 }],
                 type: 'select'
             },

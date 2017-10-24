@@ -77,22 +77,6 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             });
             news.content = $.html();
         }
-
-         // 新浪台灣 內文最後加兩篇同分類的最新新聞
-        if (template === 'SINATW'){
-            let needNewsNumber = 2;
-            let url = `/cat/${news.MainMenu.categoryName}?limit=${needNewsNumber}`;
-            let { data : { newsList : sameCatNews } } = await axios.get(url);
-            if(sameCatNews){
-                let sameCatNewsHtml = `<div><h2>相關新聞</h2>`;
-                _.forEach(sameCatNews, (n)=>{
-                    sameCatNewsHtml += `<h3><a href="${n.completeUrl}">${n.title}</a></h3>`;
-                })
-                sameCatNewsHtml += `</div>`;
-                news.sameCatNewsHtml = sameCatNewsHtml;
-            }
-        }
-
         // 最後傳進去的變數
         let description = news.content;
         let title = news.title;
