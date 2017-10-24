@@ -30,7 +30,7 @@ const schema = new Schema({
     template: {
         type: String,
         default: 'DEFAULT',
-        enum: ['DEFAULT', 'YAHOO', 'FACEBOOK', 'TAIWANMOBILE', 'SOCIAL', 'LINE', 'DEFAULTDESC','SINATW']
+        enum: ['DEFAULT', 'YAHOO', 'FACEBOOK', 'TAIWANMOBILE', 'SOCIAL', 'LINE', 'DEFAULTDESC', 'SINATW']
     },
 
     simplifiedChinese: {

@@ -48,7 +48,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
 
 
     /* loop over data and add to feed */
-    _.forEach(newsArray, (news)=>{
+    _.forEach(newsArray, (news) => {
         // 沒有新聞的話，就離開
         if(!news){ return true; }
         if(!news.shortTitle){ console.error('id: ' + news._id + ' 沒有下短標。'); }
