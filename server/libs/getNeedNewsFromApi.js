@@ -47,12 +47,7 @@ module.exports = async(startTime, endTime, categories, channelId, isFacebookInst
                     let url = `/cat/${news.MainMenu.categoryName}?limit=${needNewsNumber}`;
                     let { data : { newsList : sameCatNews } } = await axios.get(url);
                     if(sameCatNews){
-                        let sameCatNewsHtml = `<div><h2>相關新聞</h2>`;
-                        _.forEach(sameCatNews, (n)=>{
-                            sameCatNewsHtml += `<h3><a href="${n.completeUrl}">${n.title}</a></h3>`;
-                        })
-                        sameCatNewsHtml += `</div>`;
-                        news.sameCatNewsHtml = sameCatNewsHtml;
+                        news.sameCatNews = sameCatNews;
                     }
                 }
 

@@ -48,7 +48,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
 
 
     /* loop over data and add to feed */
-    items = await Promise.all(_.map(newsArray, async (news)=>{
+    _.forEach(newsArray, (news)=>{
         // 沒有新聞的話，就離開
         if(!news){ return true; }
         if(!news.shortTitle){ console.error('id: ' + news._id + ' 沒有下短標。'); }
@@ -70,7 +70,6 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             let $ = cheerio.load( news.content , { decodeEntities: false });
             $('iframe').filter(function(i, el) {
                 let iframe = $(el).parent('p').html();
-                console.log(iframe, 'L69')
                 if (iframe.indexOf('youtube') > -1){
                     $(el).closest('p').remove();
                 }
@@ -106,7 +105,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         subcategory = subcategory.replace(/[\b]/g, '');
         shortTitle = shortTitle.replace(/[\b]/g, '');
 
-        return {
+        items.push({
             id: news.sn,
             title:  title,
             shortTitle: shortTitle,
@@ -117,7 +116,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             description: description,
             author: author,
             summary: summary,
-            sameCatNewsHtml: news.sameCatNewsHtml || '',
+            sameCatNews: news.sameCatNews || '',
             date: dateFormat(news.startedAt, 'ddd DD MMM YYYY HH:mm:ss ZZ'),
             dateTime: news.startedAt,
             TaiwanMobileDate: dateFormat(news.startedAt, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),
@@ -125,8 +124,8 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             subcategory: subcategory,
             TaiwanMobileMainPhoto: TaiwanMobileMainPhoto,
             updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf()
-        };
-    }));
+        });
+    });
 
     return await Promise.resolve({
         items: items,
