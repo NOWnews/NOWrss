@@ -1,7 +1,7 @@
 {% extends "./base/yahooBase.xml" %}
 
 {% block item %}
-    {% for item in items %}{% if item.id != 2582267 %}
+    {% for item in items %}
         <item>
             <title>{{ item.title }}</title>
             <link>{{ item.url }}</link>
@@ -15,5 +15,5 @@
             {% if item.mainPhotoUrl %}<div class="main-photo"><img src="{{ item.mainPhotoUrl }}" alt="{{ item.mainPhotoDesc }}" /></div>{% endif %}{{ item.description }}
             </content:encoded>
         </item>
-    {% endif %}{% endfor %}
+    {% endfor %}
 {% endblock %}

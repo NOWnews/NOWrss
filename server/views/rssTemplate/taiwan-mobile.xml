@@ -1,7 +1,7 @@
 {% extends "./base/taiwanMobileBase.xml" %}
 
 {% block item %}
-    {% for item in items %}{% if item.id != 2582267 %}
+    {% for item in items %}
         <item>
             <id>{{item.id}}</id>
             <title><![CDATA[ {{ item.title }} ]]></title>
@@ -23,5 +23,5 @@
             <author>{{ item.author }}</author>
             <pubDate>{{ item.TaiwanMobileDate }}</pubDate>
         </item>
-    {% endif %}{% endfor %}
+    {% endfor %}
 {% endblock %}

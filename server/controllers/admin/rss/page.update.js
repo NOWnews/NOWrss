@@ -106,6 +106,10 @@ module.exports = async (req, res, next) => {
                     title: '第三方工具 描述 版型',
                     value: 'DEFAULTDESC',
                     selected: rssData.template === 'DEFAULTDESC' ? 'selected' : ''
+                },{
+                    title: '新浪台灣(內文最後加上2篇相關新聞) 版型',
+                    value: 'SINATW',
+                    selected: rssData.template === 'SINATW' ? 'selected' : ''
                 }],
                 type: 'select'
             },

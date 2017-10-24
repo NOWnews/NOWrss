@@ -38,9 +38,13 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         case 'DEFAULTDESC':
             templateFile = 'defaultdesc';
             break;
+        case 'SINATW':
+            templateFile = 'sina-tw';
+            break;
         default:
             templateFile = 'default';
     }
+
 
 
     /* loop over data and add to feed */
@@ -66,14 +70,12 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             let $ = cheerio.load( news.content , { decodeEntities: false });
             $('iframe').filter(function(i, el) {
                 let iframe = $(el).parent('p').html();
-                console.log(iframe, 'L69')
                 if (iframe.indexOf('youtube') > -1){
                     $(el).closest('p').remove();
                 }
             });
             news.content = $.html();
         }
-
         // 最後傳進去的變數
         let description = news.content;
         let title = news.title;
@@ -114,6 +116,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             description: description,
             author: author,
             summary: summary,
+            sameCatNews: news.sameCatNews || '',
             date: dateFormat(news.startedAt, 'ddd DD MMM YYYY HH:mm:ss ZZ'),
             dateTime: news.startedAt,
             TaiwanMobileDate: dateFormat(news.startedAt, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ'),

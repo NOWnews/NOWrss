@@ -12,7 +12,7 @@ import is from 'is_js';
 import querystring from 'querystring';
 import redis from '../redis';
 
-module.exports = async(startTime, endTime, categories, channelId, isFacebookInstantArticle) => {
+module.exports = async(startTime, endTime, categories, channelId, isFacebookInstantArticle, template) => {
 
     debug('categories = %j',categories)
 
@@ -39,9 +39,17 @@ module.exports = async(startTime, endTime, categories, channelId, isFacebookInst
         let { data: allNews } = await axios.get(url);
 
         debug('共撈了 %s 則新聞', allNews.length);
-
         if(!isFacebookInstantArticle){
-            allNews = _.map(allNews,(news) => {
+            allNews = await Promise.all(_.map(allNews, async (news) => {
+                // 新浪台灣 內文最後加兩篇同分類的最新新聞
+                if (template === 'SINATW'){
+                    let needNewsNumber = 2;
+                    let url = `/cat/${news.MainMenu.categoryName}?limit=${needNewsNumber}`;
+                    let { data : { newsList : sameCatNews } } = await axios.get(url);
+                    if(sameCatNews){
+                        news.sameCatNews = sameCatNews;
+                    }
+                }
 
                 //主圖
                 if(news.MainPhoto && news.MainPhoto.isDeliver===false){
@@ -70,7 +78,7 @@ module.exports = async(startTime, endTime, categories, channelId, isFacebookInst
                 });
 
                 return news;
-            });
+            }));
         }
         // debug('allNews = %j ', allNews);
 
