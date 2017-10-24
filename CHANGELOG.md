@@ -7,11 +7,13 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 ## [Unreleased]
 
 ## 1.1.8 - 2017-10.24
+
 ### Added
 - 依業務需求 新增 新浪台灣(內文最後加上2篇相關新聞) 版型 @appleoxxo
 
 ### Change
 - 移除已經不需要防亂碼程式碼 @appleoxxo
+- 新聞內文圖的URL修改 @appleoxxo
 
 ## 1.1.7 - 2017-09-13
 ### Added
