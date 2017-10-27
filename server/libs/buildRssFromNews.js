@@ -41,6 +41,9 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         case 'SINATW':
             templateFile = 'sina-tw';
             break;
+        case 'XONE':
+            templateFile = 'xone';
+            break;
         default:
             templateFile = 'default';
     }
