@@ -1,0 +1,27 @@
+{% extends "./base/base.xml" %}
+
+{% block item %}
+    {% for item in items %}
+        <item>
+            <id>{{item.id}}</id>
+            <title><![CDATA[ {{ item.title }} ]]></title>
+            <link>{{ item.url + '?utm_source=xone&utm_medium=rss&utm_campaign=201710'}}</link>
+            <description>
+                <![CDATA[
+                    {{ item.mainPhotoBody | safe }}{{ item.description | safe }}
+                ]]>
+            </description>
+            <summary>
+                {{ item.summary }}
+            </summary>
+            <guid isPermaLink="true">{{ item.url }}</guid>
+            <subcategory>
+                <![CDATA[
+                    {{ item.subcategory }}
+                ]]>
+            </subcategory>
+            <author>{{ item.author }}</author>
+            <pubDate>{{ item.date }}</pubDate>
+        </item>
+    {% endfor %}
+{% endblock %}

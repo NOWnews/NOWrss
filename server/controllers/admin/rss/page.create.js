@@ -56,11 +56,14 @@ module.exports = async (req, res, next) => {
                     title: 'Yahoo 版型',
                     value: 'YAHOO'
                 },{
-                    title: 'Facebook InstantArticle 版型',
-                    value: 'FACEBOOK'
-                },{
                     title: '台灣大哥大 版型',
                     value: 'TAIWANMOBILE'
+                },{
+                    title: '新浪台灣(內文最後加上2篇相關新聞) 版型',
+                    value: 'SINATW'
+                },{
+                    title: 'Xone 版型(有帶 utm參數) 版型',
+                    value: 'XONE'
                 },{
                     title: '社群用 版型',
                     value: 'SOCIAL'
@@ -68,8 +71,8 @@ module.exports = async (req, res, next) => {
                     title: '第三方工具 描述 版型',
                     value: 'DEFAULTDESC'
                 },{
-                    title: '新浪台灣(內文最後加上2篇相關新聞) 版型',
-                    value: 'SINATW'
+                    title: 'Facebook InstantArticle 版型',
+                    value: 'FACEBOOK'
                 }],
                 type: 'select'
             },

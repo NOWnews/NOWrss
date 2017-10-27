@@ -91,13 +91,17 @@ module.exports = async (req, res, next) => {
                     value: 'YAHOO',
                     selected: rssData.template === 'YAHOO' ? 'selected' : ''
                 },{
-                    title: 'Facebook InstantArticle 版型',
-                    value: 'FACEBOOK',
-                    selected: rssData.template === 'FACEBOOK' ? 'selected' : ''
-                },{
                     title: '台灣大哥大 版型',
                     value: 'TAIWANMOBILE',
                     selected: rssData.template === 'TAIWANMOBILE' ? 'selected' : ''
+                },{
+                    title: '新浪台灣(內文最後加上2篇相關新聞) 版型',
+                    value: 'SINATW',
+                    selected: rssData.template === 'SINATW' ? 'selected' : ''
+                },{
+                    title: 'Xone 版型(有帶 utm參數)',
+                    value: 'XONE',
+                    selected: rssData.template === 'XONE' ? 'selected' : ''
                 },{
                     title: '社群用 版型',
                     value: 'SOCIAL',
@@ -107,9 +111,9 @@ module.exports = async (req, res, next) => {
                     value: 'DEFAULTDESC',
                     selected: rssData.template === 'DEFAULTDESC' ? 'selected' : ''
                 },{
-                    title: '新浪台灣(內文最後加上2篇相關新聞) 版型',
-                    value: 'SINATW',
-                    selected: rssData.template === 'SINATW' ? 'selected' : ''
+                    title: 'Facebook InstantArticle 版型',
+                    value: 'FACEBOOK',
+                    selected: rssData.template === 'FACEBOOK' ? 'selected' : ''
                 }],
                 type: 'select'
             },

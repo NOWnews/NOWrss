@@ -6,6 +6,9 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+### Added
+- 依業務需求新增 XONE(帶 utm 參數) 版型 @wb
+
 ## 1.1.8 - 2017-10.24
 
 ### Added
