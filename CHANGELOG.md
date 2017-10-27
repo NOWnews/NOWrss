@@ -6,6 +6,8 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+### Fixed
+- 新浪台灣版型的相關新聞改端點（避免抓到重複新聞）@appleoxxo
 ### Added
 - 依業務需求新增 XONE(帶 utm 參數) 版型 @wb
 
