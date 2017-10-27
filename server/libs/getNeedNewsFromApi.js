@@ -44,8 +44,9 @@ module.exports = async(startTime, endTime, categories, channelId, isFacebookInst
                 // 新浪台灣 內文最後加兩篇同分類的最新新聞
                 if (template === 'SINATW'){
                     let needNewsNumber = 2;
-                    let url = `/cat/${news.MainMenu.categoryName}?limit=${needNewsNumber}`;
-                    let { data : { newsList : sameCatNews } } = await axios.get(url);
+                    let url = `/news/${news.sn}/relations`; //這端點會回覆3篇相關新聞
+                    let { data : sameCatNews } = await axios.get(url);
+                    sameCatNews = sameCatNews.splice(0,needNewsNumber);  // 目前只要加上2篇
                     if(sameCatNews){
                         news.sameCatNews = sameCatNews;
                     }
