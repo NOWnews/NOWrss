@@ -6,6 +6,7 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+## 1.1.10 - 2017-11.15
 ### Fixed
 - 修正XML亂碼問題 @appleoxxo
 
