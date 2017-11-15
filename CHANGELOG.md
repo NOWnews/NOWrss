@@ -6,6 +6,9 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+### Fixed
+- 修正XML亂碼問題 @appleoxxo
+
 ## 1.1.9 - 2017-10.30
 ### Fixed
 - 新浪台灣版型的相關新聞改端點（避免抓到重複新聞）@appleoxxo
