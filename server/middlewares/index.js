@@ -9,6 +9,7 @@ import cookieSession from 'cookie-session';
 import nunjucks from 'nunjucks';
 import methodOverride from 'method-override';
 import defaultUser from './defaultUser';
+import filterForXml from './filterForXml';
 
 const upload = multer({
     dest: '/tmp'
@@ -55,6 +56,7 @@ module.exports = (app) => {
      app.use(logger('dev'));
 
      app.use(defaultUser());
+     app.use(filterForXml);
 
     return (req, res, next) => next();
 
