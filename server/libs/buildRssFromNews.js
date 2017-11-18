@@ -73,7 +73,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             let $ = cheerio.load( news.content , { decodeEntities: false });
             $('iframe').filter(function(i, el) {
                 let iframe = $(el).parent('p').html();
-                if (iframe.indexOf('youtube') > -1){
+                if ( iframe && iframe.indexOf('youtube') > -1){
                     $(el).closest('p').remove();
                 }
             });
