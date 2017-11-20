@@ -102,10 +102,21 @@
                     {# Begin comScore all site Tag #}
                     <script>
                       var _comscore = _comscore || [];
-                      _comscore.push({ c1: "2", c2: "11473067" });
+                      _comscore.push({
+                        c1: "2",
+                        c2: "11473067",
+                        options: {
+                          url_append: "comscorekw=fbia"
+                        }
+                      });
+
                       (function() {
-                        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
-                        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+                        var s = document.createElement("script"),
+                          el =
+                          document.getElementsByTagName("script")[0];
+                        s.async = true;
+                        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") +
+                          ".scorecardresearch.com/beacon.js";
                         el.parentNode.insertBefore(s, el);
                       })();
                     </script>

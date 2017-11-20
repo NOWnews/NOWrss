@@ -6,6 +6,9 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+### Changed
+- 修改comscore代碼 @wayne1025
+
 ### Fixed
 - YAHOO版型iframe變數防呆 @appleoxxo
 
