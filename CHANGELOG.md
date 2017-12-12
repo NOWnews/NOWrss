@@ -7,6 +7,13 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 ## [Unreleased]
 
 ### Changed
+- 更換 RSS 的 LOGO 圖 @wb
+
+### Added
+- 依業務需求 新增 YAHOO(內文最後加上2篇相關新聞) 版型 @wb
+
+## 1.1.10 - 2017-11.26
+### Changed
 - 修改comscore代碼 @wayne1025
 
 ### Fixed
