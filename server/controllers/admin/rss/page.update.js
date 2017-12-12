@@ -87,9 +87,13 @@ module.exports = async (req, res, next) => {
                     value: 'LINE',
                     selected: rssData.template === 'LINE' ? 'selected' : ''
                 },{
-                    title: 'Yahoo 版型',
+                    title: 'Yahoo 舊版型',
                     value: 'YAHOO',
                     selected: rssData.template === 'YAHOO' ? 'selected' : ''
+                },{
+                    title: 'Yahoo(內文最後加上2篇相關新聞) 版型',
+                    value: 'YAHOO_2',
+                    selected: rssData.template === 'YAHOO_2' ? 'selected' : ''
                 },{
                     title: '台灣大哥大 版型',
                     value: 'TAIWANMOBILE',

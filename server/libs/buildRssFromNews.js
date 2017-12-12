@@ -26,6 +26,9 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         case 'YAHOO':
             templateFile = 'yahoo';
             break;
+        case 'YAHOO_2':
+            templateFile = 'yahoo_2';
+            break;
         case 'FACEBOOK':
             templateFile = 'default';
             break;
@@ -69,7 +72,7 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         }
 
         // yahoo 濾掉 影片
-        if (template === 'YAHOO'){
+        if (template === 'YAHOO' || template === 'YAHOO_2'){
             let $ = cheerio.load( news.content , { decodeEntities: false });
             $('iframe').filter(function(i, el) {
                 let iframe = $(el).parent('p').html();

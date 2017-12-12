@@ -53,8 +53,11 @@ module.exports = async (req, res, next) => {
                     title: 'Line 版型',
                     value: 'LINE'
                 },{
-                    title: 'Yahoo 版型',
+                    title: 'Yahoo 舊版型',
                     value: 'YAHOO'
+                },{
+                    title: 'Yahoo(內文最後加上2篇相關新聞) 版型',
+                    value: 'YAHOO_2'
                 },{
                     title: '台灣大哥大 版型',
                     value: 'TAIWANMOBILE'

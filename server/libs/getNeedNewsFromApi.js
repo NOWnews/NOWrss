@@ -42,7 +42,7 @@ module.exports = async(startTime, endTime, categories, channelId, isFacebookInst
         if(!isFacebookInstantArticle){
             allNews = await Promise.all(_.map(allNews, async (news) => {
                 // 新浪台灣 內文最後加兩篇同分類的最新新聞
-                if (template === 'SINATW'){
+                if (template === 'SINATW' || template === 'YAHOO_2' ){
                     let needNewsNumber = 2;
                     let url = `/news/${news.sn}/relations`; //這端點會回覆3篇相關新聞
                     let { data : sameCatNews } = await axios.get(url);
