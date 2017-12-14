@@ -8,6 +8,7 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## 1.1.11 - 2017-12.14
 ### Changed
+- 調整 YAHOO 版型相關新聞的 tag @wb
 - 調整 YAHOO 版型的文字 @wb
 - 更換 RSS 的 LOGO 圖 @wb
 

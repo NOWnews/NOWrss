@@ -15,9 +15,9 @@
             {% if item.mainPhotoUrl %}<div class="main-photo"><img src="{{ item.mainPhotoUrl }}" alt="{{ item.mainPhotoDesc }}" /></div>{% endif %}{{ item.description }}
             {% if item.sameCatNews %}
                 <div>
-                    <h2>更多 NOWnews 今日新聞報導</h2>
+                    <p>更多 NOWnews 今日新聞報導</p>
                     {% for n in item.sameCatNews %}
-                        <h3><a href="{{n.completeUrl}}?rss=yahoo">{{n.title}}</a></h3>
+                        <a href="{{n.completeUrl}}?rss=yahoo">{{n.title}}</a><br/>
                     {% endfor %}
                 </div>
             {% endif %}
