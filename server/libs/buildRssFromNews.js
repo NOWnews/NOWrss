@@ -20,8 +20,11 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
 
     // 選擇版型
     switch(template) {
-        case 'LINE':
-            templateFile = 'line';
+        case 'LINE-TW':
+            templateFile = 'line-tw';
+            break;
+        case 'LINE-HK':
+            templateFile = 'line-hk';
             break;
         case 'YAHOO':
             templateFile = 'yahoo';

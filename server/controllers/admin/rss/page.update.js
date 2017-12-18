@@ -83,9 +83,13 @@ module.exports = async (req, res, next) => {
                     value: 'DEFAULT',
                     selected: rssData.template === 'DEFAULT' ? 'selected' : ''
                 },{
-                    title: 'Line 版型',
-                    value: 'LINE',
-                    selected: rssData.template === 'LINE' ? 'selected' : ''
+                    title: 'Line TW 版型',
+                    value: 'LINE-TW',
+                    selected: rssData.template === 'LINE-TW' ? 'selected' : ''
+                },{
+                    title: 'Line HK 版型',
+                    value: 'LINE-HK',
+                    selected: rssData.template === 'LINE-HK' ? 'selected' : ''
                 },{
                     title: 'Yahoo 舊版型',
                     value: 'YAHOO',

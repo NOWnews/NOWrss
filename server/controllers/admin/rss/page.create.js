@@ -50,8 +50,11 @@ module.exports = async (req, res, next) => {
                     value: 'DEFAULT',
                     attr: 'selected'
                 },{
-                    title: 'Line 版型',
-                    value: 'LINE'
+                    title: 'Line TW 版型',
+                    value: 'LINE-TW'
+                },{
+                    title: 'Line HK 版型',
+                    value: 'LINE-HK'
                 },{
                     title: 'Yahoo 舊版型',
                     value: 'YAHOO'
