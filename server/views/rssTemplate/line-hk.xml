@@ -1,0 +1,49 @@
+{% extends "./base/LineBase.xml" %}
+
+{% block item %}
+    {% for item in items %}
+        <article>
+            <ID>{{item.id}}</ID>
+            <nativeCountry>HK</nativeCountry>
+            <language>zh</language>
+            <publishCountries>
+                <country>HK</country>
+            </publishCountries>
+            <title><![CDATA[ {{ item.title }} ]]></title>
+            <category>{{ item.subcategory }}</category>
+            <startYmdtUnix>{{ milliseconds }}</startYmdtUnix>
+            <endYmdtUnix>{{ milliseconds + 31536000000 }}</endYmdtUnix>
+            <publishTimeUnix>{{ milliseconds }}</publishTimeUnix>
+            <publishTime>{{ item.date }}</publishTime>
+            <updateTimeUnix>{{ item.updateTimeUnix }}</updateTimeUnix>
+            <contents>
+                {% if item.mainPhotoUrl %}
+                    <image>
+                        <title>{{ item.mainPhotoDesc }}</title>
+                        <url>{{ item.mainPhotoUrl }}</url>
+                    </image>
+                {% endif %}
+                {# VIDEO 舊系統沒有支援 <video>
+                    <title>String // video title</title> //Optional
+                    <description>String // video caption</description> //Optional
+                    <url>String // relative file path of video file</url> //Mandatory
+                    <thumbnail>String // relative file path of thumbnail file</thumbnail> //Optional
+                    <restrictedCountries> //Optional
+                        <country>String // ISO 3166­1 alpha­2</country>
+                        <country>String // ISO 3166­1 alpha­2</country>
+                        <country>... // others</country>
+                    </restrictedCountries>
+                </video>#}
+                <text>
+                    <content>
+                        <![CDATA[
+                            {{ item.description | safe }}
+                        ]]>
+                    </content>
+                </text>
+            </contents>
+            <author>{{ item.author }}</author>
+            <sourceUrl>{{ item.url }}</sourceUrl>
+        </article>
+    {% endfor %}
+{% endblock %}
