@@ -6,6 +6,10 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+## 1.1.12 - 2017-12.21
+### Added
+- 增加 Line HK 版型 @jason
+
 ## 1.1.11 - 2017-12.14
 ### Changed
 - 調整 YAHOO 版型相關新聞的 tag @wb
