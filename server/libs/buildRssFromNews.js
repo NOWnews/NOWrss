@@ -114,6 +114,9 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
         subcategory = subcategory.replace(/[\b]/g, '');
         shortTitle = shortTitle.replace(/[\b]/g, '');
 
+        // yahoo_2 的延伸閱讀文章 連結 要帶追蹤碼 其中需用到外送日期
+        let deliveryDate = moment.tz('Asia/Taipei').format('YYYYMMDD');
+
         items.push({
             id: news.sn,
             title:  title,
@@ -132,7 +135,8 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             UTCdate: dateFormat(news.startedAt, 'ddd, DD MMM YYYY HH:mm:ss [GMT]Z'),
             subcategory: subcategory,
             TaiwanMobileMainPhoto: TaiwanMobileMainPhoto,
-            updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf()
+            updateTimeUnix: moment.tz(news.updatedAt, 'Asia/Taipei').valueOf(),
+            deliveryDate: deliveryDate
         });
     });
 

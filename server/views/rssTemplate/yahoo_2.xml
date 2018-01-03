@@ -17,7 +17,7 @@
                 <div>
                     <p>更多 NOWnews 今日新聞報導</p>
                     {% for n in item.sameCatNews %}
-                        <a href="{{n.completeUrl}}?rss=yahoo">{{n.title}}</a><br/>
+                        <a href="{{n.completeUrl}}?utm_source=yahoo&amp;utm_medium=rss&amp;utm_campaign={{item.deliveryDate}}">{{n.title}}</a><br/>
                     {% endfor %}
                 </div>
             {% endif %}
