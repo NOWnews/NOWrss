@@ -6,6 +6,10 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+## 1.1.13 - 2017-01.05
+### Fixed
+- youtube 取 id 防呆機制 @wb
+
 ## 1.1.12 - 2017-12.21
 ### Added
 - 增加 Line HK 版型 @jason
