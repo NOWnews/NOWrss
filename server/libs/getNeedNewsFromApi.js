@@ -12,9 +12,10 @@ import is from 'is_js';
 import querystring from 'querystring';
 import redis from '../redis';
 
-module.exports = async(startTime, endTime, categories, channelId, isFacebookInstantArticle, template) => {
+module.exports = async(startTime, endTime, categories, subWebsiteList, channelId, isFacebookInstantArticle, template) => {
 
     debug('categories = %j',categories)
+    debug('subWebsiteList = %j',subWebsiteList)
 
     try {
         if (!startTime) {
@@ -37,6 +38,18 @@ module.exports = async(startTime, endTime, categories, channelId, isFacebookInst
         let url = `/rss?start=${startTime}&end=${endTime}&limit=${limit}&sort=-startedAt&${formatCategories}`;
 
         let { data: allNews } = await axios.get(url);
+
+        // 加入子項目
+        let subWebsiteData = [];
+        for (let subWebsiteName of subWebsiteList){
+            let subLimit = 10; //預設10篇
+            let subWebsiteUrl = `/subRss/${subWebsiteName}?start=${startTime}&end=${endTime}&limit=${subLimit}&sort=-startedAt`;
+            let { data: newsDate } = await axios.get(subWebsiteUrl);
+            subWebsiteData = _.concat(subWebsiteData, newsDate)
+        }
+
+        allNews = _.concat(allNews, subWebsiteData);
+        allNews = _.reverse(_.sortBy(allNews, ['formatStartedAt']));
 
         debug('共撈了 %s 則新聞', allNews.length);
         if(!isFacebookInstantArticle){
