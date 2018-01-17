@@ -45,7 +45,7 @@ router.route('/rss/:channelId')
             let simplifiedChinese = rssData.simplifiedChinese;
             debug('simplifiedChinese = %s', simplifiedChinese);
 
-            let news = await libs.getNeedNewsFromApi(startTime, endTime, rssData.catogry, channelId, false, rssData.template);
+            let news = await libs.getNeedNewsFromApi(startTime, endTime, rssData.catogry, rssData.subWebsite, channelId, false, rssData.template);
             let rssXml = await libs.buildRssFromNews(news, simplifiedChinese, rssData.template);
 
             let xmlData = {

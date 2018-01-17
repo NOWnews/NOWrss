@@ -4,7 +4,7 @@ import { Rss } from '../../../models';
 import libs from '../../../libs';
 
 module.exports = async (req, res, next) => {
-    const updateFields = ['name', 'dateRange', 'contactPerson', 'catogry', 'template', 'channelId', 'simplifiedChinese'];
+    const updateFields = ['name', 'dateRange', 'contactPerson', 'catogry', 'subWebsite', 'template', 'channelId', 'simplifiedChinese'];
     let data = _.pick(req.body, updateFields);
     let sn = req.params.sn;
 
@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
         return next(new Error('至少要填入一個分類'));
     }
 
-    // debug('req.body = %j', req.body);
+    debug('req.body = %j', req.body);
     try {
         let rssModels = await Rss.findBySn(sn);
 

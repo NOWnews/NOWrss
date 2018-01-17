@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
     try {
         // 取得資料庫的分類
         let mainCategories = await libs.getApiCategories();
+        let subWebsiteList = libs.getSubWebsite();
 
         let rssData = await Rss.findOne()
             .where('sn').equals(sn)
@@ -29,6 +30,14 @@ module.exports = async (req, res, next) => {
                 return o;
             });
         }
+
+        subWebsiteList = _.map(subWebsiteList, (o) => {
+            if(!rssData.subWebsite) return o;
+            if(rssData.subWebsite.indexOf(o.name) > -1) {
+                o.value = true;
+            }
+            return o;
+        });
 
         let startDate = utils.dateFormat(rssData.startDate);
         let endDate = utils.dateFormat(rssData.endDate);
@@ -67,6 +76,13 @@ module.exports = async (req, res, next) => {
                 name: 'catogry',
                 data: mainCategories,
                 value: rssData.catogry,
+                type: 'checkBox'
+            },
+            {
+                title: '子網站',
+                name: 'subWebsite',
+                data: subWebsiteList,
+                value: rssData.subWebsite,
                 type: 'checkBox'
             },
             {
