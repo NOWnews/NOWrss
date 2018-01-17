@@ -13,7 +13,7 @@ module.exports = () => {
             title: '保庇'
         },{
             name: 'IFUNNOW',
-            title: '吃喝玩樂的趣味'
+            title: 'iFun NOW'
         },{
             name: 'PETSMAO',
             title: '寵毛網'
@@ -22,13 +22,13 @@ module.exports = () => {
             title: '粉樂鬧'
         },{
             name: 'PLAYNOW',
-            title: '各種玩樂進行式'
+            title: 'Play NOW'
         },{
             name: 'SIGHT',
             title: '今日觀點'
         },{
             name: 'SPORTNOW',
-            title: '運動新聞資訊'
+            title: 'Sport NOW'
         }
     ];
 };
