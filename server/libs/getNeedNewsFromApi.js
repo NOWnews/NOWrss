@@ -75,6 +75,9 @@ module.exports = async(startTime, endTime, categories, subWebsiteList, channelId
                 let iframeSrc = '';
 
                 $('img').filter((i, el) => {
+                    if($(el).data('isdeliver') === undefined){
+                        return;
+                    }
                     if($(el).data('isdeliver') === false){
                         // 不外送的圖片從他外層的 P 整個刪掉
                         $(el).closest('p').remove();
