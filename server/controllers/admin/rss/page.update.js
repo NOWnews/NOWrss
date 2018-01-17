@@ -32,6 +32,7 @@ module.exports = async (req, res, next) => {
         }
 
         subWebsiteList = _.map(subWebsiteList, (o) => {
+            if(!rssData.subWebsite) return o;
             if(rssData.subWebsite.indexOf(o.name) > -1) {
                 o.value = true;
             }

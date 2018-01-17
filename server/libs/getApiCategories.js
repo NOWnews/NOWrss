@@ -25,6 +25,7 @@ module.exports = async (key, value, expire) => {
         let { data : menus }  = await axios.get('/menus');
 
         let mainCategories = _.map(menus, (menu) => {
+            if (name === '保庇' || name === '今日觀點') return null;
             let name = menu.name;
             return { name };
         });
