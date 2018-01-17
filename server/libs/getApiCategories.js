@@ -25,14 +25,21 @@ module.exports = async (key, value, expire) => {
         let { data : menus }  = await axios.get('/menus');
 
         let mainCategories = _.map(menus, (menu) => {
-            if (menu.name === '保庇' || menu.name === '今日觀點') return null;
             let name = menu.name;
             return { name };
         });
 
-        debug('mainCategories From Api = %j', mainCategories);
+        let formatMainCategories = [];
+        _.forEach(mainCategories, (value, index) => {
+            if (value.name == '保庇' || value.name == '觀點') {
+                return;
+            }
+            formatMainCategories.push(value);
+        });
 
-        let updateRedisMainCategories = await setValue('mainCategoriesRedis', mainCategories, 600);
+        debug('mainCategories From Api = %j', formatMainCategories);
+
+        let updateRedisMainCategories = await setValue('mainCategoriesRedis', formatMainCategories, 600);
 
         return Promise.resolve(updateRedisMainCategories);
     } catch(err) {
