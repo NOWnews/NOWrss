@@ -43,7 +43,7 @@
                                 {% else %}
                                     <input type="checkbox" name="{{ item.name }}" value="{{ d.name }}" class="checkbox-input minimal">
                                 {% endif %}
-                                {{ d.name }}
+                                {% if d.title %}{{ d.title }}{% else %}{{ d.name }}{% endif %}
                             </label>
                         </div>
                     {% endfor %}

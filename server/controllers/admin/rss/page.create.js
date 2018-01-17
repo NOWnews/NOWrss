@@ -8,6 +8,7 @@ module.exports = async (req, res, next) => {
     try {
         // 取得資料庫或 API 的分類
         let mainCategories = await libs.getApiCategories();
+        let subWebsiteList = libs.getSubWebsite();
 
         let formData = {
             title: '建立廠商 RSS',
@@ -35,6 +36,12 @@ module.exports = async (req, res, next) => {
                 title: '分類',
                 name: 'catogry',
                 data: mainCategories,
+                type: 'checkBox'
+            },
+            {
+                title: '子網站',
+                name: 'subWebsite',
+                data: subWebsiteList,
                 type: 'checkBox'
             },
             {

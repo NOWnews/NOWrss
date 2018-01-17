@@ -14,6 +14,11 @@ const schema = new Schema({
         required: true
     },
 
+    subWebsite: {
+        type: Array,
+        default : []
+    },
+
     confirmIP: {
         type: String
     },

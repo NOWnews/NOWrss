@@ -19,6 +19,7 @@ module.exports = async (req, res, next) => {
             name: data.name,
             simplifiedChinese: data.simplifiedChinese,
             catogry: data.catogry,
+            subWebsite: data.subWebsite,
             startDate: data.startDate,
             endDate: data.endDate,
             confirmIP: data.confirmIP || '',
