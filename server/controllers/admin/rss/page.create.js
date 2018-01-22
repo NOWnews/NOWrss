@@ -63,25 +63,22 @@ module.exports = async (req, res, next) => {
                     title: 'Line HK 版型',
                     value: 'LINE-HK'
                 },{
-                    title: 'Yahoo 舊版型',
-                    value: 'YAHOO'
-                },{
-                    title: 'Yahoo(內文最後加上2篇相關新聞) 版型',
+                    title: 'Yahoo 版型',
                     value: 'YAHOO_2'
                 },{
                     title: '台灣大哥大 版型',
                     value: 'TAIWANMOBILE'
                 },{
-                    title: '新浪台灣(內文最後加上2篇相關新聞) 版型',
+                    title: '新浪 版型',
                     value: 'SINATW'
                 },{
-                    title: 'Xone 版型(有帶 utm參數) 版型',
+                    title: 'Xone 版型',
                     value: 'XONE'
                 },{
                     title: '社群用 版型',
                     value: 'SOCIAL'
                 },{
-                    title: '第三方工具 描述 版型',
+                    title: '第三方工具 描述版型',
                     value: 'DEFAULTDESC'
                 },{
                     title: 'Facebook InstantArticle 版型',
@@ -89,11 +86,11 @@ module.exports = async (req, res, next) => {
                 }],
                 type: 'select'
             },
-            {
-                title: '限定的IP',
-                name: 'confirmIP',
-                type: 'text'
-            },
+            // {
+            //     title: '限定的IP',
+            //     name: 'confirmIP',
+            //     type: 'text'
+            // },
             {
                 title: '聯絡人資料 ( ex. 吳OO - 09xx123456 )',
                 name: 'contactPerson',

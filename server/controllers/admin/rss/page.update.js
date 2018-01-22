@@ -107,11 +107,7 @@ module.exports = async (req, res, next) => {
                     value: 'LINE-HK',
                     selected: rssData.template === 'LINE-HK' ? 'selected' : ''
                 },{
-                    title: 'Yahoo 舊版型',
-                    value: 'YAHOO',
-                    selected: rssData.template === 'YAHOO' ? 'selected' : ''
-                },{
-                    title: 'Yahoo(內文最後加上2篇相關新聞) 版型',
+                    title: 'Yahoo 版型',
                     value: 'YAHOO_2',
                     selected: rssData.template === 'YAHOO_2' ? 'selected' : ''
                 },{
@@ -119,11 +115,11 @@ module.exports = async (req, res, next) => {
                     value: 'TAIWANMOBILE',
                     selected: rssData.template === 'TAIWANMOBILE' ? 'selected' : ''
                 },{
-                    title: '新浪台灣(內文最後加上2篇相關新聞) 版型',
+                    title: '新浪 版型',
                     value: 'SINATW',
                     selected: rssData.template === 'SINATW' ? 'selected' : ''
                 },{
-                    title: 'Xone 版型(有帶 utm參數)',
+                    title: 'Xone 版型',
                     value: 'XONE',
                     selected: rssData.template === 'XONE' ? 'selected' : ''
                 },{
@@ -131,7 +127,7 @@ module.exports = async (req, res, next) => {
                     value: 'SOCIAL',
                     selected: rssData.template === 'SOCIAL' ? 'selected' : ''
                 },{
-                    title: '第三方工具 描述 版型',
+                    title: '第三方工具 描述版型',
                     value: 'DEFAULTDESC',
                     selected: rssData.template === 'DEFAULTDESC' ? 'selected' : ''
                 },{
@@ -141,13 +137,13 @@ module.exports = async (req, res, next) => {
                 }],
                 type: 'select'
             },
-            {
-                title: '限定的IP',
-                name: 'confirmIP',
-                type: 'text',
-                value: rssData.confirmIP,
-                disabled: 'disabled'
-            },
+            // {
+            //     title: '限定的IP',
+            //     name: 'confirmIP',
+            //     type: 'text',
+            //     value: rssData.confirmIP,
+            //     disabled: 'disabled'
+            // },
             {
                 title: '頻道的ID',
                 name: 'channelId',
