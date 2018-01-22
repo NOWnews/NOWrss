@@ -13,3 +13,10 @@
     transform: translate(-50%, -50%);
     -webkit-user-select: none;
 }
+
+.checkbox+.checkbox {
+    float: left;
+    margin-right: 20px;
+    border-bottom: 1px solid #bbb;
+    margin-bottom: 20px;
+}
