@@ -80,10 +80,11 @@ module.exports = async (req, res, next) => {
                 },{
                     title: '第三方工具 描述版型',
                     value: 'DEFAULTDESC'
-                },{
-                    title: 'Facebook InstantArticle 版型',
-                    value: 'FACEBOOK'
-                }],
+                }//,{
+                 //   title: 'Facebook InstantArticle 版型',
+                 //   value: 'FACEBOOK'
+                //}
+                ],
                 type: 'select'
             },
             // {

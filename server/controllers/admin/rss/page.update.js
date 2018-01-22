@@ -130,11 +130,12 @@ module.exports = async (req, res, next) => {
                     title: '第三方工具 描述版型',
                     value: 'DEFAULTDESC',
                     selected: rssData.template === 'DEFAULTDESC' ? 'selected' : ''
-                },{
-                    title: 'Facebook InstantArticle 版型',
-                    value: 'FACEBOOK',
-                    selected: rssData.template === 'FACEBOOK' ? 'selected' : ''
-                }],
+                }//,{
+                 //   title: 'Facebook InstantArticle 版型',
+                 //   value: 'FACEBOOK',
+                 //   selected: rssData.template === 'FACEBOOK' ? 'selected' : ''
+                //}
+                ],
                 type: 'select'
             },
             // {
