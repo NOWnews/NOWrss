@@ -2,6 +2,7 @@
 const debug = require('debug')('NOWrss:controllers:admin:rss:action.update');
 import { Rss } from '../../../models';
 import libs from '../../../libs';
+import redis from '../../../redis';
 
 module.exports = async (req, res, next) => {
     const updateFields = ['name', 'dateRange', 'contactPerson', 'catogry', 'subWebsite', 'template', 'channelId', 'simplifiedChinese'];
@@ -34,6 +35,9 @@ module.exports = async (req, res, next) => {
         });
 
         let updatedRssModels = await rssModels.saveAsync();
+
+        redis.removeValue(`${data.channelId}`);
+
 
         return res.redirect(`/admin/rss`);
     } catch(err) {

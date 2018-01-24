@@ -85,6 +85,11 @@ module.exports = async (newsArray, simplifiedChinese, template) => {
             });
             news.content = $.html();
         }
+
+        // 移掉 html 上面的 style
+        const regex = /(style|width|height|srcset|data.?)=["']([^"']*)["']/gi;
+        news.content = news.content.replace(regex,'');
+
         // 最後傳進去的變數
         let description = news.content;
         let title = news.title;
