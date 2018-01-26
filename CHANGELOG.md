@@ -6,6 +6,10 @@ NOWrss 的所有改變將在此 CHANGELOG 文件中記錄。
 
 ## [Unreleased]
 
+## 1.1.14 - 2018-01.26
+### Fixed
+- ia 顯現不出來的 bug @wb
+
 ## 1.1.14 - 2018-01.25
 ### Fixed
 - yahoo 手機版的文字偏小問題 @wb

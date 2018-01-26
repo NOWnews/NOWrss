@@ -23,7 +23,10 @@ router.route('/rssFacebookGet')
             categoryOption = _.map(categoryOption, (c) => { return c.name; });
             categoryOption = categoryOption.toString();
 
-            let news = await libs.getNeedNewsFromApi(startTime, endTime, categoryOption, channelId, isFacebookInstantArticle);
+            // 目前子頻道還不會匯入 ia
+            let subWebsiteList = [];
+
+            let news = await libs.getNeedNewsFromApi(startTime, endTime, categoryOption, subWebsiteList, channelId, isFacebookInstantArticle);
             let rssXml = await libs.rssFacebookInstantArticleTp(news);
 
             res.charset = 'utf-8';
