@@ -61,3 +61,8 @@ prod:
 
 **後台端點**
 `http://feed.nownews.com:9453/`
+
+### 注意事項
+
+因為機器很小，所以做了一個 [shell](https://github.com/NOWnews/NOWrss/blob/develop/crontabScript/execute_3day.sh) 來定時清理在 DB 的 log
+
