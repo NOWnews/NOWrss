@@ -50,3 +50,14 @@ prod:
 `npm install`
 
 `NODE_ENV=production pm2 start bin/www.js --name 'RSS_SERVER'`
+
+### 端點
+
+**FB IA端點**
+`http://feed.nownews.com:9453/rssFacebookGet`
+
+**外送的端點**
+`http://feed.nownews.com:9453/rss/{RSS 編號}`
+
+**後台端點**
+`http://feed.nownews.com:9453/`
