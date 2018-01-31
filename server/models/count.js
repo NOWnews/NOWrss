@@ -43,6 +43,17 @@ const schema = new Schema({
     }
 });
 
+schema.index({
+    trashed: -1,
+    startDate: 1,
+    channelId: 1
+});
+
+schema.index({
+    trashed: -1,
+    startDate: 1
+});
+
 schema.plugin(autoIncrement.plugin, {
     model: 'count',
     field: 'sn',
